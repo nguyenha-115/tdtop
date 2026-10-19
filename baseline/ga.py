@@ -22,19 +22,19 @@ from utils import (
     save_result,
 )
 
-# ---------------------------------------------------------------------
 # Đánh giá song song: mỗi tiến trình giữ sẵn một bản Problem
-# ---------------------------------------------------------------------
 _WORKER_PROBLEM = None
+_WORKER_USE_FILL = True
 
 
-def _init_worker(problem):
-    global _WORKER_PROBLEM
+def _init_worker(problem, use_fill=True):
+    global _WORKER_PROBLEM, _WORKER_USE_FILL
     _WORKER_PROBLEM = problem
+    _WORKER_USE_FILL = use_fill
 
 
 def _eval_worker(chromosome):
-    return cal_fitness(_WORKER_PROBLEM, chromosome)
+    return cal_fitness(_WORKER_PROBLEM, chromosome, _WORKER_USE_FILL)
 
 
 class Population:
@@ -48,7 +48,7 @@ class Population:
         self.indivs = deepcopy(indi_list)
 
     def tournament(self, k):
-        """Chọn 1 cá thể bằng giải đấu kích thước k."""
+        """Chọn 1 cá thể bằng kích thước k."""
         cands = random.sample(self.indivs, min(k, len(self.indivs)))
         return max(cands, key=lambda ind: ind.fitness[0])
 
@@ -101,22 +101,26 @@ class Population:
 
 
 class GASolver:
-    """Genetic Algorithm solver for TD-TOP."""
-
     def __init__(
         self,
         problem: Problem,
         pop_size: int,
         max_gen: int,
         crossover_rate: float = 0.9,
-        mutation_rate: float = 0.1,
-        mutation_rate_max: float = 0.6,
-        tournament_size: int = 3,
-        immigrant_rate: float = 0.05,
-        seed_ratio: float = 0.1,
-        patience: int = 15,
-        diversity_threshold: float = 0.15,
-        elite_keep: float = 0.1,
+        mutation_rate: float = 0.3,
+        mutation_rate_max: float = 0.8,
+        tournament_size: int = 2,
+        immigrant_rate: float = 0.1,
+        seed_ratio: float = 0.2,
+        patience: int = 30,
+        converge_threshold: float = 0.002,
+        archive_size: int = 8,
+        isolation: int = 10,
+        max_shake: int = 4,
+        restart_fresh: float = 0.3,
+        restart_strength: float = 0.04,
+        use_fill: bool = False,
+        heuristic_prob: float = 0.3,
         time_limit: float = None,
         processing_number: int = 1,
         seed: int = 42,
@@ -132,8 +136,15 @@ class GASolver:
         self.immigrant_rate = immigrant_rate
         self.seed_ratio = seed_ratio
         self.patience = max(1, patience)
-        self.diversity_threshold = diversity_threshold
-        self.elite_keep = elite_keep
+        self.converge_threshold = converge_threshold
+        self.archive_size = max(1, archive_size)
+        self.isolation = max(1, isolation)
+        self.max_shake = max(1, max_shake)
+        self.archive = []
+        self.restart_fresh = restart_fresh
+        self.restart_strength = restart_strength
+        self.use_fill = use_fill
+        self.heuristic_prob = heuristic_prob
         self.time_limit = time_limit
         self.processing_number = processing_number
         self.seed = seed
@@ -141,7 +152,6 @@ class GASolver:
         self.pool = None
         self.best_individual = None
 
-    # ------------------------------------------------------------------
     def _evaluate(self, indivs):
         if not indivs:
             return
@@ -150,39 +160,62 @@ class GASolver:
             chunk = max(1, len(chroms) // (4 * self.processing_number))
             result = self.pool.map(_eval_worker, chroms, chunksize=chunk)
         else:
-            result = [cal_fitness(self.problem, c) for c in chroms]
+            result = [cal_fitness(self.problem, c, self.use_fill) for c in chroms]
         for ind, fit in zip(indivs, result):
             ind.fitness = fit
 
     def _immigrants(self, n):
-        inds = [new_immigrant(self.problem) for _ in range(n)]
+        inds = [new_immigrant(self.problem, self.heuristic_prob) for _ in range(n)]
         self._evaluate(inds)
         return inds
 
-    def _restart(self, pop: Population):
-        """Khởi động lại một phần: giữ tinh hoa, phần còn lại = cá thể mới + cá thể bị đột biến mạnh."""
-        pop.indivs.sort(key=lambda ind: ind.fitness[0], reverse=True)
-        n_keep = max(2, int(round(self.elite_keep * self.pop_size)))
-        elites = pop.indivs[:n_keep]
-        n_new = self.pop_size - len(elites)
-        n_fresh = n_new // 2
-        n_kick = n_new - n_fresh
-        fresh = [new_immigrant(self.problem) for _ in range(n_fresh)]
-        size = len(elites[0].chromosome[0]) + len(elites[0].chromosome[1])
-        strength = max(3, size // 5)
-        kicked = [
-            mutation(self.problem, random.choice(elites), strength) for _ in range(n_kick)
-        ]
-        newcomers = fresh + kicked
+    def _update_archive(self, cands):
+        sigs = {a.fitness[5] for a in self.archive}
+        for ind in cands:
+            if ind.fitness[5] not in sigs:
+                self.archive.append(deepcopy(ind))
+                sigs.add(ind.fitness[5])
+        self.archive.sort(key=lambda ind: ind.fitness[0], reverse=True)
+        del self.archive[self.archive_size:]
+
+    def _restart(self, pop: Population, shake_level):
+        hard = shake_level > self.max_shake
+        size = len(self.archive[0].chromosome[0]) + len(self.archive[0].chromosome[1])
+        base = max(1, int(round(self.restart_strength * size)))
+        fresh_ratio = max(self.restart_fresh, 0.8) if hard else self.restart_fresh
+        n_fresh = int(round(fresh_ratio * self.pop_size))
+        n_kick = self.pop_size - n_fresh
+        newcomers = [new_immigrant(self.problem, self.heuristic_prob) for _ in range(n_fresh)]
+        lo = base * (shake_level - 1) + 1 if not hard else base * self.max_shake
+        hi = base * shake_level if not hard else base * (self.max_shake + 1)
+        for _ in range(n_kick):
+            # một nửa đá quanh tốt nhất toàn cục, nửa còn lại quanh các cực trị khác trong archive
+            src = self.archive[0] if random.random() < 0.5 else random.choice(self.archive)
+            newcomers.append(mutation(self.problem, src, random.randint(lo, max(lo, hi))))
         self._evaluate(newcomers)
-        pop.indivs = elites + newcomers
-        pop.selection()  # loại trùng, đồng thời sắp xếp
-        short = pop.pop_size - len(pop.indivs)
+        # cá thể đá xong vẫn trùng kiểu hình với archive thì loại -> epoch thực sự cô lập
+        known = {a.fitness[5] for a in self.archive}
+        pop.indivs = [ind for ind in newcomers if ind.fitness[5] not in known]
+        short = pop.selection()
         if short > 0:
             pop.indivs.extend(self._immigrants(short))
             pop.indivs.sort(key=lambda ind: ind.fitness[0], reverse=True)
 
-    # ------------------------------------------------------------------
+    def _reinject(self, pop: Population):
+        """Kết thúc giai đoạn cô lập: đưa archive trở lại, thay các cá thể kém nhất."""
+        inject = [deepcopy(a) for a in self.archive]
+        pop.indivs = pop.indivs[: self.pop_size - len(inject)] + inject
+        pop.selection()
+        short = self.pop_size - len(pop.indivs)
+        if short > 0:
+            pop.indivs.extend(self._immigrants(short))
+            pop.indivs.sort(key=lambda ind: ind.fitness[0], reverse=True)
+
+    def _converged(self, pop: Population):
+        top = pop.indivs[0].fitness[0]
+        mid = pop.indivs[len(pop.indivs) // 2].fitness[0]
+        return (top - mid) / max(1.0, abs(top)) < self.converge_threshold
+
     def run(self) -> Dict[str, Any]:
         random.seed(self.seed)
         np.random.seed(self.seed)
@@ -197,7 +230,7 @@ class GASolver:
 
         if self.processing_number > 1:
             self.pool = multiprocessing.Pool(
-                self.processing_number, initializer=_init_worker, initargs=(self.problem,)
+                self.processing_number, initializer=_init_worker, initargs=(self.problem, self.use_fill)
             )
         try:
             self._evaluate(pop.indivs)
@@ -207,12 +240,19 @@ class GASolver:
                 pop.indivs.extend(self._immigrants(short))
                 pop.indivs.sort(key=lambda ind: ind.fitness[0], reverse=True)
 
-            best = pop.indivs[0]
-            best_fit = best.fitness[0]
-            self.best_individual = deepcopy(best)
-            stagnation, restarts = 0, 0
+            self.archive = []
+            self._update_archive(pop.indivs[:1])
+            best_fit = pop.indivs[0].fitness[0]
+            self.best_individual = deepcopy(pop.indivs[0])
+            epoch_best = best_fit
+            stagnation, restarts, successes = 0, 0, 0
+            shake_level = 1
+            since_restart = None  # số thế hệ kể từ restart gần nhất (None = chưa restart)
+            improved_in_epoch = False
             div = population_diversity(pop.indivs)
-            history[0] = self._record(best, div, self.mutation_rate, 0, restarts)
+            history[0] = self._record(
+                self.best_individual, pop.indivs[0], div, self.mutation_rate, 0, restarts, successes, shake_level
+            )
 
             n_imm = int(round(self.immigrant_rate * self.pop_size))
 
@@ -236,7 +276,7 @@ class GASolver:
                     self.tournament_size,
                     strength,
                 )
-                offspring.extend(new_immigrant(self.problem) for _ in range(n_imm))
+                offspring.extend(new_immigrant(self.problem, self.heuristic_prob) for _ in range(n_imm))
                 self._evaluate(offspring)
                 pop.indivs.extend(offspring)
                 short = pop.selection()
@@ -244,35 +284,63 @@ class GASolver:
                     pop.indivs.extend(self._immigrants(short))
                     pop.indivs.sort(key=lambda ind: ind.fitness[0], reverse=True)
 
-                best = pop.indivs[0]
-                if best.fitness[0] > best_fit + 1e-9:
-                    best_fit = best.fitness[0]
-                    self.best_individual = deepcopy(best)
+                # tiến độ của epoch hiện tại (quyết định đình trệ) và của toàn cục
+                top = pop.indivs[0]
+                if top.fitness[0] > epoch_best + 1e-9:
+                    epoch_best = top.fitness[0]
                     stagnation = 0
                 else:
                     stagnation += 1
+                if top.fitness[0] > best_fit + 1e-9:
+                    best_fit = top.fitness[0]
+                    self.best_individual = deepcopy(top)
+                    improved_in_epoch = True
+                self._update_archive(pop.indivs[:1])
+
+                event = ""
+                if since_restart is not None:
+                    since_restart += 1
+                    if since_restart == self.isolation:
+                        self._reinject(pop)
+                        event = "  [REINJECT]"
+
+                # điều kiện restart: đình trệ đủ lâu, hoặc quần thể đã hội tụ kiểu hình
+                # (chỉ xét hội tụ khi đã qua giai đoạn cô lập: quần thể vừa đá quanh best vốn rất sát nhau)
+                isolated = since_restart is not None and since_restart <= self.isolation
+                if stagnation >= self.patience or (
+                    not isolated and stagnation >= max(3, self.patience // 2) and self._converged(pop)
+                ):
+                    if restarts > 0:  # đánh giá epoch vừa kết thúc
+                        if improved_in_epoch:
+                            successes += 1
+                            shake_level = 1
+                        else:
+                            shake_level += 1
+                    self._update_archive(pop.indivs[:3])
+                    self._restart(pop, shake_level)
+                    event = "  [RESTART lv={}{}]".format(
+                        shake_level, " HARD" if shake_level > self.max_shake else ""
+                    )
+                    if shake_level > self.max_shake:
+                        shake_level = 1
+                    restarts += 1
+                    stagnation, since_restart, improved_in_epoch = 0, 0, False
+                    epoch_best = pop.indivs[0].fitness[0]
 
                 div = population_diversity(pop.indivs)
-                restarted = False
-                if stagnation >= self.patience or div < self.diversity_threshold:
-                    if stagnation >= max(3, self.patience // 3):  # tránh restart khi vừa cải thiện
-                        self._restart(pop)
-                        restarts += 1
-                        stagnation = 0
-                        restarted = True
-                        div = population_diversity(pop.indivs)
-
-                best = pop.indivs[0]
-                history[gen + 1] = self._record(best, div, pm, stagnation, restarts)
+                history[gen + 1] = self._record(
+                    self.best_individual, pop.indivs[0], div, pm, stagnation, restarts, successes, shake_level
+                )
                 if self.verbose:
                     print(
-                        "Generation {}: fitness={:.2f} f1={} div={:.3f} pm={:.2f}{}".format(
+                        "Generation {}: best={:.2f} f1={} epoch={:.2f} div={:.3f} pm={:.2f}{}".format(
                             gen + 1,
-                            best.fitness[0],
-                            best.fitness[1],
+                            self.best_individual.fitness[0],
+                            self.best_individual.fitness[1],
+                            pop.indivs[0].fitness[0],
                             div,
                             pm,
-                            "  [RESTART]" if restarted else "",
+                            event,
                         )
                     )
         finally:
@@ -283,9 +351,12 @@ class GASolver:
         return history
 
     @staticmethod
-    def _record(best, diversity, pm, stagnation, restarts):
+    def _record(best, epoch_top, diversity, pm, stagnation, restarts, successes, shake_level):
         fitness, f1, f2, service_rate, violation, _ = best.fitness
         return {
+            "epoch_fitness": epoch_top.fitness[0],
+            "restart_success": successes,
+            "shake_level": shake_level,
             "fitness": fitness,
             "profit": f1,
             "energy": f2,
@@ -299,7 +370,6 @@ class GASolver:
 
 
 def collect_files(data_root: Path, filename, subfolder):
-    """Giống ortool.py: trả về list[(đường dẫn file, thư mục con tương đối)]."""
     files = []
     if filename and subfolder:
         path = data_root / subfolder / filename
@@ -327,8 +397,7 @@ def collect_files(data_root: Path, filename, subfolder):
 
 
 def main():
-    """Run GA on datasets.
-
+    """
     Ví dụ:
         python ga.py --filename S042_N10_R_R3.json --subfolder S/N10
         python ga.py --filename S042_N10_R_R3.json
@@ -341,19 +410,33 @@ def main():
     parser.add_argument("--subfolder", type=str, default=None,
                         help="Thư mục con dưới DATA_ROOT, vd S/N10 hoặc L/N100")
     parser.add_argument("--data-root", type=str, default="../data/data",
-                        help="Thư mục dữ liệu gốc (mặc định ../data/data, giống ortool.py)")
+                        help="Thư mục dữ liệu gốc (mặc định ../data/data)")
     parser.add_argument("--pop-size", type=int, default=100)
     parser.add_argument("--max-gen", type=int, default=100)
     parser.add_argument("--crossover-rate", type=float, default=0.9)
-    parser.add_argument("--mutation-rate", type=float, default=0.1)
-    parser.add_argument("--mutation-rate-max", type=float, default=0.6)
-    parser.add_argument("--tournament-size", type=int, default=5)
-    parser.add_argument("--immigrant-rate", type=float, default=0.05)
-    parser.add_argument("--seed-ratio", type=float, default=0.1)
-    parser.add_argument("--patience", type=int, default=15,
-                        help="Số thế hệ không cải thiện trước khi khởi động lại một phần")
-    parser.add_argument("--diversity-threshold", type=float, default=0.15)
-    parser.add_argument("--elite-keep", type=float, default=0.1)
+    parser.add_argument("--mutation-rate", type=float, default=0.3)
+    parser.add_argument("--mutation-rate-max", type=float, default=0.8)
+    parser.add_argument("--tournament-size", type=int, default=2)
+    parser.add_argument("--immigrant-rate", type=float, default=0.1)
+    parser.add_argument("--seed-ratio", type=float, default=0.2)
+    parser.add_argument("--patience", type=int, default=30,
+                        help="Số thế hệ epoch hiện tại không cải thiện trước khi restart")
+    parser.add_argument("--converge-threshold", type=float, default=0.002,
+                        help="Restart sớm khi (best - median)/|best| < ngưỡng (hội tụ kiểu hình)")
+    parser.add_argument("--archive-size", type=int, default=8,
+                        help="Số cực trị cục bộ khác nhau lưu trong archive")
+    parser.add_argument("--isolation", type=int, default=10,
+                        help="Số thế hệ epoch mới chạy cô lập trước khi tái nhập archive")
+    parser.add_argument("--max-shake", type=int, default=4,
+                        help="Số mức leo thang cường độ đá; vượt quá -> restart cứng")
+    parser.add_argument("--restart-fresh", type=float, default=0.3,
+                        help="Tỉ lệ cá thể mới hoàn toàn khi restart (còn lại = archive bị đá)")
+    parser.add_argument("--restart-strength", type=float, default=0.04,
+                        help="Cường độ đá cho mỗi mức, tính theo tỉ lệ độ dài nhiễm sắc thể")
+    parser.add_argument("--heuristic-prob", type=float, default=0.3,
+                        help="Xác suất cá thể nhập cư được sinh bằng heuristic")
+    parser.add_argument("--use-fill", action="store_true",
+                        help="Dùng bước fill tham lam khi đánh giá trong lúc tiến hóa (chậm hơn, hội tụ nhanh hơn)")
     parser.add_argument("--time-limit", type=float, default=None, help="Giới hạn thời gian mỗi instance (giây)")
     parser.add_argument("--s-max", type=int, default=2, help="Số sortie tối đa/UAV nếu dữ liệu không khai báo")
     parser.add_argument("--processing-number", type=int, default=4)
@@ -387,8 +470,14 @@ def main():
                 immigrant_rate=args.immigrant_rate,
                 seed_ratio=args.seed_ratio,
                 patience=args.patience,
-                diversity_threshold=args.diversity_threshold,
-                elite_keep=args.elite_keep,
+                converge_threshold=args.converge_threshold,
+                archive_size=args.archive_size,
+                isolation=args.isolation,
+                max_shake=args.max_shake,
+                restart_fresh=args.restart_fresh,
+                restart_strength=args.restart_strength,
+                use_fill=args.use_fill,
+                heuristic_prob=args.heuristic_prob,
                 time_limit=args.time_limit,
                 processing_number=args.processing_number,
                 seed=args.seed,
@@ -409,6 +498,7 @@ def main():
                 "best_energy": fit[2],
                 "best_service_rate": len(solution.served) / max(1, problem.num_info),
                 "num_restarts": last["restarts"],
+                "num_restart_success": last["restart_success"],
                 "best_solution": solution_to_dict(problem, solution, fit),
             }
             save_result(result, result_dir / sub / data_file.name)

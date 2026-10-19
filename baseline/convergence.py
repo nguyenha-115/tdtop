@@ -81,7 +81,7 @@ def plot_one(json_path, algo, metric, out_dir, show):
 
     t = data.get("time")
     title = os.path.splitext(os.path.basename(json_path))[0]
-    ax.set_title(f"{NAMES[algo]} convergence — {title}" +
+    ax.set_title(f"{NAMES[algo]} convergence - {title}" +
                  (f"  (t = {t:.2f}s)" if t is not None else ""))
     ax.set_xlabel("Thế hệ (generation)" if algo == "ga" else "Vòng lặp (iteration)")
     ax.set_ylabel(YLABEL[metric])

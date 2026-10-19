@@ -13,9 +13,7 @@ from problem import Problem, Solution, Route, Sortie, TruckPlan, Individual
 EPS = 1e-9
 
 
-# ====================================================================
 # Khởi tạo
-# ====================================================================
 def random_individual(problem: Problem) -> Individual:
     truck = list(problem.road_ids) + list(problem.delim_ids)
     random.shuffle(truck)
@@ -28,8 +26,6 @@ def random_individual(problem: Problem) -> Individual:
 
 
 def heuristic_individual(problem: Problem) -> Individual:
-    """Lớp xe tải: quét góc quanh kho rồi chia đều cho các xe, láng giềng gần nhất trong từng xe.
-    Lớp UAV: sắp theo hiệu quả p/thời gian bay tối thiểu (có nhiễu)."""
     import math
 
     P = problem
@@ -84,16 +80,14 @@ def init_population(num_indi, seed, problem, seed_ratio: float = 0.1):
     return popu
 
 
-def new_immigrant(problem: Problem) -> Individual:
-    """Cá thể mới hoàn toàn (immigrant): 30% heuristic, 70% ngẫu nhiên."""
-    if random.random() < 0.3:
+def new_immigrant(problem: Problem, heuristic_prob: float = 0.3) -> Individual:
+    """Cá thể mới hoàn toàn (immigrant): heuristic với xác suất `heuristic_prob`, còn lại ngẫu nhiên."""
+    if random.random() < heuristic_prob:
         return heuristic_individual(problem)
     return random_individual(problem)
 
 
-# ====================================================================
 # Lai ghép (PMX trên từng hoán vị, mask đi theo gene)
-# ====================================================================
 def _pmx(p1, p2, a, b):
     size = len(p1)
     child = [None] * size
@@ -152,9 +146,7 @@ def crossover(problem: Problem, parent1: Individual, parent2: Individual):
     return Individual([ot1, oi1, om1]), Individual([ot2, oi2, om2])
 
 
-# ====================================================================
 # Đột biến
-# ====================================================================
 def _swap_or_insert(seq, mask=None):
     n = len(seq)
     if n < 2:
@@ -183,8 +175,7 @@ def _invert(seq, mask=None):
 
 
 def mutation(problem: Problem, indi: Individual, strength: int = 1):
-    """Mỗi lần đột biến chọn ngẫu nhiên 1 trong 4 toán tử; lặp `strength` lần.
-    strength lớn dùng cho giai đoạn thoát hội tụ sớm."""
+    """Mỗi lần đột biến chọn ngẫu nhiên 1 trong 4 toán tử; lặp `strength` lần."""
     truck, info, mask = (list(x) for x in indi.chromosome)
     for _ in range(max(1, strength)):
         op = random.randint(0, 3)
@@ -204,9 +195,8 @@ def mutation(problem: Problem, indi: Individual, strength: int = 1):
     return Individual([truck, info, mask])
 
 
-# ====================================================================
+
 # Giải mã
-# ====================================================================
 def partition(truck_layer, problem: Problem):
     """Cắt lớp xe tải tại ký tự phân cách thành K danh sách nút đường."""
     routes = [[] for _ in range(problem.num_trucks)]
@@ -428,9 +418,7 @@ def decode(indi: Individual, problem: Problem, use_fill: bool = True) -> Solutio
     return build_solution(P, node_lists, pl)
 
 
-# ====================================================================
 # Hàm thích nghi
-# ====================================================================
 def cal_objective(problem: Problem, solution: Solution):
     f1 = sum(problem.profit[i] for i in solution.served)
     f2 = solution.energy
@@ -442,21 +430,19 @@ def cal_objective(problem: Problem, solution: Solution):
     return fitness, f1, f2
 
 
-def cal_fitness(problem: Problem, indi_or_chromosome):
+def cal_fitness(problem: Problem, indi_or_chromosome, use_fill: bool = True):
     indi = (
         indi_or_chromosome
         if isinstance(indi_or_chromosome, Individual)
         else Individual(indi_or_chromosome)
     )
-    solution = decode(indi, problem)
+    solution = decode(indi, problem, use_fill)
     fitness, f1, f2 = cal_objective(problem, solution)
     service_rate = len(solution.served) / max(1, problem.num_info)
     return fitness, f1, f2, service_rate, solution.violation, solution.signature
 
 
-# ====================================================================
 # Đo độ đa dạng quần thể
-# ====================================================================
 def population_diversity(indivs: List[Individual], n_pairs: int = 40) -> float:
     """Khoảng cách Hamming chuẩn hóa trung bình (lớp xe tải, lớp UAV, mask) trên mẫu các cặp."""
     n = len(indivs)
@@ -476,11 +462,8 @@ def population_diversity(indivs: List[Individual], n_pairs: int = 40) -> float:
     return total / n_pairs
 
 
-# ====================================================================
-# Xuất kết quả
-# ====================================================================
+# kết quả
 def solution_to_dict(problem: Problem, solution: Solution, fitness_tuple) -> Dict:
-    """Xuất lời giải theo định dạng gần giống kết quả của ortool.py để đối chiếu với MILP."""
     P = problem
     oid = P.orig_id
     routes = []

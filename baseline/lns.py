@@ -23,13 +23,11 @@ from utils import (
 )
 
 
-# =====================================================================
-# Trạng thái lời giải của ALNS
-# =====================================================================
+# Trạng thái lời giải của LNS
 class ALNSState(_Planner):
     """Hành trình xe + sortie theo cung; hỗ trợ xóa/chèn tăng dần."""
 
-    # ---------------- khởi tạo / sao chép ----------------
+    # khởi tạo / sao chép 
     @classmethod
     def from_solution(cls, P: Problem, sol: Solution):
         st = cls(P, [list(plan.route.nodes) for plan in sol.plans])
@@ -56,7 +54,7 @@ class ALNSState(_Planner):
         c.violation = self.violation
         return c
 
-    # ---------------- đại lượng dẫn xuất ----------------
+    # đại lượng dẫn xuất
     def _refresh_arc(self, k, idx):
         lst = self.sorties[k][idx]
         self.dur[k][idx] = max([self.tG[k][idx]] + [s["F"] for s in lst])
@@ -100,7 +98,7 @@ class ALNSState(_Planner):
         self.violation = self.viol()
         return build_solution(self.P, self.nl, self)
 
-    # ---------------- thay đổi hành trình xe ----------------
+    # thay đổi hành trình xe
     def set_route(self, k, roads):
         """Đặt lại dãy nút đường của xe k. Sortie ở các cung còn nguyên (cùng cặp nút) được giữ,
         sortie ở cung biến mất được trả về dưới dạng các nhóm tự do."""
@@ -133,7 +131,7 @@ class ALNSState(_Planner):
                 groups.extend(self.set_route(k, [x for x in cur if x not in nodes]))
         return groups
 
-    # ---------------- xóa nút / sortie ----------------
+    # xóa nút / sortie
     def locate(self, node):
         for k in range(len(self.nl)):
             for idx in range(len(self.nl[k]) - 1):
@@ -194,7 +192,7 @@ class ALNSState(_Planner):
             F, _ = self._cost(new, _inner_stats(P, new), a, b, self.tG[k][idx])
         return self.dur[k][idx] - max(self.tG[k][idx], F, other)
 
-    # ---------------- chèn nút thông tin ----------------
+    # chèn nút thông tin
     def arc_options(self, node, k, idx):
         """Các vị trí chèn khả thi của `node` trên cung (k,idx): tối đa 1 'sortie mới' và 1 'ghép tốt nhất'.
         Placement = (delta, E, k, idx, si (-1 nếu sortie mới), seq, F)."""
@@ -299,18 +297,17 @@ def state_objective(P: Problem, st: ALNSState):
 def _pkey(pl):
     return (pl[0], pl[1])
 
-
-# =====================================================================
 # ALNS
-# =====================================================================
 class ALNSSolver:
     D_NAMES = [
         "D1_random", "D2_worst", "D3_shaw", "D4_sortie", "D5_window", "D6_wait",
         "D7_road_random", "D8_road_related", "D9_road_worst", "D10_road_segment",
+        "D11_target",
     ]
     N_INFO_D = 6  # D1..D6 là toán tử trên nút thông tin
     RR_NAMES = ["R1_greedy", "R2_regret2"]
     RI_NAMES = ["I1_profit", "I2_cost", "I3_density", "I4_regret", "I5_noise"]
+    M_NAMES = ["M1_plain", "M2_noise", "M3_swap"]  # chế độ sửa chữa (chọn thích nghi)
 
     def __init__(
         self,
@@ -328,8 +325,10 @@ class ALNSSolver:
         rho: float = 0.1,
         segment: int = 100,
         stag_raise: int = 200,
-        reset_after: int = 500,
+        reset_after: int = 300,
         reheat_mult: float = 5.0,
+        elite_size: int = 8,
+        q_kick: float = 0.5,
         init_tries: int = 20,
         polish: bool = True,
         time_limit: float = None,
@@ -349,6 +348,9 @@ class ALNSSolver:
         self.stag_raise = max(1, stag_raise)
         self.reset_after = max(1, reset_after)
         self.reheat_mult = reheat_mult
+        self.elite_size = max(1, elite_size)
+        self.q_kick = q_kick
+        self._prio, self._noisy = [], False
         self.init_tries = max(1, init_tries)
         self.polish_on = polish
         self.time_limit = time_limit
@@ -365,9 +367,7 @@ class ALNSSolver:
         ) or 1.0
         self._max_p = max((self.P.profit[i] for i in self.P.info_ids), default=1) or 1
 
-    # ------------------------------------------------------------------
     # Toán tử phá hủy: trả về (nút đường bị gỡ, nhóm tự do)
-    # ------------------------------------------------------------------
     def _remove_nodes(self, st, nodes):
         groups = []
         for n in nodes:
@@ -467,6 +467,37 @@ class ALNSSolver:
     def _all_roads(self, st):
         return [x for k in range(len(st.nl)) for x in st.road_nodes(k)]
 
+    def _d_target(self, st, q, qR):
+        """Chọn một nút CHƯA phục vụ có lợi nhuận cao làm mục tiêu, gỡ các nút đang phục vụ gần nó
+        (cùng cung / gần theo khoảng cách UAV) để giải phóng chỗ, rồi ép chèn mục tiêu trước."""
+        P = self.P
+        served = st.served_set()
+        unserved = [i for i in P.info_ids if P.reachable[i] and i not in served]
+        if not unserved or not served:
+            return self._d_random(st, q, qR)
+        u = random.choices(unserved, weights=[P.profit[i] for i in unserved])[0]
+        # cung "rẻ" nhất cho u theo cận dưới thời gian bay
+        best_arc, best_lb = None, None
+        for k in range(len(st.nl)):
+            nl = st.nl[k]
+            for idx in range(len(nl) - 1):
+                a, b = nl[idx], nl[idx + 1]
+                if P.uav_energy[a][u] + P.uav_energy[u][b] + P.p_srv * P.service[u] > P.theta + EPS:
+                    continue
+                lb = P.uav_time[a][u] + P.uav_time[u][b] + P.service[u] - st.dur[k][idx]
+                if best_lb is None or lb < best_lb:
+                    best_arc, best_lb = (k, idx), lb
+        on_arc = set()
+        if best_arc is not None:
+            k, idx = best_arc
+            on_arc = {i for so in st.sorties[k][idx] for i in so["seq"]}
+        order = sorted(served, key=lambda j: P.uav_dist[u][j] - (1e9 if j in on_arc else 0.0))
+        nodes = self._randomized_pick(order, max(1, q))
+        # thêm vài nút chưa phục vụ khác quanh u làm mục tiêu phụ
+        near = sorted((j for j in unserved if j != u), key=lambda j: P.uav_dist[u][j])
+        self._prio = [u] + [j for j in near[:3] if random.random() < 0.5]
+        return [], self._remove_nodes(st, nodes)
+
     def _d_road_random(self, st, q, qR):
         roads = self._all_roads(st)
         nodes = random.sample(roads, min(qR, len(roads)))
@@ -508,9 +539,7 @@ class ALNSSolver:
         nodes = roads[start: start + w]
         return nodes, st.remove_roads(nodes)
 
-    # ------------------------------------------------------------------
     # Toán tử sửa chữa
-    # ------------------------------------------------------------------
     def _road_options(self, st, x):
         """(vi phạm tăng thêm, chi phí, k, idx) cho mọi vị trí chèn nút đường x."""
         P = self.P
@@ -570,20 +599,39 @@ class ALNSSolver:
                     break
                 seq.pop()  # nút bị cắt ở lại kho, sẽ được chèn lẻ ở bước sau
 
-    def _repair_info(self, st, mode):
+    def _best_pl(self, opts):
+        """Vị trí chèn tốt nhất; ở chế độ nhiễu, chi phí được cộng nhiễu ngẫu nhiên (Ropke & Pisinger)."""
+        if not self._noisy:
+            return min(opts, key=_pkey)
+        amp = self.noise * 0.1 * self.P.T
+        return min(opts, key=lambda pl: (max(0.0, pl[0] + random.uniform(-amp, amp)), pl[1]))
+
+    def _repair_info(self, st, mode, prio=(), exclude=()):
+        """Chèn nút chưa phục vụ. `prio`: chèn trước tiên (mục tiêu của D11);
+        `exclude`: tạm hoãn (nút vừa bị gỡ, để nhường chỗ cho nút khác)."""
         P = self.P
         served = st.served_set()
-        pool = [i for i in P.info_ids if P.reachable[i] and i not in served]
+        exclude = set(exclude)
+        pool = [i for i in P.info_ids if P.reachable[i] and i not in served and i not in exclude]
         if not pool:
             return
         cache = _Cache(st, pool)
+        for n in prio:
+            if n in cache.opts:
+                opts = cache.options(n)
+                cache.drop(n)
+                if opts:
+                    pl = min(opts, key=_pkey)
+                    st.apply_placement(pl)
+                    cache.refresh_arc(pl[2], pl[3])
         if mode == 0:  # I1: theo lợi nhuận giảm dần
+            pool = cache.nodes()
             pool.sort(key=lambda n: (-P.profit[n], random.random()))
             for n in pool:
                 opts = cache.options(n)
                 cache.drop(n)
                 if opts:
-                    pl = min(opts, key=_pkey)
+                    pl = self._best_pl(opts)
                     st.apply_placement(pl)
                     cache.refresh_arc(pl[2], pl[3])
             return
@@ -596,7 +644,7 @@ class ALNSSolver:
                 opts = cache.options(n)
                 if not opts:
                     continue
-                pl = min(opts, key=_pkey)
+                pl = self._best_pl(opts)
                 p = P.profit[n]
                 if mode == 1:  # I2: chi phí nhỏ nhất
                     sc = (-pl[0], p, -pl[1])
@@ -623,9 +671,7 @@ class ALNSSolver:
             cache.drop(best_n)
             cache.refresh_arc(best_pl[2], best_pl[3])
 
-    # ------------------------------------------------------------------
     # Cải thiện cục bộ khi tìm được lời giải tốt nhất mới
-    # ------------------------------------------------------------------
     def _polish(self, st):
         """Thử mọi hoán vị thứ tự bay của sortie (<= 6 nút) rồi lấp thêm nút còn lại."""
         P = self.P
@@ -656,7 +702,7 @@ class ALNSSolver:
                     st._refresh_arc(k, idx)
         self._repair_info(st, 1)
 
-    # ------------------------------------------------------------------
+    #
     def _init_state(self):
         P = self.P
         best_sol, best_fit = None, None
@@ -667,6 +713,62 @@ class ALNSSolver:
             if best_fit is None or fit[0] > best_fit[0]:
                 best_sol, best_fit = sol, fit
         return ALNSState.from_solution(P, best_sol)
+
+    def _destroy_repair(self, cur, d_fn, q, qR, m, ri, w_rr):
+        """Một bước phá hủy + sửa chữa trên bản sao của `cur`.
+        m = 0: sửa chữa thường (chèn lại cả nhóm cũ); m = 1: có nhiễu, rã nhóm;
+        m = 2: hoán đổi — nút vừa gỡ bị hoãn để nút chưa phục vụ được chèn trước."""
+        new = cur.copy()
+        before = new.served_set()
+        self._prio, self._noisy = [], (m == 1)
+        road_pool, groups = d_fn(new, q, qR)
+        rr = None
+        if road_pool:
+            rr = self._roulette(w_rr)
+            groups = list(groups) + self._repair_road(new, road_pool, rr)
+        if m == 0:
+            self._reinsert_groups(new, groups)
+            self._repair_info(new, ri, self._prio)
+        elif m == 1:
+            self._repair_info(new, ri, self._prio)
+        else:
+            removed = before - new.served_set()
+            self._repair_info(new, ri, self._prio, exclude=removed)
+            self._repair_info(new, ri)
+        self._noisy = False
+        return new, rr
+
+    def _update_elite(self, elite, f, sig, st):
+        """Kho lời giải ưu tú, khác nhau về chữ ký, sắp giảm dần theo fitness."""
+        if any(s == sig for _, s, _ in elite):
+            return
+        if len(elite) < self.elite_size or f > elite[-1][0]:
+            elite.append((f, sig, st.copy()))
+            elite.sort(key=lambda t: -t[0])
+            del elite[self.elite_size:]
+
+    @staticmethod
+    def _pick_elite(elite):
+        r = random.choices(range(len(elite)), weights=[1.0 / (i + 1) for i in range(len(elite))])[0]
+        return elite[r][2]
+
+    def _kick(self, st):
+        """Phá hủy mạnh (q_kick * số nút đang phục vụ, có thể đảo cả hành trình xe) + sửa chữa có nhiễu."""
+        P = self.P
+        n_served = len(st.served_set())
+        q = max(1, int(round(random.uniform(0.5, 1.0) * self.q_kick * max(1, n_served))))
+        qR = random.randint(1, max(1, P.num_road // 2)) if P.num_road and random.random() < 0.5 else 0
+        d_fn = random.choice((self._d_random, self._d_shaw, self._d_target))
+        new = st.copy()
+        self._prio, self._noisy = [], True
+        if qR:  # nhóm bị giải phóng trở thành nút chưa phục vụ, được chèn lại ở bước sửa chữa
+            road_pool, _ = self._d_road_random(new, q, qR)
+            self._repair_road(new, road_pool, 0)
+        if new.served_set():
+            d_fn(new, q, qR)
+        self._repair_info(new, random.randrange(len(self.RI_NAMES)), self._prio)
+        self._noisy = False
+        return new
 
     @staticmethod
     def _roulette(weights, mask=None):
@@ -684,13 +786,16 @@ class ALNSSolver:
         d_fns = [
             self._d_random, self._d_worst, self._d_shaw, self._d_sortie, self._d_window, self._d_wait,
             self._d_road_random, self._d_road_related, self._d_road_worst, self._d_road_segment,
+            self._d_target,
         ]
-        nD, nRR, nRI = len(d_fns), len(self.RR_NAMES), len(self.RI_NAMES)
-        w_d, w_rr, w_ri = [1.0] * nD, [1.0] * nRR, [1.0] * nRI
-        seg_sc = {"d": [0.0] * nD, "rr": [0.0] * nRR, "ri": [0.0] * nRI}
-        seg_n = {"d": [0] * nD, "rr": [0] * nRR, "ri": [0] * nRI}
-        tot_n = {"d": [0] * nD, "rr": [0] * nRR, "ri": [0] * nRI}
-        tot_best = {"d": [0] * nD, "rr": [0] * nRR, "ri": [0] * nRI}
+        road_d = set(range(self.N_INFO_D, self.N_INFO_D + 4))
+        nD, nRR, nRI, nM = len(d_fns), len(self.RR_NAMES), len(self.RI_NAMES), len(self.M_NAMES)
+        w_d, w_rr, w_ri, w_m = [1.0] * nD, [1.0] * nRR, [1.0] * nRI, [1.0] * nM
+        grps = (("d", w_d), ("rr", w_rr), ("ri", w_ri), ("m", w_m))
+        seg_sc = {g: [0.0] * len(w) for g, w in grps}
+        seg_n = {g: [0] * len(w) for g, w in grps}
+        tot_n = {g: [0] * len(w) for g, w in grps}
+        tot_best = {g: [0] * len(w) for g, w in grps}
 
         cur = self._init_state()
         cur_f, cur_f1, _, _ = state_objective(P, cur)
@@ -698,10 +803,12 @@ class ALNSSolver:
         best = cur.copy()
         best_f = cur_f
         best_obj = state_objective(P, best)
+        elite = [(cur_f, cur_sig, cur.copy())]
 
-        T0 = -self.w_start * max(1.0, P.total_profit) / math.log(0.5)
+        T0 = -self.w_start * max(1.0, cur_f1) / math.log(0.5)
         boost = 1.0
         stag = since_reset = resets_noimp = 0
+        self.n_dup = 0
         visited = deque(maxlen=3000)
         visited_set = set()
         sig0, sig1, sig2 = self.sigma
@@ -726,25 +833,20 @@ class ALNSSolver:
             qrmax_eff = min(0.8, self.q_road_max + 0.1 * (stag // self.stag_raise))
             q = max(1, int(round(random.uniform(self.q_min, qmax_eff) * max(1, n_served))))
             qR = random.randint(1, max(1, int(round(qrmax_eff * nR)))) if nR else 0
-            mask = [(i < self.N_INFO_D and n_served > 0) or (i >= self.N_INFO_D and nR > 0) for i in range(nD)]
+            mask = [(nR > 0) if i in road_d else (n_served > 0) for i in range(nD)]
             d = self._roulette(w_d, mask)
             if d is None:
                 break
-
-            new = cur.copy()
-            road_pool, groups = d_fns[d](new, q, qR)
-            rr = ri = None
-            if road_pool:
-                rr = self._roulette(w_rr)
-                groups = list(groups) + self._repair_road(new, road_pool, rr)
-            self._reinsert_groups(new, groups)
+            m = self._roulette(w_m)
             ri = self._roulette(w_ri)
-            self._repair_info(new, ri)
+            new, rr = self._destroy_repair(cur, d_fns[d], q, qR, m, ri, w_rr)
 
             fit_n, f1_n, f2_n, V_n = state_objective(P, new)
             sig = new.signature()
             score, accepted = 0.0, False
             improved_best = False
+            if sig == cur_sig:
+                self.n_dup += 1
             if sig != cur_sig and sig not in visited_set:
                 if len(visited) == visited.maxlen:
                     visited_set.discard(visited[0])
@@ -764,9 +866,10 @@ class ALNSSolver:
                         score, accepted = sig2, True
             if accepted:
                 cur, cur_f, cur_sig = new, fit_n, sig
+                self._update_elite(elite, cur_f, cur_sig, cur)
 
             # ----- thống kê điểm toán tử -----
-            for grp, j in (("d", d), ("rr", rr), ("ri", ri)):
+            for grp, j in (("d", d), ("rr", rr), ("ri", ri), ("m", m)):
                 if j is None:
                     continue
                 seg_n[grp][j] += 1
@@ -782,20 +885,23 @@ class ALNSSolver:
                 stag += 1
                 since_reset += 1
                 if since_reset >= self.reset_after:
-                    cur = best.copy()
-                    cur_f, cur_sig = best_f, cur.signature()
+                    # khởi động lại từ một lời giải ưu tú (không chỉ best) + cú hích phá hủy lớn
+                    cur = self._kick(self._pick_elite(elite))
+                    cur_f, cur_sig = state_objective(P, cur)[0], cur.signature()
+                    self._update_elite(elite, cur_f, cur_sig, cur)
                     visited.clear()
                     visited_set.clear()
                     self.resets += 1
                     since_reset = 0
                     resets_noimp += 1
+                    # tăng nhiệt độ dần theo số lần khởi động lại không cải thiện
+                    boost = 1.0 + (self.reheat_mult - 1.0) * min(1.0, resets_noimp / 3.0)
                     if resets_noimp >= 3:
-                        boost = self.reheat_mult
                         resets_noimp = 0
 
-            # ----- cập nhật trọng số cuối mỗi đoạn -----
+            # cập nhật trọng số cuối mỗi đoạn
             if it % self.segment == 0 and self.rho > 0:
-                for grp, w in (("d", w_d), ("rr", w_rr), ("ri", w_ri)):
+                for grp, w in grps:
                     for j in range(len(w)):
                         if seg_n[grp][j] > 0:
                             w[j] = (1 - self.rho) * w[j] + self.rho * seg_sc[grp][j] / seg_n[grp][j]
@@ -818,6 +924,8 @@ class ALNSSolver:
             "destroy": {self.D_NAMES[j]: {"used": tot_n["d"][j], "new_best": tot_best["d"][j], "weight": w_d[j]} for j in range(nD)},
             "repair_road": {self.RR_NAMES[j]: {"used": tot_n["rr"][j], "new_best": tot_best["rr"][j], "weight": w_rr[j]} for j in range(nRR)},
             "repair_info": {self.RI_NAMES[j]: {"used": tot_n["ri"][j], "new_best": tot_best["ri"][j], "weight": w_ri[j]} for j in range(nRI)},
+            "repair_mode": {self.M_NAMES[j]: {"used": tot_n["m"][j], "new_best": tot_best["m"][j], "weight": w_m[j]} for j in range(nM)},
+            "duplicates": self.n_dup,
         }
         return history
 
@@ -836,9 +944,7 @@ class ALNSSolver:
         }
 
 
-# =====================================================================
-# Chạy nhiều bản độc lập song song (hạt giống khác nhau)
-# =====================================================================
+# Chạy nhiều bản độc lập song song
 def _run_one(args):
     data_path, s_max, params, seed = args
     problem = Problem(data_path, s_max_default=s_max)
@@ -849,7 +955,6 @@ def _run_one(args):
 
 
 def collect_files(data_root: Path, filename, subfolder):
-    """Giống ortool.py / ga.py: trả về list[(đường dẫn file, thư mục con tương đối)]."""
     files = []
     if filename and subfolder:
         path = data_root / subfolder / filename
@@ -872,13 +977,12 @@ def collect_files(data_root: Path, filename, subfolder):
         for f in sorted(folder.glob("*.json")):
             files.append((f, subfolder))
     else:
-        print("Cần truyền --filename và/hoặc --subfolder")
+        print("--filename và/hoặc --subfolder")
     return files
 
 
 def main():
-    """Run ALNS on datasets.
-
+    """
     Ví dụ:
         python alns.py --filename S042_N10_R_R3.json --subfolder S/N10
         python alns.py --filename S042_N10_R_R3.json
@@ -914,7 +1018,7 @@ def main():
     args = parser.parse_args()
 
     data_root = Path(args.data_root)
-    result_dir = Path(__file__).parent / "result" / "alns"
+    result_dir = Path(__file__).parent / "result" / "lns"
     files = collect_files(data_root, args.filename, args.subfolder)
     if not files:
         return
@@ -928,7 +1032,7 @@ def main():
         verbose=(args.runs == 1), print_every=args.print_every,
     )
 
-    print(f"\n{'=' * 80}\nALNS Solver (TD-TOP)\n{'=' * 80}\n")
+    print(f"\n{'=' * 80}\nLNS Solver (TD-TOP)\n{'=' * 80}\n")
     print(f"Found {len(files)} file(s)")
 
     for data_file, sub in files:
@@ -971,7 +1075,7 @@ def main():
             traceback.print_exc()
             continue
 
-    print(f"\n{'=' * 80}\nALNS experiments completed!\n{'=' * 80}\n")
+    print(f"\n{'=' * 80}\nLNS experiments completed!\n{'=' * 80}\n")
 
 
 if __name__ == "__main__":

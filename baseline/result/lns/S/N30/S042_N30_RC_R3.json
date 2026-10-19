@@ -1,0 +1,3357 @@
+{
+  "time": 4.124395132064819,
+  "history": {
+    "0": {
+      "fitness": 1327.1482692602303,
+      "profit": 1328,
+      "energy": 323.3875121217904,
+      "violation": 0.0,
+      "current_fitness": 1327.1482692602303,
+      "temperature": 95.79495071502718,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "10": {
+      "fitness": 1327.1949532221126,
+      "profit": 1328,
+      "energy": 305.6624147592308,
+      "violation": 0.0,
+      "current_fitness": 1327.1949532221126,
+      "temperature": 94.48059471728418,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "20": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1827937779888,
+      "temperature": 93.04133894911662,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "30": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.200731606565,
+      "temperature": 91.62400786476805,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "40": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.0983991869293,
+      "temperature": 90.22826747790242,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "50": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1696237464364,
+      "temperature": 88.85378888991384,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "60": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.129421879036,
+      "temperature": 87.50024821242323,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "70": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1361600613302,
+      "temperature": 86.16732649095587,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "80": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.147517007211,
+      "temperature": 84.85470962978155,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "90": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1414080674997,
+      "temperature": 83.56208831789958,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "100": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1466681414079,
+      "temperature": 82.28915795615133,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "110": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1365863120586,
+      "temperature": 81.03561858544313,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "120": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.1719150140373,
+      "temperature": 79.80117481606254,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "130": {
+      "fitness": 1327.2359647291717,
+      "profit": 1328,
+      "energy": 290.0910509268252,
+      "violation": 0.0,
+      "current_fitness": 1327.191341727269,
+      "temperature": 78.58553575807137,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "140": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.187544157173,
+      "temperature": 77.38841495275908,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "150": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.2289249398723,
+      "temperature": 76.20953030514026,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "160": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1847822807877,
+      "temperature": 75.04860401748061,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "170": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1679898215382,
+      "temperature": 73.90536252383535,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "180": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.172824892554,
+      "temperature": 72.77953642558488,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "190": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.197557406759,
+      "temperature": 71.67086042795253,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "200": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.195753690127,
+      "temperature": 70.57907327748924,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "210": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1788264149693,
+      "temperature": 69.50391770051061,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "220": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1939585637374,
+      "temperature": 68.4451403424718,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "230": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1917614025576,
+      "temperature": 67.40249170826587,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "240": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.182613442999,
+      "temperature": 66.37572610343169,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "250": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.2227694454525,
+      "temperature": 65.36460157625724,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "260": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1945164695956,
+      "temperature": 64.36887986076522,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "270": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1326.1728262690058,
+      "temperature": 63.38832632056674,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "280": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1326.1457745300802,
+      "temperature": 62.42270989357074,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "290": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1586667016593,
+      "temperature": 61.4718030375353,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "300": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1366054947655,
+      "temperature": 60.535381676448694,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "310": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1508890172418,
+      "temperature": 59.61322514772699,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "320": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1565148217353,
+      "temperature": 58.7051161502162,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "330": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1536036893194,
+      "temperature": 57.81084069298639,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "340": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.062680174327,
+      "temperature": 56.9301880449059,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "350": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1788805823178,
+      "temperature": 56.06295068498374,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "360": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1228994046182,
+      "temperature": 55.208924253468325,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "370": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1326.0832629146864,
+      "temperature": 54.36790750369132,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "380": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.151446061707,
+      "temperature": 53.53970225464485,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "390": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1451607089098,
+      "temperature": 52.72411334428129,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "400": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.0904669247416,
+      "temperature": 51.9209485835244,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "410": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1479922676608,
+      "temperature": 51.130018710980984,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "420": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.2027072013261,
+      "temperature": 50.3511373483425,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "430": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1669949523537,
+      "temperature": 49.58412095646599,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "440": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.2262475835987,
+      "temperature": 48.82878879212414,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "450": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.2101590504924,
+      "temperature": 48.0849628654141,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "460": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1750554873774,
+      "temperature": 47.35246789781513,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "470": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1307.1441796159804,
+      "temperature": 46.63113128088515,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "480": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1280717581742,
+      "temperature": 45.92078303558653,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "490": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1049912936794,
+      "temperature": 45.221255772231494,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "500": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1756951126838,
+      "temperature": 44.532384651037574,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "510": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1847790317486,
+      "temperature": 43.854007343284074,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "520": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1580851285191,
+      "temperature": 43.18596399306015,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "530": {
+      "fitness": 1327.242022656903,
+      "profit": 1328,
+      "energy": 287.7909599636326,
+      "violation": 0.0,
+      "current_fitness": 1327.1756427166931,
+      "temperature": 42.528097179595676,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "540": {
+      "fitness": 1327.2442922399562,
+      "profit": 1328,
+      "energy": 286.92923831516504,
+      "violation": 0.0,
+      "current_fitness": 1327.2442922399562,
+      "temperature": 41.88025188016589,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "550": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.1914927398661,
+      "temperature": 41.242275433561126,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "560": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.2017960634244,
+      "temperature": 40.614017504113015,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "570": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.206293339118,
+      "temperature": 39.995330046268734,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "580": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.2339611051527,
+      "temperature": 39.38606726970488,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "590": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.178607179829,
+      "temperature": 38.786085604972754,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "600": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.2285631150442,
+      "temperature": 38.19524366966702,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "610": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.1800150876447,
+      "temperature": 37.613402235109696,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "620": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.1839469554423,
+      "temperature": 37.04042419354172,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "630": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.2025610815717,
+      "temperature": 36.47617452581418,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "640": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.2309088088152,
+      "temperature": 35.920520269571874,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "650": {
+      "fitness": 1327.245085573058,
+      "profit": 1328,
+      "energy": 286.6280233817406,
+      "violation": 0.0,
+      "current_fitness": 1327.183678143919,
+      "temperature": 35.37333048792137,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "660": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.252810054688,
+      "temperature": 34.834476238576514,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "670": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.2203546190976,
+      "temperature": 34.30383054347385,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "680": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.206050183802,
+      "temperature": 33.78126835885093,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "690": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.155576477192,
+      "temperature": 33.26666654578045,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "700": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.081085179485,
+      "temperature": 32.75990384115321,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "710": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1691475187697,
+      "temperature": 32.26086082910316,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "720": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.222884054583,
+      "temperature": 31.76941991286766,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "730": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.182260366596,
+      "temperature": 31.28546528707648,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "740": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1544365369118,
+      "temperature": 30.808882910462874,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "750": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.145899405252,
+      "temperature": 30.33956047899039,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "760": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1631314060994,
+      "temperature": 29.87738739938903,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "770": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1621761317115,
+      "temperature": 29.42225476309456,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "780": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.0973445562306,
+      "temperature": 28.974055320584792,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "790": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1523213006226,
+      "temperature": 28.532683456106795,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "800": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1410210340846,
+      "temperature": 28.09803516278919,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "810": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1364916675864,
+      "temperature": 27.670008018133416,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "820": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1250147943301,
+      "temperature": 27.24850115987847,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "830": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1268802483346,
+      "temperature": 26.833415262233288,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "840": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.0974480392356,
+      "temperature": 26.424652512471095,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "850": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1639296363228,
+      "temperature": 26.022116587880443,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "860": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.1799726678237,
+      "temperature": 25.62571263306723,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "870": {
+      "fitness": 1327.252810054688,
+      "profit": 1328,
+      "energy": 283.69517056786685,
+      "violation": 0.0,
+      "current_fitness": 1327.2125139838977,
+      "temperature": 25.235347237602603,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "880": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.2271876104999,
+      "temperature": 24.850928414011246,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "890": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1836847935256,
+      "temperature": 24.47236557609506,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "900": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1783642648234,
+      "temperature": 24.099569517587007,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "910": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1273441039136,
+      "temperature": 23.732452391130185,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "920": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.190355648948,
+      "temperature": 23.370927687576987,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "930": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1972288092697,
+      "temperature": 23.014910215603795,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "940": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1937871586422,
+      "temperature": 22.664316081636024,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "950": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.193294620817,
+      "temperature": 22.319062670079123,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "960": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.2060519528382,
+      "temperature": 21.97906862385063,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "970": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1326.1542013485036,
+      "temperature": 21.644253825208803,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "980": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1598958224718,
+      "temperature": 21.314539376873363,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "990": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1798570316375,
+      "temperature": 20.989847583433715,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1000": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1492548999115,
+      "temperature": 20.670101933040513,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1010": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1982234295497,
+      "temperature": 20.355227079376014,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1020": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1326.106167426211,
+      "temperature": 20.04514882389915,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1030": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1605539146683,
+      "temperature": 19.739794098361042,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1040": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1125554559321,
+      "temperature": 19.439090947586863,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1050": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1187153993396,
+      "temperature": 19.142968512519992,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1060": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1454296048353,
+      "temperature": 18.851357013524492,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1070": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1475115999617,
+      "temperature": 18.564187733941864,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1080": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.2263141529893,
+      "temperature": 18.28139300389839,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1090": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1647839754105,
+      "temperature": 18.00290618435909,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1100": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1411979419584,
+      "temperature": 17.72866165142456,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1110": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.167128764306,
+      "temperature": 17.458594780867116,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1120": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.205985890423,
+      "temperature": 17.192641932902387,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1130": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.22160936646,
+      "temperature": 16.930740437193002,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1140": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1202802856442,
+      "temperature": 16.67282857808063,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1150": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.2147256834633,
+      "temperature": 16.41884558004303,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1160": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.0926252561078,
+      "temperature": 16.168731593372645,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1170": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1219161671202,
+      "temperature": 15.92242768007332,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1180": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1428657185547,
+      "temperature": 15.679875799971915,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1190": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1691903335295,
+      "temperature": 15.441018797041432,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1200": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.090001300767,
+      "temperature": 15.205800385932513,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1210": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.157662796521,
+      "temperature": 14.97416513871011,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1220": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1285773509203,
+      "temperature": 14.746058471792201,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1230": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1835981863176,
+      "temperature": 14.521426633087438,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1240": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1977904049522,
+      "temperature": 14.300216689328806,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1250": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1723902775761,
+      "temperature": 14.082376513600135,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1260": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1906368156062,
+      "temperature": 13.867854773052727,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1270": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1698082414966,
+      "temperature": 13.656600916809014,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1280": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.242439927728,
+      "temperature": 13.448565164050526,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "1290": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.17407610668,
+      "temperature": 13.24369849228734,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "1300": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1352909005136,
+      "temperature": 13.041952625806152,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "1310": {
+      "fitness": 1327.255178826631,
+      "profit": 1328,
+      "energy": 282.7957886040661,
+      "violation": 0.0,
+      "current_fitness": 1327.1675903308076,
+      "temperature": 12.84328002429441,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "1320": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2309975571065,
+      "temperature": 12.647633871637678,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1330": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2069460219602,
+      "temperature": 12.454968064887673,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1340": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1696935760142,
+      "temperature": 12.265237203398367,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1350": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.181915997776,
+      "temperature": 12.078396578127572,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1360": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.175121338812,
+      "temperature": 11.894402161101478,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1370": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2045810274633,
+      "temperature": 11.713210595039735,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1380": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.236775063346,
+      "temperature": 11.534779183138513,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1390": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1519139052139,
+      "temperature": 11.359065879009258,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1400": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1312612209408,
+      "temperature": 11.186029276770679,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1410": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1165800046012,
+      "temperature": 11.015628601291674,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1420": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.155625279319,
+      "temperature": 10.847823698582907,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1430": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1696783746909,
+      "temperature": 10.682575026334723,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1440": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1607844685643,
+      "temperature": 10.519843644599229,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1450": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2409047643343,
+      "temperature": 10.359591206614308,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1460": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2144939748055,
+      "temperature": 10.201779949767406,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1470": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1692814208,
+      "temperature": 10.046372686696987,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1480": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1596260514202,
+      "temperature": 9.893332796529526,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1490": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1326.1383604439404,
+      "temperature": 9.74262421625001,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1500": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1409324071815,
+      "temperature": 9.594211432203876,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1510": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1711866885958,
+      "temperature": 9.448059471728417,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1520": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.163995622079,
+      "temperature": 9.304133894911665,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1530": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1326.2535888041873,
+      "temperature": 9.162400786476804,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1540": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1437779006512,
+      "temperature": 9.022826747790242,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1550": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1305653667403,
+      "temperature": 8.885378888991385,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1560": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2001388879885,
+      "temperature": 8.75002482124232,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1570": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.1607392265678,
+      "temperature": 8.616732649095587,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1580": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2121364393624,
+      "temperature": 8.485470962978155,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1590": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.228455896009,
+      "temperature": 8.35620883178996,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1600": {
+      "fitness": 1327.2668590828437,
+      "profit": 1328,
+      "energy": 278.36099622051734,
+      "violation": 0.0,
+      "current_fitness": 1327.2587960112223,
+      "temperature": 8.228915795615132,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1610": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2067213496173,
+      "temperature": 8.103561858544312,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1620": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1958997911795,
+      "temperature": 7.980117481606255,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1630": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2198383213838,
+      "temperature": 7.858553575807137,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1640": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2136616901,
+      "temperature": 7.738841495275907,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1650": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.210575996444,
+      "temperature": 7.620953030514027,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1660": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1326.1832490587135,
+      "temperature": 7.504860401748059,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1670": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1772994700223,
+      "temperature": 7.3905362523835345,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1680": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1873701459888,
+      "temperature": 7.277953642558489,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1690": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2153606091103,
+      "temperature": 7.167086042795256,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1700": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2166398898803,
+      "temperature": 7.057907327748922,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1710": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.160615280641,
+      "temperature": 6.950391770051062,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1720": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1900670533307,
+      "temperature": 6.844514034247181,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1730": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1326.2051513669087,
+      "temperature": 6.740249170826586,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1740": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1194053391591,
+      "temperature": 6.637572610343168,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1750": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1490718714215,
+      "temperature": 6.536460157625726,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1760": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1203277632649,
+      "temperature": 6.4368879860765205,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1770": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1140852944936,
+      "temperature": 6.3388326320566755,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1780": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1603765043951,
+      "temperature": 6.242270989357075,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1790": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.218470312922,
+      "temperature": 6.147180303753529,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1800": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2116326119137,
+      "temperature": 6.053538167644868,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "1810": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1787672833966,
+      "temperature": 5.9613225147727,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1820": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2058212284414,
+      "temperature": 5.870511615021622,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1830": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1161360410608,
+      "temperature": 5.781084069298639,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1840": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1506391969147,
+      "temperature": 5.693018804490591,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1850": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1287252600287,
+      "temperature": 5.606295068498374,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1860": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.149181258126,
+      "temperature": 5.520892425346832,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1870": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1931559070238,
+      "temperature": 5.436790750369132,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1880": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.181999736913,
+      "temperature": 5.353970225464486,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1890": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.142642274525,
+      "temperature": 5.272411334428129,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1900": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.152829879596,
+      "temperature": 5.192094858352441,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1910": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1781896327968,
+      "temperature": 5.1130018710981,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1920": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1187887346887,
+      "temperature": 5.0351137348342485,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1930": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1776997431698,
+      "temperature": 4.958412095646598,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1940": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.202749624175,
+      "temperature": 4.882878879212415,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1950": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1453092249794,
+      "temperature": 4.808496286541412,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1960": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.190628420992,
+      "temperature": 4.735246789781512,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1970": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2065464914058,
+      "temperature": 4.663113128088515,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1980": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1484980714831,
+      "temperature": 4.5920783035586545,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "1990": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1635538021546,
+      "temperature": 4.522125577223149,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2000": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.0520715054745,
+      "temperature": 4.453238465103758,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2010": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2038697724106,
+      "temperature": 4.385400734328408,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2020": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.2373636281056,
+      "temperature": 4.3185963993060135,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2030": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1989279117472,
+      "temperature": 4.252809717959567,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2040": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1411678329496,
+      "temperature": 4.18802518801659,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2050": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1866272065424,
+      "temperature": 4.1242275433561115,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2060": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1538346214943,
+      "temperature": 4.061401750411301,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2070": {
+      "fitness": 1327.2906758763802,
+      "profit": 1328,
+      "energy": 269.3181693635018,
+      "violation": 0.0,
+      "current_fitness": 1327.1844753324638,
+      "temperature": 3.9995330046268736,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2080": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2634014938922,
+      "temperature": 3.9386067269704887,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2090": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2722257155758,
+      "temperature": 3.878608560497275,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2100": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2340494951882,
+      "temperature": 3.819524366966702,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2110": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1820627087827,
+      "temperature": 3.7613402235109707,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2120": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1326.1843144152785,
+      "temperature": 3.7040424193541717,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2130": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1351499127097,
+      "temperature": 3.6476174525814185,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2140": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.128160146996,
+      "temperature": 3.5920520269571874,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2150": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1793427935131,
+      "temperature": 3.537333048792136,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2160": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.260308232119,
+      "temperature": 3.4834476238576513,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2170": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.234139504629,
+      "temperature": 3.430383054347385,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2180": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1915592183018,
+      "temperature": 3.3781268358850927,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2190": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1595862870145,
+      "temperature": 3.3266666545780446,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2200": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1542921351997,
+      "temperature": 3.2759903841153215,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2210": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1553921811822,
+      "temperature": 3.226086082910317,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2220": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1326.1236230874442,
+      "temperature": 3.1769419912867654,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2230": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2167667033555,
+      "temperature": 3.128546528707648,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2240": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1750165930562,
+      "temperature": 3.080888291046288,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2250": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1694933949068,
+      "temperature": 3.0339560478990384,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2260": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2038349259226,
+      "temperature": 2.9877387399389033,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2270": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1991416259696,
+      "temperature": 2.942225476309457,
+      "q_max": 0.4,
+      "resets": 0
+    },
+    "2280": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2116615182838,
+      "temperature": 2.897405532058478,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2290": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.157272106921,
+      "temperature": 2.8532683456106795,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2300": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1631395800525,
+      "temperature": 2.8098035162789192,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2310": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2190007800236,
+      "temperature": 2.7670008018133405,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2320": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2139203430506,
+      "temperature": 2.724850115987847,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2330": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.240921928199,
+      "temperature": 2.683341526223329,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2340": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2007152226797,
+      "temperature": 2.6424652512471103,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2350": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1977700721266,
+      "temperature": 2.6022116587880437,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2360": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.0822794131286,
+      "temperature": 2.5625712633067237,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2370": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1895601348788,
+      "temperature": 2.523534723760261,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2380": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1917626444783,
+      "temperature": 2.485092841401124,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2390": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.097446824647,
+      "temperature": 2.447236557609506,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2400": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1326.1690083374735,
+      "temperature": 2.409956951758702,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2410": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1203226100993,
+      "temperature": 2.3732452391130177,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2420": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.083732490876,
+      "temperature": 2.3370927687576986,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2430": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1838861643987,
+      "temperature": 2.301491021560379,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2440": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1525179618934,
+      "temperature": 2.266431608163603,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2450": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2062036690656,
+      "temperature": 2.231906267007912,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2460": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2046059973302,
+      "temperature": 2.197906862385063,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2470": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.223145747924,
+      "temperature": 2.164425382520881,
+      "q_max": 0.5,
+      "resets": 0
+    },
+    "2480": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2024763895647,
+      "temperature": 2.131453937687336,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2490": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1568307704797,
+      "temperature": 2.0989847583433714,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2500": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1567409610232,
+      "temperature": 2.0670101933040517,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2510": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2532911357716,
+      "temperature": 2.0355227079376013,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2520": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1649758113645,
+      "temperature": 2.0045148823899153,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2530": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2029516604644,
+      "temperature": 1.9739794098361043,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2540": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1702567594125,
+      "temperature": 1.9439090947586857,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2550": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1466873671127,
+      "temperature": 1.9142968512519993,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2560": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1403923541993,
+      "temperature": 1.8851357013524492,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2570": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.166100427032,
+      "temperature": 1.8564187733941866,
+      "q_max": 0.6000000000000001,
+      "resets": 0
+    },
+    "2580": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1588127475115,
+      "temperature": 1.828139300389839,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2590": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1209564820676,
+      "temperature": 1.8002906184359087,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2600": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1457988983595,
+      "temperature": 1.7728661651424564,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2610": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.116740136847,
+      "temperature": 1.7458594780867112,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2620": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1542818090286,
+      "temperature": 1.7192641932902388,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2630": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1311050483023,
+      "temperature": 1.6930740437193004,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2640": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.224631255985,
+      "temperature": 1.6672828578080625,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2650": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2277644354847,
+      "temperature": 1.6418845580043029,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2660": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.0439876518303,
+      "temperature": 1.6168731593372645,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2670": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.196715939354,
+      "temperature": 1.5922427680073317,
+      "q_max": 0.6000000000000001,
+      "resets": 1
+    },
+    "2680": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.20292341349,
+      "temperature": 1.5679875799971916,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2690": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.0995721255485,
+      "temperature": 1.5441018797041435,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2700": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1671701683533,
+      "temperature": 1.5205800385932517,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2710": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1811140952648,
+      "temperature": 1.497416513871011,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2720": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.168554769584,
+      "temperature": 1.47460584717922,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2730": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.273765171068,
+      "temperature": 1.4521426633087442,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2740": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1326.1942147050086,
+      "temperature": 1.4300216689328802,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2750": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1618015581496,
+      "temperature": 1.4082376513600137,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2760": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1840798758938,
+      "temperature": 1.386785477305273,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2770": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1208244052216,
+      "temperature": 1.365660091680901,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2780": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1282204247038,
+      "temperature": 1.3448565164050528,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2790": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2051183837855,
+      "temperature": 1.324369849228734,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2800": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.200405111437,
+      "temperature": 1.3041952625806148,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2810": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1736619622513,
+      "temperature": 1.284328002429441,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2820": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.187435243882,
+      "temperature": 1.2647633871637678,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2830": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1699105440434,
+      "temperature": 1.2454968064887677,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2840": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2261176543614,
+      "temperature": 1.226523720339837,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2850": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.209293352449,
+      "temperature": 1.2078396578127573,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2860": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.20668864279,
+      "temperature": 1.189440216110148,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2870": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2108689718582,
+      "temperature": 1.1713210595039731,
+      "q_max": 0.7000000000000001,
+      "resets": 1
+    },
+    "2880": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1824895239622,
+      "temperature": 1.1534779183138513,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2890": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.196917877692,
+      "temperature": 1.135906587900926,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2900": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1790458152987,
+      "temperature": 1.1186029276770677,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2910": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2087435834455,
+      "temperature": 1.1015628601291674,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2920": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.209416782436,
+      "temperature": 1.0847823698582908,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2930": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.175264529229,
+      "temperature": 1.068257502633472,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2940": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1123289466955,
+      "temperature": 1.051984364459923,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2950": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.095650799504,
+      "temperature": 1.035959120661431,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2960": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.2010574316787,
+      "temperature": 1.0201779949767409,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2970": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1253216548434,
+      "temperature": 1.0046372686696985,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2980": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1675588382946,
+      "temperature": 0.9893332796529527,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "2990": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1070586197507,
+      "temperature": 0.9742624216250012,
+      "q_max": 0.8,
+      "resets": 1
+    },
+    "3000": {
+      "fitness": 1327.2940174368566,
+      "profit": 1328,
+      "energy": 268.0494363254621,
+      "violation": 0.0,
+      "current_fitness": 1327.1698268935447,
+      "temperature": 0.9594211432203874,
+      "q_max": 0.4,
+      "resets": 1
+    }
+  },
+  "best_fitness": 1327.2940174368566,
+  "best_profit": 1328,
+  "best_energy": 268.0494363254621,
+  "best_service_rate": 1.0,
+  "num_resets": 1,
+  "best_seed": 42,
+  "runs_best_profit": [
+    1328
+  ],
+  "operator_stats": {
+    "destroy": {
+      "D1_random": {
+        "used": 651,
+        "new_best": 5,
+        "weight": 5.729749724155383
+      },
+      "D2_worst": {
+        "used": 598,
+        "new_best": 2,
+        "weight": 5.574373970698446
+      },
+      "D3_shaw": {
+        "used": 544,
+        "new_best": 1,
+        "weight": 5.660191923925357
+      },
+      "D4_sortie": {
+        "used": 184,
+        "new_best": 1,
+        "weight": 1.7580205204033756
+      },
+      "D5_window": {
+        "used": 106,
+        "new_best": 0,
+        "weight": 1.7715278808091024
+      },
+      "D6_wait": {
+        "used": 127,
+        "new_best": 0,
+        "weight": 1.2802112420858247
+      },
+      "D7_road_random": {
+        "used": 206,
+        "new_best": 0,
+        "weight": 1.742851314437056
+      },
+      "D8_road_related": {
+        "used": 164,
+        "new_best": 0,
+        "weight": 1.8930406335028809
+      },
+      "D9_road_worst": {
+        "used": 252,
+        "new_best": 1,
+        "weight": 2.1859007512380773
+      },
+      "D10_road_segment": {
+        "used": 168,
+        "new_best": 1,
+        "weight": 1.7812636276609575
+      }
+    },
+    "repair_road": {
+      "R1_greedy": {
+        "used": 421,
+        "new_best": 1,
+        "weight": 1.8507185679113838
+      },
+      "R2_regret2": {
+        "used": 369,
+        "new_best": 1,
+        "weight": 1.9125790728028345
+      }
+    },
+    "repair_info": {
+      "I1_profit": {
+        "used": 575,
+        "new_best": 1,
+        "weight": 3.820490923754704
+      },
+      "I2_cost": {
+        "used": 569,
+        "new_best": 2,
+        "weight": 4.1126489408092315
+      },
+      "I3_density": {
+        "used": 544,
+        "new_best": 0,
+        "weight": 3.7872184104483644
+      },
+      "I4_regret": {
+        "used": 652,
+        "new_best": 5,
+        "weight": 4.396570399985103
+      },
+      "I5_noise": {
+        "used": 660,
+        "new_best": 3,
+        "weight": 4.4064048853215665
+      }
+    }
+  },
+  "best_solution": {
+    "objective": 1328,
+    "f1_total_value": 1328,
+    "f2_total_energy_wh": 268.0494363254621,
+    "violation_h": 0.0,
+    "summary": {
+      "num_trucks_available": 1,
+      "num_trucks_used": 1,
+      "num_info_nodes": 30,
+      "num_info_nodes_served": 30,
+      "unserved_info_nodes": [],
+      "total_sorties": 6,
+      "total_drones_used": 3
+    },
+    "routes": [
+      {
+        "id": 1,
+        "route": [
+          0,
+          1,
+          3,
+          4,
+          2,
+          5
+        ],
+        "arrival": [
+          0.0,
+          0.026297999999999995,
+          0.19013000000000002,
+          0.4929803222905144,
+          0.7578157211321795,
+          0.8959857211321796
+        ],
+        "departure": [
+          0.0,
+          0.026297999999999995,
+          0.2434643222905144,
+          0.5886037211321795,
+          0.7578157211321795,
+          1.0185365259205421
+        ],
+        "uavs": [
+          {
+            "id": "T1-U1",
+            "num_sorties": 4,
+            "sorties": [
+              "T1-S1",
+              "T1-S2",
+              "T1-S3",
+              "T1-S4"
+            ]
+          },
+          {
+            "id": "T1-U2",
+            "num_sorties": 1,
+            "sorties": [
+              "T1-S5"
+            ]
+          },
+          {
+            "id": "T1-U3",
+            "num_sorties": 1,
+            "sorties": [
+              "T1-S6"
+            ]
+          }
+        ],
+        "sorties": [
+          {
+            "id": "T1-S1",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 1,
+            "launch": 1,
+            "land": 3,
+            "path": [
+              1,
+              11,
+              14,
+              32,
+              30,
+              27,
+              3
+            ],
+            "t_launch": 0.026297999999999995,
+            "t_arrival": 0.2434643222905144,
+            "t_wait": 0.0,
+            "energy_wh": 39.314297821643706,
+            "served_nodes": [
+              11,
+              14,
+              32,
+              30,
+              27
+            ]
+          },
+          {
+            "id": "T1-S2",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 2,
+            "launch": 3,
+            "land": 4,
+            "path": [
+              3,
+              21,
+              22,
+              28,
+              16,
+              12,
+              20,
+              8,
+              4
+            ],
+            "t_launch": 0.2434643222905144,
+            "t_arrival": 0.5886037211321795,
+            "t_wait": 0.0,
+            "energy_wh": 62.484018848659616,
+            "served_nodes": [
+              21,
+              22,
+              28,
+              16,
+              12,
+              20,
+              8
+            ]
+          },
+          {
+            "id": "T1-S3",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 3,
+            "launch": 4,
+            "land": 2,
+            "path": [
+              4,
+              26,
+              17,
+              29,
+              2
+            ],
+            "t_launch": 0.5886037211321795,
+            "t_arrival": 0.7554522652799491,
+            "t_wait": 0.0023634558522304117,
+            "energy_wh": 30.48597093678504,
+            "served_nodes": [
+              26,
+              17,
+              29
+            ]
+          },
+          {
+            "id": "T1-S4",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 4,
+            "launch": 2,
+            "land": 5,
+            "path": [
+              2,
+              24,
+              23,
+              13,
+              35,
+              9,
+              33,
+              25,
+              5
+            ],
+            "t_launch": 0.7578157211321795,
+            "t_arrival": 1.0185365259205421,
+            "t_wait": 0.0,
+            "energy_wh": 47.05522784020336,
+            "served_nodes": [
+              24,
+              23,
+              13,
+              35,
+              9,
+              33,
+              25
+            ]
+          },
+          {
+            "id": "T1-S5",
+            "truck": 1,
+            "uav": "T1-U2",
+            "uav_trip_no": 1,
+            "launch": 2,
+            "land": 5,
+            "path": [
+              2,
+              6,
+              10,
+              31,
+              15,
+              5
+            ],
+            "t_launch": 0.7578157211321795,
+            "t_arrival": 1.0101138126380116,
+            "t_wait": 0.0,
+            "energy_wh": 45.420102466888586,
+            "served_nodes": [
+              6,
+              10,
+              31,
+              15
+            ]
+          },
+          {
+            "id": "T1-S6",
+            "truck": 1,
+            "uav": "T1-U3",
+            "uav_trip_no": 1,
+            "launch": 2,
+            "land": 5,
+            "path": [
+              2,
+              7,
+              19,
+              18,
+              34,
+              5
+            ],
+            "t_launch": 0.7578157211321795,
+            "t_arrival": 0.997040255708765,
+            "t_wait": 0.0,
+            "energy_wh": 43.2898184112818,
+            "served_nodes": [
+              7,
+              19,
+              18,
+              34
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
