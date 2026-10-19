@@ -1,0 +1,214 @@
+{
+  "status": "Optimal",
+  "objective": 835.0,
+  "f1_total_value": 835.0,
+  "time_sec": 5.2165234088897705,
+  "summary": {
+    "num_trucks_available": 1,
+    "num_trucks_used": 1,
+    "num_info_nodes": 20,
+    "num_info_nodes_served": 20,
+    "unserved_info_nodes": [],
+    "total_sorties": 6,
+    "total_drones_used": 2
+  },
+  "routes": [
+    {
+      "id": 1,
+      "route": [
+        0,
+        4,
+        3,
+        2,
+        1,
+        5
+      ],
+      "arrival": [
+        -0.0,
+        0.1378140000000001,
+        0.5001207014758364,
+        0.8122807014758364,
+        1.0066459725276466,
+        1.049619662663147
+      ],
+      "departure": [
+        0.0,
+        0.34334870147583646,
+        0.5001207014758364,
+        0.8378659725276468,
+        1.0289056626631472,
+        3.3333333333333335
+      ],
+      "uavs": [
+        {
+          "id": "T1-U1",
+          "num_sorties": 4,
+          "sorties": [
+            "T1-S1",
+            "T1-S3",
+            "T1-S5",
+            "T1-S6"
+          ]
+        },
+        {
+          "id": "T1-U2",
+          "num_sorties": 2,
+          "sorties": [
+            "T1-S2",
+            "T1-S4"
+          ]
+        }
+      ],
+      "sorties": [
+        {
+          "id": "T1-S1",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            9,
+            22,
+            21,
+            12,
+            24,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.34334870147583646,
+          "t_wait": 0.008501599872892946,
+          "energy_wh": 63.1138,
+          "served_nodes": [
+            9,
+            12,
+            21,
+            22,
+            24
+          ]
+        },
+        {
+          "id": "T1-S2",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            6,
+            19,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.21683279045499743,
+          "t_wait": 0.14384738218737808,
+          "energy_wh": 63.1138,
+          "served_nodes": [
+            6,
+            19
+          ]
+        },
+        {
+          "id": "T1-S3",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 2,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            7,
+            15,
+            8,
+            17,
+            2
+          ],
+          "t_launch": 0.5001207014758364,
+          "t_arrival": 0.8378659725276468,
+          "t_wait": 0.013006612208009562,
+          "energy_wh": 63.1138,
+          "served_nodes": [
+            7,
+            8,
+            15,
+            17
+          ]
+        },
+        {
+          "id": "T1-S4",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 2,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            14,
+            18,
+            25,
+            2
+          ],
+          "t_launch": 0.5001207014758364,
+          "t_arrival": 0.8315783120321647,
+          "t_wait": 0.021200155690257537,
+          "energy_wh": 63.1138,
+          "served_nodes": [
+            14,
+            18,
+            25
+          ]
+        },
+        {
+          "id": "T1-S5",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 3,
+          "launch": 2,
+          "land": 1,
+          "path": [
+            2,
+            11,
+            13,
+            1
+          ],
+          "t_launch": 0.8378659725276468,
+          "t_arrival": 1.0289056626631472,
+          "t_wait": 0.17076112341553462,
+          "energy_wh": 63.1138,
+          "served_nodes": [
+            11,
+            13
+          ]
+        },
+        {
+          "id": "T1-S6",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 4,
+          "launch": 1,
+          "land": 5,
+          "path": [
+            1,
+            10,
+            23,
+            16,
+            20,
+            5
+          ],
+          "t_launch": 1.0289056626631472,
+          "t_arrival": 1.3625220662524218,
+          "t_wait": 0.0,
+          "energy_wh": 59.90138363786308,
+          "served_nodes": [
+            10,
+            16,
+            20,
+            23
+          ]
+        }
+      ]
+    }
+  ]
+}

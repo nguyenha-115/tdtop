@@ -1,0 +1,194 @@
+{
+  "status": "Optimal",
+  "objective": 418.0,
+  "f1_total_value": 418.0,
+  "time_sec": 1.2496917247772217,
+  "summary": {
+    "num_trucks_available": 1,
+    "num_trucks_used": 1,
+    "num_info_nodes": 10,
+    "num_info_nodes_served": 10,
+    "unserved_info_nodes": [],
+    "total_sorties": 6,
+    "total_drones_used": 2
+  },
+  "routes": [
+    {
+      "id": 1,
+      "route": [
+        0,
+        4,
+        1,
+        3,
+        2,
+        5
+      ],
+      "arrival": [
+        -0.0,
+        0.11818200000000001,
+        0.35111860155029406,
+        0.6083362495222758,
+        0.7550362495222759,
+        0.9372183537759224
+      ],
+      "departure": [
+        0.0,
+        0.24176860155029403,
+        0.49075024952227564,
+        0.6083362495222758,
+        0.7882603537759225,
+        3.3333333333333335
+      ],
+      "uavs": [
+        {
+          "id": "T1-U1",
+          "num_sorties": 3,
+          "sorties": [
+            "T1-S1",
+            "T1-S3",
+            "T1-S5"
+          ]
+        },
+        {
+          "id": "T1-U2",
+          "num_sorties": 3,
+          "sorties": [
+            "T1-S2",
+            "T1-S4",
+            "T1-S6"
+          ]
+        }
+      ],
+      "sorties": [
+        {
+          "id": "T1-S1",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            7,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.20060668763473036,
+          "t_wait": 0.0,
+          "energy_wh": 35.87368716544016,
+          "served_nodes": [
+            7
+          ]
+        },
+        {
+          "id": "T1-S2",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            8,
+            12,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.24176860155029403,
+          "t_wait": 0.0,
+          "energy_wh": 43.4470655252298,
+          "served_nodes": [
+            8,
+            12
+          ]
+        },
+        {
+          "id": "T1-S3",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 2,
+          "launch": 4,
+          "land": 1,
+          "path": [
+            4,
+            15,
+            14,
+            9,
+            1
+          ],
+          "t_launch": 0.24176860155029403,
+          "t_arrival": 0.49075024952227564,
+          "t_wait": 0.0,
+          "energy_wh": 44.63306951325474,
+          "served_nodes": [
+            9,
+            14,
+            15
+          ]
+        },
+        {
+          "id": "T1-S4",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 2,
+          "launch": 4,
+          "land": 1,
+          "path": [
+            4,
+            13,
+            6,
+            1
+          ],
+          "t_launch": 0.24176860155029403,
+          "t_arrival": 0.48523304533070544,
+          "t_wait": 0.0,
+          "energy_wh": 43.84019736826424,
+          "served_nodes": [
+            6,
+            13
+          ]
+        },
+        {
+          "id": "T1-S5",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 3,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            10,
+            2
+          ],
+          "t_launch": 0.6083362495222758,
+          "t_arrival": 0.7882603537759225,
+          "t_wait": 0.0,
+          "energy_wh": 32.17612276792594,
+          "served_nodes": [
+            10
+          ]
+        },
+        {
+          "id": "T1-S6",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 3,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            11,
+            2
+          ],
+          "t_launch": 0.6083362495222758,
+          "t_arrival": 0.7174065562353845,
+          "t_wait": 0.037629693286891364,
+          "energy_wh": 25.934323015441283,
+          "served_nodes": [
+            11
+          ]
+        }
+      ]
+    }
+  ]
+}

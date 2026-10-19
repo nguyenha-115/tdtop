@@ -1,0 +1,184 @@
+{
+  "Config": {
+    "General": {
+      "SUITE": "S",
+      "NUM_INFO_NODES": 10,
+      "NUM_ROAD_NODES": 4,
+      "MAX_COORD": 10.0,
+      "T_MAX_MIN": 200.0,
+      "COORD_DISTRIBUTION": "C",
+      "NUM_CLUSTERS": 7,
+      "SOURCE": "synthetic",
+      "SEED": 43,
+      "SEED_BASE": 42,
+      "VALUE_DIST": "uniform",
+      "CAPACITY": 100,
+      "ROAD_NODES_PER_TRUCK": 4
+    },
+    "Vehicles": {
+      "NUM_TRUCKS": 1,
+      "UAVS_PER_TRUCK": [
+        3
+      ],
+      "SORTIES_PER_TRUCK": 6,
+      "V_TRUCK": 50.0,
+      "V_UAV": 72.0,
+      "TRUCK_DISTANCE": "manhattan",
+      "UAV_DISTANCE": "euclid",
+      "BATTERY_MAH": 4276,
+      "BATTERY_VOLT": 14.76,
+      "THETA_WH": 63.1138
+    },
+    "Energy": {
+      "P0": 79.86,
+      "Pi": 88.66,
+      "U_TIP": 120.0,
+      "V0": 4.03,
+      "D0": 0.6,
+      "RHO": 1.225,
+      "Q_SOLIDITY": 0.05,
+      "A_DISK": 0.503,
+      "P_SENS": 5.0,
+      "P_COMP": 8.0,
+      "P_TX": 2.0,
+      "P_AVIO": 15.0,
+      "P_FLY_W": 178.3063,
+      "P_HOVER_W": 168.52,
+      "P_SRV_W": 183.52,
+      "E_FLY_WH_PER_KM": 2.4765
+    }
+  },
+  "Depot": {
+    "id_start": 0,
+    "id_end": 5,
+    "coord": [
+      5.0,
+      5.0
+    ]
+  },
+  "RoadNodes": [
+    {
+      "id": 1,
+      "coord": [
+        4.622,
+        5.2396
+      ]
+    },
+    {
+      "id": 2,
+      "coord": [
+        5.6426,
+        9.8647
+      ]
+    },
+    {
+      "id": 3,
+      "coord": [
+        3.0948,
+        0.9775
+      ]
+    },
+    {
+      "id": 4,
+      "coord": [
+        5.5725,
+        1.9566
+      ]
+    }
+  ],
+  "InfoNodes": [
+    {
+      "id": 6,
+      "coord": [
+        2.5,
+        3.91
+      ],
+      "p": 68,
+      "s_min": 2.5154
+    },
+    {
+      "id": 7,
+      "coord": [
+        4.65,
+        5.28
+      ],
+      "p": 17,
+      "s_min": 1.1962
+    },
+    {
+      "id": 8,
+      "coord": [
+        3.28,
+        3.32
+      ],
+      "p": 29,
+      "s_min": 0.9425
+    },
+    {
+      "id": 9,
+      "coord": [
+        5.62,
+        9.88
+      ],
+      "p": 11,
+      "s_min": 1.8741
+    },
+    {
+      "id": 10,
+      "coord": [
+        5.96,
+        5.11
+      ],
+      "p": 48,
+      "s_min": 1.0846
+    },
+    {
+      "id": 11,
+      "coord": [
+        3.0,
+        0.95
+      ],
+      "p": 40,
+      "s_min": 1.6676
+    },
+    {
+      "id": 12,
+      "coord": [
+        5.65,
+        1.96
+      ],
+      "p": 3,
+      "s_min": 2.9461
+    },
+    {
+      "id": 13,
+      "coord": [
+        4.64,
+        5.87
+      ],
+      "p": 87,
+      "s_min": 2.4179
+    },
+    {
+      "id": 14,
+      "coord": [
+        2.74,
+        4.2
+      ],
+      "p": 100,
+      "s_min": 0.0687
+    },
+    {
+      "id": 15,
+      "coord": [
+        5.48,
+        9.52
+      ],
+      "p": 15,
+      "s_min": 0.793
+    }
+  ],
+  "Stats": {
+    "TOTAL_VALUE": 418
+  }
+}

@@ -1,0 +1,1341 @@
+{
+  "time": 7.046229124069214,
+  "history": {
+    "0": {
+      "fitness": 834.4034002602958,
+      "profit": 835,
+      "energy": 226.51865965015867,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.7141666666666666,
+      "mutation_rate": 0.1,
+      "stagnation": 0,
+      "restarts": 0
+    },
+    "1": {
+      "fitness": 834.4349704472168,
+      "profit": 835,
+      "energy": 214.53200268350324,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.70375,
+      "mutation_rate": 0.1,
+      "stagnation": 0,
+      "restarts": 0
+    },
+    "2": {
+      "fitness": 834.4349704472168,
+      "profit": 835,
+      "energy": 214.53200268350324,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6929166666666665,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 0
+    },
+    "3": {
+      "fitness": 834.4487893365057,
+      "profit": 835,
+      "energy": 209.2852081053738,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6349999999999998,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 0,
+      "restarts": 0
+    },
+    "4": {
+      "fitness": 834.4487893365057,
+      "profit": 835,
+      "energy": 209.2852081053738,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6254166666666666,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 0
+    },
+    "5": {
+      "fitness": 834.4487893365057,
+      "profit": 835,
+      "energy": 209.2852081053738,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5895833333333333,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 0
+    },
+    "6": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5808333333333333,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 0,
+      "restarts": 0
+    },
+    "7": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5804166666666669,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 0
+    },
+    "8": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5258333333333332,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 0
+    },
+    "9": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.54125,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 0
+    },
+    "10": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5245833333333334,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 0
+    },
+    "11": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.47624999999999995,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 0
+    },
+    "12": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.48458333333333325,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 0
+    },
+    "13": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5479166666666668,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 0
+    },
+    "14": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4866666666666667,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 0
+    },
+    "15": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5525,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 0
+    },
+    "16": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.51625,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 0
+    },
+    "17": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5104166666666667,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 0
+    },
+    "18": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5195833333333332,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 0
+    },
+    "19": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.49333333333333335,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 0
+    },
+    "20": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5741666666666668,
+      "mutation_rate": 0.5333333333333333,
+      "stagnation": 14,
+      "restarts": 0
+    },
+    "21": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6741666666666666,
+      "mutation_rate": 0.5666666666666667,
+      "stagnation": 0,
+      "restarts": 1
+    },
+    "22": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5470833333333331,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 1
+    },
+    "23": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5166666666666666,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 1
+    },
+    "24": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.49416666666666664,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 1
+    },
+    "25": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5662499999999999,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 1
+    },
+    "26": {
+      "fitness": 834.4608652106624,
+      "profit": 835,
+      "energy": 204.70020639308805,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5529166666666668,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 1
+    },
+    "27": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5216666666666667,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 0,
+      "restarts": 1
+    },
+    "28": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4987499999999999,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 1
+    },
+    "29": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4645833333333333,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 1
+    },
+    "30": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4870833333333332,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 1
+    },
+    "31": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4866666666666667,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 1
+    },
+    "32": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.47833333333333333,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 1
+    },
+    "33": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.48291666666666666,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 1
+    },
+    "34": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4875000000000001,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 1
+    },
+    "35": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.49083333333333334,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 1
+    },
+    "36": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5441666666666667,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 1
+    },
+    "37": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4383333333333333,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 1
+    },
+    "38": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5220833333333335,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 1
+    },
+    "39": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4379166666666666,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 1
+    },
+    "40": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5133333333333332,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 1
+    },
+    "41": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.47750000000000004,
+      "mutation_rate": 0.5333333333333333,
+      "stagnation": 14,
+      "restarts": 1
+    },
+    "42": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.71375,
+      "mutation_rate": 0.5666666666666667,
+      "stagnation": 0,
+      "restarts": 2
+    },
+    "43": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6466666666666667,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 2
+    },
+    "44": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5520833333333333,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 2
+    },
+    "45": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5387500000000002,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 2
+    },
+    "46": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4658333333333333,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 2
+    },
+    "47": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4950000000000001,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 2
+    },
+    "48": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.485,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 2
+    },
+    "49": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4737499999999999,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 2
+    },
+    "50": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.48250000000000004,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 2
+    },
+    "51": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5166666666666668,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 2
+    },
+    "52": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.53875,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 2
+    },
+    "53": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4700000000000001,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 2
+    },
+    "54": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.42041666666666655,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 2
+    },
+    "55": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4570833333333334,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 2
+    },
+    "56": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.505,
+      "mutation_rate": 0.5333333333333333,
+      "stagnation": 14,
+      "restarts": 2
+    },
+    "57": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6995833333333332,
+      "mutation_rate": 0.5666666666666667,
+      "stagnation": 0,
+      "restarts": 3
+    },
+    "58": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5575,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 3
+    },
+    "59": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5416666666666667,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 3
+    },
+    "60": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.505,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 3
+    },
+    "61": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5241666666666667,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 3
+    },
+    "62": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4604166666666666,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 3
+    },
+    "63": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4791666666666667,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 3
+    },
+    "64": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4758333333333332,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 3
+    },
+    "65": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4600000000000001,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 3
+    },
+    "66": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.47458333333333347,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 3
+    },
+    "67": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5120833333333333,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 3
+    },
+    "68": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5029166666666668,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 3
+    },
+    "69": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.445,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 3
+    },
+    "70": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4670833333333335,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 3
+    },
+    "71": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4699999999999999,
+      "mutation_rate": 0.5333333333333333,
+      "stagnation": 14,
+      "restarts": 3
+    },
+    "72": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6679166666666665,
+      "mutation_rate": 0.5666666666666667,
+      "stagnation": 0,
+      "restarts": 4
+    },
+    "73": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6041666666666665,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 4
+    },
+    "74": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5362500000000001,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 4
+    },
+    "75": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.48166666666666674,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 4
+    },
+    "76": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5079166666666667,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 4
+    },
+    "77": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5058333333333331,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 4
+    },
+    "78": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4725,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 4
+    },
+    "79": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4995833333333334,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 4
+    },
+    "80": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4424999999999999,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 4
+    },
+    "81": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.50125,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 4
+    },
+    "82": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5091666666666665,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 4
+    },
+    "83": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4741666666666668,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 4
+    },
+    "84": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.49708333333333343,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 4
+    },
+    "85": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5233333333333333,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 4
+    },
+    "86": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.50875,
+      "mutation_rate": 0.5333333333333333,
+      "stagnation": 14,
+      "restarts": 4
+    },
+    "87": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.6633333333333333,
+      "mutation_rate": 0.5666666666666667,
+      "stagnation": 0,
+      "restarts": 5
+    },
+    "88": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5991666666666666,
+      "mutation_rate": 0.1,
+      "stagnation": 1,
+      "restarts": 5
+    },
+    "89": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5633333333333332,
+      "mutation_rate": 0.13333333333333333,
+      "stagnation": 2,
+      "restarts": 5
+    },
+    "90": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.5041666666666669,
+      "mutation_rate": 0.16666666666666669,
+      "stagnation": 3,
+      "restarts": 5
+    },
+    "91": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.46375,
+      "mutation_rate": 0.2,
+      "stagnation": 4,
+      "restarts": 5
+    },
+    "92": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4729166666666667,
+      "mutation_rate": 0.23333333333333334,
+      "stagnation": 5,
+      "restarts": 5
+    },
+    "93": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4254166666666667,
+      "mutation_rate": 0.26666666666666666,
+      "stagnation": 6,
+      "restarts": 5
+    },
+    "94": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.44333333333333347,
+      "mutation_rate": 0.30000000000000004,
+      "stagnation": 7,
+      "restarts": 5
+    },
+    "95": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4491666666666667,
+      "mutation_rate": 0.33333333333333337,
+      "stagnation": 8,
+      "restarts": 5
+    },
+    "96": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.48624999999999996,
+      "mutation_rate": 0.3666666666666667,
+      "stagnation": 9,
+      "restarts": 5
+    },
+    "97": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.43,
+      "mutation_rate": 0.4,
+      "stagnation": 10,
+      "restarts": 5
+    },
+    "98": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.40583333333333343,
+      "mutation_rate": 0.43333333333333335,
+      "stagnation": 11,
+      "restarts": 5
+    },
+    "99": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4966666666666665,
+      "mutation_rate": 0.4666666666666667,
+      "stagnation": 12,
+      "restarts": 5
+    },
+    "100": {
+      "fitness": 834.461392163785,
+      "profit": 835,
+      "energy": 204.50013135605468,
+      "service_rate": 1.0,
+      "violation": 0.0,
+      "diversity": 0.4316666666666668,
+      "mutation_rate": 0.5,
+      "stagnation": 13,
+      "restarts": 5
+    }
+  },
+  "best_fitness": 834.461392163785,
+  "best_profit": 835,
+  "best_energy": 204.50013135605468,
+  "best_service_rate": 1.0,
+  "num_restarts": 5,
+  "best_solution": {
+    "objective": 835,
+    "f1_total_value": 835,
+    "f2_total_energy_wh": 204.50013135605468,
+    "violation_h": 0.0,
+    "summary": {
+      "num_trucks_available": 1,
+      "num_trucks_used": 1,
+      "num_info_nodes": 20,
+      "num_info_nodes_served": 20,
+      "unserved_info_nodes": [],
+      "total_sorties": 6,
+      "total_drones_used": 3
+    },
+    "routes": [
+      {
+        "id": 1,
+        "route": [
+          0,
+          2,
+          4,
+          1,
+          3,
+          5
+        ],
+        "arrival": [
+          0.0,
+          0.148066,
+          0.37092782758792364,
+          0.568052975452265,
+          0.7139026375694313,
+          1.0157692456219378
+        ],
+        "departure": [
+          0.0,
+          0.21553982758792364,
+          0.427336975452265,
+          0.5705226375694313,
+          0.8516752456219379,
+          1.0157692456219378
+        ],
+        "uavs": [
+          {
+            "id": "T1-U1",
+            "num_sorties": 4,
+            "sorties": [
+              "T1-S1",
+              "T1-S2",
+              "T1-S3",
+              "T1-S6"
+            ]
+          },
+          {
+            "id": "T1-U2",
+            "num_sorties": 1,
+            "sorties": [
+              "T1-S4"
+            ]
+          },
+          {
+            "id": "T1-U3",
+            "num_sorties": 1,
+            "sorties": [
+              "T1-S5"
+            ]
+          }
+        ],
+        "sorties": [
+          {
+            "id": "T1-S1",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 1,
+            "launch": 0,
+            "land": 2,
+            "path": [
+              0,
+              25,
+              22,
+              9,
+              6,
+              17,
+              2
+            ],
+            "t_launch": 0.0,
+            "t_arrival": 0.21553982758792364,
+            "t_wait": 0.0,
+            "energy_wh": 38.93057773088082,
+            "served_nodes": [
+              25,
+              22,
+              9,
+              6,
+              17
+            ]
+          },
+          {
+            "id": "T1-S2",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 2,
+            "launch": 2,
+            "land": 4,
+            "path": [
+              2,
+              19,
+              8,
+              11,
+              4
+            ],
+            "t_launch": 0.21553982758792364,
+            "t_arrival": 0.427336975452265,
+            "t_wait": 0.0,
+            "energy_wh": 38.287098954728314,
+            "served_nodes": [
+              19,
+              8,
+              11
+            ]
+          },
+          {
+            "id": "T1-S3",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 3,
+            "launch": 4,
+            "land": 1,
+            "path": [
+              4,
+              24,
+              13,
+              12,
+              1
+            ],
+            "t_launch": 0.427336975452265,
+            "t_arrival": 0.5562524448895957,
+            "t_wait": 0.011800530562669331,
+            "energy_wh": 25.245362088185928,
+            "served_nodes": [
+              24,
+              13,
+              12
+            ]
+          },
+          {
+            "id": "T1-S4",
+            "truck": 1,
+            "uav": "T1-U2",
+            "uav_trip_no": 1,
+            "launch": 4,
+            "land": 1,
+            "path": [
+              4,
+              18,
+              20,
+              1
+            ],
+            "t_launch": 0.427336975452265,
+            "t_arrival": 0.5684884673923102,
+            "t_wait": 0.0,
+            "energy_wh": 25.533341031512247,
+            "served_nodes": [
+              18,
+              20
+            ]
+          },
+          {
+            "id": "T1-S5",
+            "truck": 1,
+            "uav": "T1-U3",
+            "uav_trip_no": 1,
+            "launch": 4,
+            "land": 1,
+            "path": [
+              4,
+              15,
+              7,
+              1
+            ],
+            "t_launch": 0.427336975452265,
+            "t_arrival": 0.5705226375694313,
+            "t_wait": 0.0,
+            "energy_wh": 25.79044604078769,
+            "served_nodes": [
+              15,
+              7
+            ]
+          },
+          {
+            "id": "T1-S6",
+            "truck": 1,
+            "uav": "T1-U1",
+            "uav_trip_no": 4,
+            "launch": 1,
+            "land": 3,
+            "path": [
+              1,
+              16,
+              21,
+              10,
+              14,
+              23,
+              3
+            ],
+            "t_launch": 0.5705226375694313,
+            "t_arrival": 0.8516752456219379,
+            "t_wait": 0.0,
+            "energy_wh": 50.713305509959675,
+            "served_nodes": [
+              16,
+              21,
+              10,
+              14,
+              23
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

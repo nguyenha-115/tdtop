@@ -1,0 +1,194 @@
+{
+  "status": "Optimal",
+  "objective": 418.0,
+  "f1_total_value": 418.0,
+  "time_sec": 1.0139238834381104,
+  "summary": {
+    "num_trucks_available": 1,
+    "num_trucks_used": 1,
+    "num_info_nodes": 10,
+    "num_info_nodes_served": 10,
+    "unserved_info_nodes": [],
+    "total_sorties": 6,
+    "total_drones_used": 2
+  },
+  "routes": [
+    {
+      "id": 1,
+      "route": [
+        0,
+        4,
+        3,
+        2,
+        1,
+        5
+      ],
+      "arrival": [
+        -0.0,
+        0.06451800000000008,
+        0.42831966981450087,
+        0.5714196698145009,
+        0.7992313556971351,
+        0.9916905415097603
+      ],
+      "departure": [
+        0.0,
+        0.236947669814501,
+        0.42831966981450087,
+        0.6863173556971351,
+        0.9793385415097604,
+        3.3333333333333335
+      ],
+      "uavs": [
+        {
+          "id": "T1-U1",
+          "num_sorties": 3,
+          "sorties": [
+            "T1-S1",
+            "T1-S3",
+            "T1-S5"
+          ]
+        },
+        {
+          "id": "T1-U2",
+          "num_sorties": 3,
+          "sorties": [
+            "T1-S2",
+            "T1-S4",
+            "T1-S6"
+          ]
+        }
+      ],
+      "sorties": [
+        {
+          "id": "T1-S1",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            7,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.0717752489004977,
+          "t_wait": 0.0,
+          "energy_wh": 12.902010987616613,
+          "served_nodes": [
+            7
+          ]
+        },
+        {
+          "id": "T1-S2",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 1,
+          "launch": 0,
+          "land": 4,
+          "path": [
+            0,
+            8,
+            12,
+            4
+          ],
+          "t_launch": 0.0,
+          "t_arrival": 0.23694766981450113,
+          "t_wait": 0.0,
+          "energy_wh": 42.58745482928404,
+          "served_nodes": [
+            8,
+            12
+          ]
+        },
+        {
+          "id": "T1-S3",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 2,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            10,
+            15,
+            2
+          ],
+          "t_launch": 0.42831966981450087,
+          "t_arrival": 0.6863173556971351,
+          "t_wait": 0.0,
+          "energy_wh": 46.16615222769407,
+          "served_nodes": [
+            10,
+            15
+          ]
+        },
+        {
+          "id": "T1-S4",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 2,
+          "launch": 3,
+          "land": 2,
+          "path": [
+            3,
+            11,
+            2
+          ],
+          "t_launch": 0.42831966981450087,
+          "t_arrival": 0.6387941555919946,
+          "t_wait": 0.0,
+          "energy_wh": 37.67414346334668,
+          "served_nodes": [
+            11
+          ]
+        },
+        {
+          "id": "T1-S5",
+          "truck": 1,
+          "uav": "T1-U1",
+          "uav_trip_no": 3,
+          "launch": 2,
+          "land": 1,
+          "path": [
+            2,
+            13,
+            9,
+            1
+          ],
+          "t_launch": 0.6863173556971351,
+          "t_arrival": 0.9793385415097604,
+          "t_wait": 0.0,
+          "energy_wh": 52.62085333321089,
+          "served_nodes": [
+            9,
+            13
+          ]
+        },
+        {
+          "id": "T1-S6",
+          "truck": 1,
+          "uav": "T1-U2",
+          "uav_trip_no": 3,
+          "launch": 2,
+          "land": 1,
+          "path": [
+            2,
+            14,
+            6,
+            1
+          ],
+          "t_launch": 0.6863173556971351,
+          "t_arrival": 0.8888955610832362,
+          "t_wait": 0.0,
+          "energy_wh": 36.345786799318255,
+          "served_nodes": [
+            6,
+            14
+          ]
+        }
+      ]
+    }
+  ]
+}
