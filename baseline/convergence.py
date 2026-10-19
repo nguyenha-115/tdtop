@@ -8,8 +8,8 @@ import sys
 import matplotlib
 import numpy as np
 
-COLORS = {"ga": "#1f77b4", "lns": "#d62728"}
-NAMES = {"ga": "GA", "lns": "LNS"}
+COLORS = {"ga": "#1f77b4", "lns": "#d62728", "vns": "#1f77b4"}
+NAMES = {"ga": "GA", "lns": "LNS", "vns": "VNS"}
 YLABEL = {"fitness": "Best fitness", "profit": "Best profit", "energy": "Energy (Wh)"}
 
 
@@ -98,12 +98,12 @@ def plot_one(json_path, algo, metric, out_dir, show):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Vẽ biểu đồ hội tụ GA / LNS")
-    ap.add_argument("--algo", required=True, choices=["ga", "lns"])
+    ap = argparse.ArgumentParser(description="Vẽ biểu đồ hội tụ")
+    ap.add_argument("--algo", required=True, choices=["ga", "lns", "vns"])
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--filename", help="vd: S042_N10_C_R3.json")
     g.add_argument("--subfolder", help="vd: S/N10 ")
-    ap.add_argument("--root", default="./result", help="thư mục gốc kết quả (mặc định /result)")
+    ap.add_argument("--root", default="./result", help="thư mục gốc kết quả")
     ap.add_argument("--out", default="./img", help="thư mục lưu ảnh")
     ap.add_argument("--metric", default="fitness", choices=list(YLABEL))
     ap.add_argument("--show", action="store_true")

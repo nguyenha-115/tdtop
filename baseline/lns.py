@@ -8,6 +8,8 @@ from collections import deque
 from pathlib import Path
 from typing import Dict, List
 
+import numpy as np
+
 from problem import Problem, Solution
 from utils import (
     EPS,
@@ -305,7 +307,7 @@ class ALNSSolver:
         "D11_target",
     ]
     N_INFO_D = 6  # D1..D6 là toán tử trên nút thông tin
-    RR_NAMES = ["R1_greedy", "R2_regret2"]
+    RR_NAMES = ["R1_greedy", "R2_regret2", "R3_potential"]
     RI_NAMES = ["I1_profit", "I2_cost", "I3_density", "I4_regret", "I5_noise"]
     M_NAMES = ["M1_plain", "M2_noise", "M3_swap"]  # chế độ sửa chữa (chọn thích nghi)
 
@@ -366,6 +368,38 @@ class ALNSSolver:
             (self.P.uav_dist[i][j] for i in self.P.info_ids for j in self.P.info_ids), default=1.0
         ) or 1.0
         self._max_p = max((self.P.profit[i] for i in self.P.info_ids), default=1) or 1
+        self._pot = self._arc_potential()
+
+    def _arc_potential(self, top: int = 10):
+        """pot[a][b]: tổng lợi nhuận của `top` nút thông tin có thể phục vụ bằng sortie đơn nút trên
+        cung xe a->b (đã tính năng lượng lơ lửng chờ xe). Dùng để đánh giá vị trí chèn nút đường."""
+        P = self.P
+        tn = [0] + list(P.road_ids) + [P.end]
+        info = list(P.info_ids)
+        pot = {}
+        if not info:
+            return pot
+        ue = np.array(P.uav_energy)
+        ut = np.array(P.uav_time)
+        tt = np.array(P.truck_time)
+        prof = np.array([P.profit[i] for i in info], dtype=float)
+        srv = np.array([P.service[i] for i in info])
+        tn_a = np.array(tn)
+        e_in, e_out = ue[np.ix_(tn_a, info)], ue[np.ix_(info, tn_a)]  # (A, I), (I, B)
+        t_in, t_out = ut[np.ix_(tn_a, info)], ut[np.ix_(info, tn_a)]
+        for ai, a in enumerate(tn):
+            if a == P.end:
+                continue
+            F = t_in[ai][:, None] + srv[:, None] + t_out  # (I, B)
+            hover = np.maximum(0.0, tt[a, tn_a][None, :] - F)
+            E = e_in[ai][:, None] + P.p_srv * srv[:, None] + e_out + P.p_hover * hover
+            ok = np.where(E <= P.theta + EPS, prof[:, None], 0.0)
+            k = min(top, len(info))
+            best = -np.partition(-ok, k - 1, axis=0)[:k].sum(axis=0)
+            for bi, b in enumerate(tn):
+                if b != a and b != 0:
+                    pot[(a, b)] = float(best[bi])
+        return pot
 
     # Toán tử phá hủy: trả về (nút đường bị gỡ, nhóm tự do)
     def _remove_nodes(self, st, nodes):
@@ -571,6 +605,19 @@ class ALNSSolver:
             for x in pool:
                 opt = min(self._road_options(st, x), key=lambda o: (o[0], o[1]))
                 groups.extend(self._insert_road(st, x, opt))
+        elif mode == 2:  # theo tiềm năng cung (lợi nhuận UAV phục vụ được), có nhiễu
+            random.shuffle(pool)
+            pot = self._pot
+            for x in pool:
+                best_o, best_sc = None, None
+                for o in self._road_options(st, x):
+                    k, idx = o[2], o[3]
+                    a, b = st.nl[k][idx], st.nl[k][idx + 1]
+                    gain = pot.get((a, x), 0.0) + pot.get((x, b), 0.0) - pot.get((a, b), 0.0)
+                    sc = (o[0], -gain * random.uniform(0.7, 1.3) + 0.01 * o[1])
+                    if best_sc is None or sc < best_sc:
+                        best_o, best_sc = o, sc
+                groups.extend(self._insert_road(st, x, best_o))
         else:  # regret-2 theo xe
             while pool:
                 best_x, best_opt, best_reg = None, None, None
@@ -763,7 +810,7 @@ class ALNSSolver:
         self._prio, self._noisy = [], True
         if qR:  # nhóm bị giải phóng trở thành nút chưa phục vụ, được chèn lại ở bước sửa chữa
             road_pool, _ = self._d_road_random(new, q, qR)
-            self._repair_road(new, road_pool, 0)
+            self._repair_road(new, road_pool, 2)
         if new.served_set():
             d_fn(new, q, qR)
         self._repair_info(new, random.randrange(len(self.RI_NAMES)), self._prio)
@@ -805,10 +852,10 @@ class ALNSSolver:
         best_obj = state_objective(P, best)
         elite = [(cur_f, cur_sig, cur.copy())]
 
-        T0 = -self.w_start * max(1.0, cur_f1) / math.log(0.5)
+        T0 = -self.w_start * max(1.0, P.total_profit) / math.log(0.5)
         boost = 1.0
         stag = since_reset = resets_noimp = 0
-        self.n_dup = 0
+        self.n_dup = self.n_retry = 0
         visited = deque(maxlen=3000)
         visited_set = set()
         sig0, sig1, sig2 = self.sigma
@@ -840,9 +887,15 @@ class ALNSSolver:
             m = self._roulette(w_m)
             ri = self._roulette(w_ri)
             new, rr = self._destroy_repair(cur, d_fns[d], q, qR, m, ri, w_rr)
+            sig = new.signature()
+            if sig == cur_sig and m != 2:
+                # sửa chữa dựng lại y nguyên lời giải cũ: thử lại ngay ở chế độ hoán đổi
+                self.n_retry += 1
+                m = 2
+                new, rr = self._destroy_repair(cur, d_fns[d], q, qR, m, ri, w_rr)
+                sig = new.signature()
 
             fit_n, f1_n, f2_n, V_n = state_objective(P, new)
-            sig = new.signature()
             score, accepted = 0.0, False
             improved_best = False
             if sig == cur_sig:
@@ -926,6 +979,7 @@ class ALNSSolver:
             "repair_info": {self.RI_NAMES[j]: {"used": tot_n["ri"][j], "new_best": tot_best["ri"][j], "weight": w_ri[j]} for j in range(nRI)},
             "repair_mode": {self.M_NAMES[j]: {"used": tot_n["m"][j], "new_best": tot_best["m"][j], "weight": w_m[j]} for j in range(nM)},
             "duplicates": self.n_dup,
+            "duplicate_retries": self.n_retry,
         }
         return history
 
@@ -1005,7 +1059,9 @@ def main():
     parser.add_argument("--rho", type=float, default=0.1, help="Hệ số phản ứng; 0 = LNS thuần (trọng số cố định)")
     parser.add_argument("--segment", type=int, default=100)
     parser.add_argument("--stag-raise", type=int, default=200)
-    parser.add_argument("--reset-after", type=int, default=500)
+    parser.add_argument("--reset-after", type=int, default=300)
+    parser.add_argument("--elite-size", type=int, default=8, help="Số lời giải ưu tú dùng để khởi động lại")
+    parser.add_argument("--q-kick", type=float, default=0.5, help="Tỉ lệ phá hủy tối đa khi khởi động lại")
     parser.add_argument("--reheat-mult", type=float, default=5.0)
     parser.add_argument("--init-tries", type=int, default=20)
     parser.add_argument("--no-polish", action="store_true")
@@ -1028,6 +1084,7 @@ def main():
         p_worst=args.p_worst, noise=args.noise, omega=args.omega, w_start=args.w_start,
         t_end_ratio=args.t_end_ratio, rho=args.rho, segment=args.segment,
         stag_raise=args.stag_raise, reset_after=args.reset_after, reheat_mult=args.reheat_mult,
+        elite_size=args.elite_size, q_kick=args.q_kick,
         init_tries=args.init_tries, polish=not args.no_polish, time_limit=args.time_limit,
         verbose=(args.runs == 1), print_every=args.print_every,
     )
