@@ -7,7 +7,11 @@ import sys
 import os
 import numpy as np
 from population import Population, Individual
-from metric import cal_hv_front
+
+# Ghi chú tốc độ: bản cũ cập nhật kho ngoài (external_pop) bằng Individual.dominates trong vòng lặp Python.
+# Kho ngoài không giới hạn và giữ cả các lời giải trùng mục tiêu nên lớn tới hàng nghìn phần tử -> mỗi con
+# lai phải so trội hàng nghìn lần (~85% thời gian chạy). Bản này giữ thêm ma trận mục tiêu của kho ngoài và so
+# trội bằng numpy; natural_selection tính tổng có trọng số cho cả vùng lân cận một lần. Kết quả trùng khớp bản gốc.
 
 def init_weight_vectors_2d(pop_size):
     wvs = []
@@ -38,6 +42,7 @@ class MOEADPopulation(Population):
         super().__init__(pop_size)
         self.neighborhood_size = neighborhood_size
         self.external_pop = []
+        self._ext_F = None  # ma trận mục tiêu của external_pop (cùng thứ tự)
         self.weights = init_weight_vectors(self.pop_size)
         self.neighborhoods = self.init_neighborhood()
 
@@ -54,7 +59,7 @@ class MOEADPopulation(Population):
     def reproduction(self, problem, crossover_operator, mutation_operator, mutation_rate):
         offspring = []
         for i in range(self.pop_size):
-            parent1, parent2 = np.random.choice(self.neighborhoods[i].tolist(), 2, replace=False)
+            parent1, parent2 = np.random.choice(self.neighborhoods[i], 2, replace=False)
             off1, off2 = crossover_operator(problem, self.indivs[parent1], self.indivs[parent2])
             if np.random.rand() < mutation_rate:
                 off1 = mutation_operator(problem, off1)
@@ -69,27 +74,40 @@ class MOEADPopulation(Population):
 
     def natural_selection(self):
         self.indivs, O = self.indivs[:self.pop_size], self.indivs[self.pop_size:]
+        P = np.asarray([ind.objectives for ind in self.indivs], dtype=float)
         for i in range(self.pop_size):
             indi = O[i]
             wv = self.weights[i]
-            value_indi = np.sum(wv * indi.objectives)
-            for j in self.neighborhoods[i]:
-                if value_indi < np.sum(wv * self.indivs[j].objectives):
-                    self.indivs[j] = indi
+            o = np.asarray(indi.objectives, dtype=float)
+            value_indi = np.sum(wv * o)
+            nb = self.neighborhoods[i]
+            # các j trong vùng lân cận khác nhau nên so sánh với giá trị trước khi thay = vòng lặp gốc
+            replace = nb[value_indi < (P[nb] * wv).sum(axis=1)]
+            for j in replace:
+                self.indivs[j] = indi
+            P[replace] = o
 
     def update_external(self, indivs: list):
+        """Như bản gốc: con mới trội phần tử nào thì xóa các phần tử đó và thêm con; nếu không trội ai và
+        không bị ai trội thì thêm vào cuối. Thứ tự external_pop giữ nguyên."""
+        E = self._ext_F
+        if E is None or len(E) != len(self.external_pop):
+            E = (np.asarray([ind.objectives for ind in self.external_pop], dtype=float)
+                 if self.external_pop else None)
         for indi in indivs:
-            old_size = len(self.external_pop)
-            self.external_pop = [other for other in self.external_pop
-                                 if not indi.dominates(other)]
-            if old_size > len(self.external_pop):
-                self.external_pop.append(indi)
+            o = np.asarray(indi.objectives, dtype=float)
+            if E is None:
+                E = np.empty((0, len(o)))
+            dom = (o <= E).all(axis=1) & (o < E).any(axis=1)  # indi trội phần tử của kho
+            if dom.any():
+                keep = np.flatnonzero(~dom)
+                self.external_pop = [self.external_pop[k] for k in keep]
+                E = E[keep]
+            elif ((E <= o).all(axis=1) & (E < o).any(axis=1)).any():  # bị trội -> bỏ
                 continue
-            for other in self.external_pop:
-                if other.dominates(indi):
-                    break
-            else:
-                self.external_pop.append(indi)
+            self.external_pop.append(indi)
+            E = np.vstack([E, o])
+        self._ext_F = E
     
     # def update_weights(self, problem, indivs: list):
     #     for i in range(self.pop_size):

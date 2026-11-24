@@ -1,0 +1,2188 @@
+{
+  "time": 5.923438549041748,
+  "stop_reason": null,
+  "evaluations": 3112,
+  "history": {
+    "0": {
+      "hypervolume": 0.8633544829813157,
+      "front_size": 14,
+      "evaluations": 100,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.06798362731933594,
+      "improved": true
+    },
+    "1": {
+      "hypervolume": 0.8669708817082563,
+      "front_size": 16,
+      "evaluations": 197,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.10833525657653809,
+      "improved": true
+    },
+    "2": {
+      "hypervolume": 0.8691274003173376,
+      "front_size": 18,
+      "evaluations": 261,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.14395570755004883,
+      "improved": true
+    },
+    "3": {
+      "hypervolume": 0.8691274003173376,
+      "front_size": 18,
+      "evaluations": 306,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.17694950103759766,
+      "improved": false
+    },
+    "4": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 351,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.20185542106628418,
+      "improved": true
+    },
+    "5": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 396,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.23396682739257812,
+      "improved": false
+    },
+    "6": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 441,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.2633686065673828,
+      "improved": false
+    },
+    "7": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 485,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.293424129486084,
+      "improved": false
+    },
+    "8": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 522,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.32702016830444336,
+      "improved": false
+    },
+    "9": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 557,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.36291956901550293,
+      "improved": false
+    },
+    "10": {
+      "hypervolume": 0.8729423896991816,
+      "front_size": 17,
+      "evaluations": 596,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.40651988983154297,
+      "improved": false
+    },
+    "11": {
+      "hypervolume": 0.8735386025854339,
+      "front_size": 18,
+      "evaluations": 639,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.4485352039337158,
+      "improved": true
+    },
+    "12": {
+      "hypervolume": 0.8753786873136754,
+      "front_size": 20,
+      "evaluations": 679,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.49504828453063965,
+      "improved": true
+    },
+    "13": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 714,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.5284771919250488,
+      "improved": true
+    },
+    "14": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 743,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.55739426612854,
+      "improved": false
+    },
+    "15": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 782,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.6016781330108643,
+      "improved": false
+    },
+    "16": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 818,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.6481978893280029,
+      "improved": false
+    },
+    "17": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 852,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.6973440647125244,
+      "improved": false
+    },
+    "18": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 883,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.7537438869476318,
+      "improved": false
+    },
+    "19": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 910,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.7940807342529297,
+      "improved": false
+    },
+    "20": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 951,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.8269748687744141,
+      "improved": false
+    },
+    "21": {
+      "hypervolume": 0.875642787063031,
+      "front_size": 21,
+      "evaluations": 992,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.8607127666473389,
+      "improved": false
+    },
+    "22": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1035,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.9028007984161377,
+      "improved": true
+    },
+    "23": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1068,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.9373159408569336,
+      "improved": false
+    },
+    "24": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1100,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 0.968315839767456,
+      "improved": false
+    },
+    "25": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1130,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.0053555965423584,
+      "improved": false
+    },
+    "26": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1161,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.0387961864471436,
+      "improved": false
+    },
+    "27": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1188,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.0689432621002197,
+      "improved": false
+    },
+    "28": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1215,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.1022441387176514,
+      "improved": false
+    },
+    "29": {
+      "hypervolume": 0.8765052301565807,
+      "front_size": 21,
+      "evaluations": 1240,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.1359608173370361,
+      "improved": false
+    },
+    "30": {
+      "hypervolume": 0.8772409560830525,
+      "front_size": 22,
+      "evaluations": 1272,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.1810791492462158,
+      "improved": true
+    },
+    "31": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1299,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.218513011932373,
+      "improved": true
+    },
+    "32": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1322,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.2536876201629639,
+      "improved": false
+    },
+    "33": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1348,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.2974300384521484,
+      "improved": false
+    },
+    "34": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1379,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.3518989086151123,
+      "improved": false
+    },
+    "35": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1412,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.4254150390625,
+      "improved": false
+    },
+    "36": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1445,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.4916672706604004,
+      "improved": false
+    },
+    "37": {
+      "hypervolume": 0.8772687137535662,
+      "front_size": 23,
+      "evaluations": 1473,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.5499653816223145,
+      "improved": false
+    },
+    "38": {
+      "hypervolume": 0.8775257393586843,
+      "front_size": 25,
+      "evaluations": 1505,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.627009630203247,
+      "improved": true
+    },
+    "39": {
+      "hypervolume": 0.8775259702537923,
+      "front_size": 26,
+      "evaluations": 1528,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.6860547065734863,
+      "improved": true
+    },
+    "40": {
+      "hypervolume": 0.8775259702537923,
+      "front_size": 26,
+      "evaluations": 1555,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.7290925979614258,
+      "improved": false
+    },
+    "41": {
+      "hypervolume": 0.8775698960059375,
+      "front_size": 27,
+      "evaluations": 1582,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.7772283554077148,
+      "improved": true
+    },
+    "42": {
+      "hypervolume": 0.8775698960059375,
+      "front_size": 27,
+      "evaluations": 1614,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.823258638381958,
+      "improved": false
+    },
+    "43": {
+      "hypervolume": 0.8778156811221396,
+      "front_size": 27,
+      "evaluations": 1646,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.8712801933288574,
+      "improved": true
+    },
+    "44": {
+      "hypervolume": 0.8778156811221396,
+      "front_size": 27,
+      "evaluations": 1668,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.9133377075195312,
+      "improved": false
+    },
+    "45": {
+      "hypervolume": 0.8778156811221396,
+      "front_size": 27,
+      "evaluations": 1696,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 1.9669995307922363,
+      "improved": false
+    },
+    "46": {
+      "hypervolume": 0.8778156811221396,
+      "front_size": 27,
+      "evaluations": 1723,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.0191049575805664,
+      "improved": false
+    },
+    "47": {
+      "hypervolume": 0.8778156811221396,
+      "front_size": 27,
+      "evaluations": 1742,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.0640032291412354,
+      "improved": false
+    },
+    "48": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1764,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.1191325187683105,
+      "improved": true
+    },
+    "49": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1790,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.172849655151367,
+      "improved": false
+    },
+    "50": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1810,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.222170114517212,
+      "improved": false
+    },
+    "51": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1835,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.275238037109375,
+      "improved": false
+    },
+    "52": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1859,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.334702730178833,
+      "improved": false
+    },
+    "53": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1880,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.383885622024536,
+      "improved": false
+    },
+    "54": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1907,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.437875747680664,
+      "improved": false
+    },
+    "55": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1932,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.4890189170837402,
+      "improved": false
+    },
+    "56": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1959,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.578015089035034,
+      "improved": false
+    },
+    "57": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 1991,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.626913547515869,
+      "improved": false
+    },
+    "58": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 2013,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.675447940826416,
+      "improved": false
+    },
+    "59": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 2036,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.7343556880950928,
+      "improved": false
+    },
+    "60": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 2061,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.793466806411743,
+      "improved": false
+    },
+    "61": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 2088,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.8683996200561523,
+      "improved": false
+    },
+    "62": {
+      "hypervolume": 0.8783929021071869,
+      "front_size": 27,
+      "evaluations": 2115,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.9218814373016357,
+      "improved": false
+    },
+    "63": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2138,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 2.9734907150268555,
+      "improved": true
+    },
+    "64": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2168,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.0391576290130615,
+      "improved": false
+    },
+    "65": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2193,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.1004793643951416,
+      "improved": false
+    },
+    "66": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2219,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.1554579734802246,
+      "improved": false
+    },
+    "67": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2247,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.2175374031066895,
+      "improved": false
+    },
+    "68": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2272,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.27691388130188,
+      "improved": false
+    },
+    "69": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2296,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.337465524673462,
+      "improved": false
+    },
+    "70": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2332,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.4412221908569336,
+      "improved": false
+    },
+    "71": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2360,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.5102829933166504,
+      "improved": false
+    },
+    "72": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2381,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.5613667964935303,
+      "improved": false
+    },
+    "73": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2401,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.62744140625,
+      "improved": false
+    },
+    "74": {
+      "hypervolume": 0.8798791849749639,
+      "front_size": 26,
+      "evaluations": 2427,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.6883411407470703,
+      "improved": false
+    },
+    "75": {
+      "hypervolume": 0.8799134328073044,
+      "front_size": 27,
+      "evaluations": 2453,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.760589838027954,
+      "improved": true
+    },
+    "76": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2482,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.839078187942505,
+      "improved": true
+    },
+    "77": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2507,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 3.916659116744995,
+      "improved": false
+    },
+    "78": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2533,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.025548458099365,
+      "improved": false
+    },
+    "79": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2555,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.08938193321228,
+      "improved": false
+    },
+    "80": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2581,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.1516194343566895,
+      "improved": false
+    },
+    "81": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2604,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.223513603210449,
+      "improved": false
+    },
+    "82": {
+      "hypervolume": 0.8804538540865388,
+      "front_size": 28,
+      "evaluations": 2631,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.293867349624634,
+      "improved": false
+    },
+    "83": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2660,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.359185695648193,
+      "improved": true
+    },
+    "84": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2692,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.434341669082642,
+      "improved": false
+    },
+    "85": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2714,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.500852584838867,
+      "improved": false
+    },
+    "86": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2746,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.579862833023071,
+      "improved": false
+    },
+    "87": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2776,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.658875942230225,
+      "improved": false
+    },
+    "88": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2794,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.736233472824097,
+      "improved": false
+    },
+    "89": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2825,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.835259199142456,
+      "improved": false
+    },
+    "90": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2851,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 4.929338693618774,
+      "improved": false
+    },
+    "91": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2871,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.000942230224609,
+      "improved": false
+    },
+    "92": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2897,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.077789306640625,
+      "improved": false
+    },
+    "93": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2921,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.148799657821655,
+      "improved": false
+    },
+    "94": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2944,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.228008508682251,
+      "improved": false
+    },
+    "95": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 2968,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.305338144302368,
+      "improved": false
+    },
+    "96": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 3001,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.391688346862793,
+      "improved": false
+    },
+    "97": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 3028,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.523086309432983,
+      "improved": false
+    },
+    "98": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 3055,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.6043455600738525,
+      "improved": false
+    },
+    "99": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 3083,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.747878789901733,
+      "improved": false
+    },
+    "100": {
+      "hypervolume": 0.8806736157308995,
+      "front_size": 27,
+      "evaluations": 3112,
+      "f1_max": 415.0,
+      "f2_min": 0.0,
+      "time": 5.856094837188721,
+      "improved": false
+    }
+  },
+  "hypervolume": 0.8806736157308995,
+  "hv_reference": {
+    "f1": 0.0,
+    "f2_wh": 378.6828,
+    "f1_norm": 415.0
+  },
+  "pareto_size": 27,
+  "ideal_point": {
+    "f1": 415,
+    "f2_wh": 0
+  },
+  "nadir_point": {
+    "f1": 0,
+    "f2_wh": 105.30010458204424
+  },
+  "improved_generations": 19,
+  "num_generations": 100,
+  "verify_errors": [],
+  "params": {
+    "pop_size": 100,
+    "max_gen": 100,
+    "neighbor_size": 10,
+    "seed": 42,
+    "processes": 1,
+    "s_max": 0,
+    "time_limit": null,
+    "early_stop": null,
+    "ls_rate": 0.0
+  },
+  "pareto_front": [
+    {
+      "f1_total_value": 0,
+      "f2_total_energy_wh": 0,
+      "objectives_normalized": [
+        1.0,
+        0.0
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -2.16145,
+        -0.229571,
+        -2.727864,
+        -1.908403,
+        -2.239072,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        -0.706466,
+        -0.612129,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 0,
+        "f2_total_energy_wh": 0,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 0,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "total_sorties": 0,
+          "total_drones_used": 0
+        }
+      }
+    },
+    {
+      "f1_total_value": 19,
+      "f2_total_energy_wh": 9.122339666386768,
+      "objectives_normalized": [
+        0.9542168674698795,
+        0.024089659383491325
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -2.16145,
+        -0.229571,
+        -2.727864,
+        -1.908403,
+        -2.239072,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        -0.706466,
+        -0.612129,
+        1.851787
+      ],
+      "solution": {
+        "f1_total_value": 19,
+        "f2_total_energy_wh": 9.122339666386768,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 1,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 75,
+      "f2_total_energy_wh": 24.208464100564672,
+      "objectives_normalized": [
+        0.8192771084337349,
+        0.0639280793861371
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        -2.718364,
+        -1.976984,
+        -1.073002,
+        -0.246497,
+        -1.011431,
+        -1.055334,
+        -2.305645,
+        3.141593,
+        -2.7929,
+        -1.509896
+      ],
+      "solution": {
+        "f1_total_value": 75,
+        "f2_total_energy_wh": 24.208464100564672,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 1,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 111,
+      "f2_total_energy_wh": 24.494410431067973,
+      "objectives_normalized": [
+        0.7325301204819277,
+        0.06468318717160636
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -2.16145,
+        -0.252282,
+        0.483836,
+        -1.908403,
+        -1.933735,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.126673,
+        -0.612129,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 111,
+        "f2_total_energy_wh": 24.494410431067973,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 2,
+          "unserved_info_nodes": [
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 113,
+      "f2_total_energy_wh": 24.57411082744959,
+      "objectives_normalized": [
+        0.727710843373494,
+        0.06489365460340314
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -0.602846,
+        -0.229571,
+        -2.727864,
+        -1.667922,
+        0.436449,
+        -2.268895,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        -0.612129,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 113,
+        "f2_total_energy_wh": 24.57411082744959,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 2,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            10,
+            11,
+            12,
+            14,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 126,
+      "f2_total_energy_wh": 24.592253798696014,
+      "objectives_normalized": [
+        0.6963855421686747,
+        0.06494156533831486
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        -0.853659,
+        -1.451236,
+        -0.149908,
+        -0.914915,
+        -1.321284,
+        -1.913556,
+        -0.887691,
+        0.05,
+        3.141593,
+        -2.957741
+      ],
+      "solution": {
+        "f1_total_value": 126,
+        "f2_total_energy_wh": 24.592253798696014,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 2,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 162,
+      "f2_total_energy_wh": 25.029231258568778,
+      "objectives_normalized": [
+        0.6096385542168674,
+        0.06609550594473469
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        0.554191,
+        -0.119551,
+        -0.628319,
+        -2.215221,
+        2.323884,
+        -2.697406,
+        -1.300574,
+        -2.794624,
+        -2.680724,
+        -2.942602,
+        3.141593,
+        2.600968,
+        -1.845246
+      ],
+      "solution": {
+        "f1_total_value": 162,
+        "f2_total_energy_wh": 25.029231258568778,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 3,
+          "unserved_info_nodes": [
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 164,
+      "f2_total_energy_wh": 27.54987733503112,
+      "objectives_normalized": [
+        0.6048192771084338,
+        0.07275185811193728
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        0.628319,
+        -2.16145,
+        -0.229571,
+        -2.727864,
+        -1.908403,
+        0.372949,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        3.141593,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 164,
+        "f2_total_energy_wh": 27.54987733503112,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 3,
+          "unserved_info_nodes": [
+            6,
+            7,
+            8,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 200,
+      "f2_total_energy_wh": 30.240958331797483,
+      "objectives_normalized": [
+        0.5180722891566265,
+        0.07985828332260532
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        0.628319,
+        -2.16145,
+        -0.229571,
+        0.822898,
+        -1.908403,
+        0.436449,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        3.141593,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 200,
+        "f2_total_energy_wh": 30.240958331797483,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 4,
+          "unserved_info_nodes": [
+            6,
+            8,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 202,
+      "f2_total_energy_wh": 38.85332262267482,
+      "objectives_normalized": [
+        0.5132530120481928,
+        0.10260123412701823
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -2.16145,
+        2.003229,
+        -2.727864,
+        -1.908403,
+        -2.239072,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        2.277368,
+        1.446863,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 202,
+        "f2_total_energy_wh": 38.85332262267482,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 3,
+          "unserved_info_nodes": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 219,
+      "f2_total_energy_wh": 39.36329799818425,
+      "objectives_normalized": [
+        0.47228915662650606,
+        0.10394794270609664
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        0.628319,
+        -2.16145,
+        -0.229571,
+        0.822898,
+        -1.908403,
+        0.436449,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        3.141593,
+        1.209347
+      ],
+      "solution": {
+        "f1_total_value": 219,
+        "f2_total_energy_wh": 39.36329799818425,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 5,
+          "unserved_info_nodes": [
+            6,
+            8,
+            10,
+            11,
+            12
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 238,
+      "f2_total_energy_wh": 44.35912275865634,
+      "objectives_normalized": [
+        0.4265060240963855,
+        0.11714057981681857
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        0.61989,
+        0.628319,
+        -2.16145,
+        1.374968,
+        0.565265,
+        -1.908403,
+        -0.253144,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.141593,
+        2.111062,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 238,
+        "f2_total_energy_wh": 44.35912275865634,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 4,
+          "unserved_info_nodes": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 252,
+      "f2_total_energy_wh": 47.847949348619665,
+      "objectives_normalized": [
+        0.3927710843373494,
+        0.12635363779030806
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        1.515598,
+        0.822898,
+        -1.667922,
+        -2.239072,
+        2.626516,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        3.141593,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 252,
+        "f2_total_energy_wh": 47.847949348619665,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 5,
+          "unserved_info_nodes": [
+            8,
+            9,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 276,
+      "f2_total_energy_wh": 53.2724401250247,
+      "objectives_normalized": [
+        0.3349397590361446,
+        0.14067826720681453
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        0.628319,
+        1.884956,
+        -1.884956,
+        -0.628319,
+        1.515598,
+        0.822898,
+        -1.908403,
+        0.436449,
+        -0.113639,
+        -3.048566,
+        -2.623574,
+        3.078389,
+        3.141593,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 276,
+        "f2_total_energy_wh": 53.2724401250247,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 5,
+          "unserved_info_nodes": [
+            8,
+            10,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 290,
+      "f2_total_energy_wh": 56.761266714988025,
+      "objectives_normalized": [
+        0.3012048192771084,
+        0.149891325180304
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        -2.161299,
+        -0.619735,
+        1.982245,
+        0.734437,
+        -1.667922,
+        0.328756,
+        2.626516,
+        -0.229571,
+        -3.095288,
+        1.209347,
+        3.141593,
+        -0.706466
+      ],
+      "solution": {
+        "f1_total_value": 290,
+        "f2_total_energy_wh": 56.761266714988025,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 6,
+          "unserved_info_nodes": [
+            8,
+            11,
+            12,
+            15
+          ],
+          "total_sorties": 1,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 305,
+      "f2_total_energy_wh": 59.72048753440276,
+      "objectives_normalized": [
+        0.2650602409638554,
+        0.1577058359513629
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.010239,
+        1.243625,
+        -0.694959,
+        -2.079225,
+        -1.6429,
+        2.946803,
+        -2.697406,
+        2.380943,
+        -2.600185,
+        2.773512,
+        0.95461,
+        0.302766,
+        2.555188,
+        -1.832142
+      ],
+      "solution": {
+        "f1_total_value": 305,
+        "f2_total_energy_wh": 59.72048753440276,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 6,
+          "unserved_info_nodes": [
+            6,
+            8,
+            10,
+            15
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 324,
+      "f2_total_energy_wh": 64.65190119452285,
+      "objectives_normalized": [
+        0.21927710843373494,
+        0.17072838057213807
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        0.815419,
+        -1.782389,
+        1.923919,
+        0.611191,
+        -1.673184,
+        1.696636,
+        -0.675987,
+        0.05,
+        -1.961392,
+        0.159512,
+        2.930095,
+        0.648496,
+        0.85164,
+        2.684635
+      ],
+      "solution": {
+        "f1_total_value": 324,
+        "f2_total_energy_wh": 64.65190119452285,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 7,
+          "unserved_info_nodes": [
+            6,
+            8,
+            10
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 326,
+      "f2_total_energy_wh": 73.26426548540019,
+      "objectives_normalized": [
+        0.21445783132530116,
+        0.193471331376551
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        0.05,
+        -1.27631,
+        -0.782794,
+        -0.775517,
+        -2.78207,
+        1.904956,
+        0.668319,
+        2.523274,
+        3.141593,
+        1.286637
+      ],
+      "solution": {
+        "f1_total_value": 326,
+        "f2_total_energy_wh": 73.26426548540019,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 6,
+          "unserved_info_nodes": [
+            7,
+            8,
+            9,
+            10
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 343,
+      "f2_total_energy_wh": 73.8386519612616,
+      "objectives_normalized": [
+        0.17349397590361448,
+        0.1949881324455761
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        0.628319,
+        -2.16145,
+        1.374968,
+        0.565265,
+        -1.908403,
+        -1.895826,
+        -2.139426,
+        2.111062,
+        0.933312,
+        3.141593,
+        2.111062,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 343,
+        "f2_total_energy_wh": 73.8386519612616,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 6,
+          "unserved_info_nodes": [
+            8,
+            9,
+            10,
+            15
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 357,
+      "f2_total_energy_wh": 77.32747855122494,
+      "objectives_normalized": [
+        0.1397590361445783,
+        0.20420119041906562
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.88524,
+        0.628319,
+        -0.628319,
+        3.066189,
+        1.424041,
+        -1.667922,
+        -2.238687,
+        2.626516,
+        0.175325,
+        1.982245,
+        3.078389,
+        3.141593,
+        -2.16476
+      ],
+      "solution": {
+        "f1_total_value": 357,
+        "f2_total_energy_wh": 77.32747855122494,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 7,
+          "unserved_info_nodes": [
+            8,
+            9,
+            15
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 362,
+      "f2_total_energy_wh": 78.7700656213817,
+      "objectives_normalized": [
+        0.12771084337349392,
+        0.20801067706635132
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        1.595796,
+        0.565265,
+        -0.898767,
+        -1.895826,
+        -2.139426,
+        2.111062,
+        1.080531,
+        3.141593,
+        2.626327,
+        0.05
+      ],
+      "solution": {
+        "f1_total_value": 362,
+        "f2_total_energy_wh": 78.7700656213817,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 7,
+          "unserved_info_nodes": [
+            8,
+            9,
+            10
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 376,
+      "f2_total_energy_wh": 82.25889221134503,
+      "objectives_normalized": [
+        0.09397590361445785,
+        0.21722373503984083
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.88524,
+        0.463003,
+        -0.602992,
+        2.111062,
+        1.424041,
+        -0.061801,
+        -1.177404,
+        2.626516,
+        0.175325,
+        1.903834,
+        3.078389,
+        2.755144,
+        1.209347
+      ],
+      "solution": {
+        "f1_total_value": 376,
+        "f2_total_energy_wh": 82.25889221134503,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 8,
+          "unserved_info_nodes": [
+            8,
+            9
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 381,
+      "f2_total_energy_wh": 82.75196932762998,
+      "objectives_normalized": [
+        0.08192771084337347,
+        0.2185258198355721
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.88524,
+        0.463003,
+        -0.602992,
+        3.066189,
+        1.424041,
+        -1.277915,
+        0.756175,
+        -1.594336,
+        0.175325,
+        1.903834,
+        3.078389,
+        3.141593,
+        -1.094061
+      ],
+      "solution": {
+        "f1_total_value": 381,
+        "f2_total_energy_wh": 82.75196932762998,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 7,
+          "unserved_info_nodes": [
+            8,
+            10,
+            15
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 395,
+      "f2_total_energy_wh": 86.24079591759329,
+      "objectives_normalized": [
+        0.048192771084337394,
+        0.22773887780906155
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        1.457661,
+        0.61989,
+        -2.161299,
+        -2.16145,
+        1.515598,
+        0.822898,
+        -1.908403,
+        0.436449,
+        2.626516,
+        0.175325,
+        1.982245,
+        3.078389,
+        3.141593,
+        -0.617012
+      ],
+      "solution": {
+        "f1_total_value": 395,
+        "f2_total_energy_wh": 86.24079591759329,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 8,
+          "unserved_info_nodes": [
+            8,
+            15
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 400,
+      "f2_total_energy_wh": 87.68338298775006,
+      "objectives_normalized": [
+        0.03614457831325302,
+        0.2315483644563473
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        1.374968,
+        0.491656,
+        -0.270297,
+        0.05,
+        -3.007113,
+        2.699937,
+        0.933312,
+        2.25828,
+        3.141593,
+        1.816624
+      ],
+      "solution": {
+        "f1_total_value": 400,
+        "f2_total_energy_wh": 87.68338298775006,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 8,
+          "unserved_info_nodes": [
+            8,
+            10
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 414,
+      "f2_total_energy_wh": 91.1722095777134,
+      "objectives_normalized": [
+        0.002409638554216831,
+        0.2407614224298368
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        1.982245,
+        1.595796,
+        -1.411301,
+        0.436449,
+        0.05,
+        2.368694,
+        0.822898,
+        2.755144,
+        3.141593,
+        1.209347
+      ],
+      "solution": {
+        "f1_total_value": 414,
+        "f2_total_energy_wh": 91.1722095777134,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 9,
+          "unserved_info_nodes": [
+            8
+          ],
+          "total_sorties": 2,
+          "total_drones_used": 1
+        }
+      }
+    },
+    {
+      "f1_total_value": 415,
+      "f2_total_energy_wh": 105.30010458204424,
+      "objectives_normalized": [
+        0.0,
+        0.2780694147768112
+      ],
+      "violation_h": 0,
+      "verify_errors": [],
+      "chromosome": [
+        -1.884956,
+        1.884956,
+        0.628319,
+        -0.628319,
+        1.982245,
+        1.595796,
+        2.853003,
+        0.436449,
+        0.05,
+        2.111062,
+        1.080531,
+        2.755144,
+        3.141593,
+        1.209347
+      ],
+      "solution": {
+        "f1_total_value": 415,
+        "f2_total_energy_wh": 105.30010458204424,
+        "violation_h": 0,
+        "summary": {
+          "num_trucks_available": 1,
+          "num_trucks_used": 1,
+          "num_info_nodes": 10,
+          "num_info_nodes_served": 10,
+          "unserved_info_nodes": [],
+          "total_sorties": 3,
+          "total_drones_used": 1
+        }
+      }
+    }
+  ]
+}

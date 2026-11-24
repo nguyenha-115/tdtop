@@ -13,51 +13,45 @@ import numpy as np
 from problem import Problem, Solution
 from utils import (
     EPS,
-    _Planner,
-    _inner_stats,
-    build_solution,
+    State,
+    prepare,
+    metrics,
+    opt_order,
+    W_T,
+    construct,
+    random_routes,
     decode,
-    heuristic_individual,
-    random_individual,
     cal_objective,
+    verify_solution,
     solution_to_dict,
     save_result,
 )
 
 
-# Trạng thái lời giải của LNS
-class ALNSState(_Planner):
-    """Hành trình xe + sortie theo cung; hỗ trợ xóa/chèn tăng dần."""
+# Trạng thái lời giải của ALNS
+class ALNSState(State):
+    """Mở rộng utils.State (hành trình xe + sortie theo cung, mỗi sortie là dict
+    {seq, F, E, Ef, Es}) bằng các thao tác xóa/chèn dùng cho ALNS.
 
-    # khởi tạo / sao chép 
+    Quy ước: State.copy() dùng chung routes/nl/tG giữa các bản sao nên ở đây KHÔNG sửa tại chỗ
+    các danh sách con của chúng; set_route() luôn thay cả phần tử bằng danh sách mới."""
+
+    # khởi tạo / sao chép
     @classmethod
-    def from_solution(cls, P: Problem, sol: Solution):
-        st = cls(P, [list(plan.route.nodes) for plan in sol.plans])
-        for plan in sol.plans:
-            for s in plan.sorties:
-                st.sorties[plan.truck][s.arc_index].append(
-                    {"seq": list(s.nodes), "F": s.t_arrival - s.t_launch, "E": s.energy}
-                )
-        for k in range(P.num_trucks):
-            for idx in range(len(st.nl[k]) - 1):
-                st._refresh_arc(k, idx)
-            st.cnt[k] = sum(len(lst) for lst in st.sorties[k])
-        return st
+    def from_state(cls, st: State):
+        return cls.copy(st)
 
     def copy(self):
-        c = object.__new__(ALNSState)
-        c.P = self.P
-        c.nl = [list(x) for x in self.nl]
-        c.tG = [list(x) for x in self.tG]
-        c.dur = [list(x) for x in self.dur]
-        c.sorties = [[list(lst) for lst in arcs] for arcs in self.sorties]
-        c.used = list(self.used)
-        c.cnt = list(self.cnt)
-        c.violation = self.violation
+        c = State.copy(self)
+        c.__class__ = ALNSState
+        c.routes = list(self.routes)
+        c.nl = list(self.nl)
+        c.tG = list(self.tG)
         return c
 
     # đại lượng dẫn xuất
     def _refresh_arc(self, k, idx):
+        """Cập nhật nhanh thời gian cung / thời gian xe k (chưa đụng tới served, profit, energy)."""
         lst = self.sorties[k][idx]
         self.dur[k][idx] = max([self.tG[k][idx]] + [s["F"] for s in lst])
         self.used[k] = sum(self.dur[k])
@@ -66,39 +60,14 @@ class ALNSState(_Planner):
         return sum(max(0.0, u - self.P.T) for u in self.used)
 
     def served_set(self):
-        return {i for arcs in self.sorties for lst in arcs for so in lst for i in so["seq"]}
-
-    def all_sorties(self):
-        return [
-            (k, idx, so)
-            for k in range(len(self.nl))
-            for idx in range(len(self.nl[k]) - 1)
-            for so in self.sorties[k][idx]
-        ]
+        return set(self.served)
 
     def road_nodes(self, k):
         return self.nl[k][1:-1]
 
-    def signature(self):
-        return hash(
-            tuple(
-                (
-                    tuple(self.nl[k]),
-                    tuple(
-                        sorted(
-                            (idx, tuple(s["seq"]))
-                            for idx, lst in enumerate(self.sorties[k])
-                            for s in lst
-                        )
-                    ),
-                )
-                for k in range(len(self.nl))
-            )
-        )
-
     def to_solution(self) -> Solution:
-        self.violation = self.viol()
-        return build_solution(self.P, self.nl, self)
+        self.refresh()
+        return decode(self)
 
     # thay đổi hành trình xe
     def set_route(self, k, roads):
@@ -106,9 +75,7 @@ class ALNSState(_Planner):
         sortie ở cung biến mất được trả về dưới dạng các nhóm tự do."""
         P = self.P
         old_nl = self.nl[k]
-        old_map = {
-            (old_nl[i], old_nl[i + 1]): self.sorties[k][i] for i in range(len(old_nl) - 1)
-        }
+        old_map = {(old_nl[i], old_nl[i + 1]): self.sorties[k][i] for i in range(len(old_nl) - 1)}
         nl = [0] + list(roads) + [P.end]
         new_pairs = set(zip(nl, nl[1:]))
         released = []
@@ -117,10 +84,10 @@ class ALNSState(_Planner):
                 released.extend(list(s["seq"]) for s in lst)
         tG = [P.truck_time[nl[i]][nl[i + 1]] for i in range(len(nl) - 1)]
         sorties = [list(old_map.get((nl[i], nl[i + 1]), [])) for i in range(len(nl) - 1)]
+        self.routes[k] = list(roads)
         self.nl[k], self.tG[k], self.sorties[k] = nl, tG, sorties
-        self.dur[k] = [max([tG[i]] + [s["F"] for s in sorties[i]]) for i in range(len(tG))]
-        self.used[k] = sum(self.dur[k])
-        self.cnt[k] = sum(len(l) for l in sorties)
+        self.dur[k] = list(tG)
+        self.refresh()
         return released
 
     def remove_roads(self, nodes):
@@ -155,17 +122,15 @@ class ALNSState(_Planner):
         released = []
         if new:
             a, b = self.nl[k][idx], self.nl[k][idx + 1]
-            F, E = self._cost(new, _inner_stats(P, new), a, b, self.tG[k][idx])
+            F, E, Ef, Es = metrics(P, new, a, b, self.tG[k][idx])
             if E <= P.theta + EPS:
-                lst[si] = {"seq": new, "F": F, "E": E}
+                lst[si] = {"seq": new, "F": F, "E": E, "Ef": Ef, "Es": Es, "t": True}
             else:
                 del lst[si]
-                self.cnt[k] -= 1
                 released.append(new)
         else:
             del lst[si]
-            self.cnt[k] -= 1
-        self._refresh_arc(k, idx)
+        self.refresh()
         return released
 
     def remove_sortie_obj(self, k, idx, so):
@@ -173,8 +138,7 @@ class ALNSState(_Planner):
         for j, x in enumerate(lst):
             if x is so:
                 del lst[j]
-                self.cnt[k] -= 1
-                self._refresh_arc(k, idx)
+                self.refresh()
                 return list(so["seq"])
         return None
 
@@ -191,62 +155,82 @@ class ALNSState(_Planner):
         new = [x for x in lst[si]["seq"] if x != node]
         F = 0.0
         if new:
-            F, _ = self._cost(new, _inner_stats(P, new), a, b, self.tG[k][idx])
+            F = metrics(P, new, a, b, self.tG[k][idx])[0]
         return self.dur[k][idx] - max(self.tG[k][idx], F, other)
 
     # chèn nút thông tin
+    def _wt(self, k):
+        """Giá quy đổi 1 giờ kéo dài hành trình ~ bao nhiêu Wh. Xe còn dư nhiều thời gian thì thời gian gần như
+        miễn phí (ràng buộc thực sự là pin + số sortie); càng sát T càng đắt."""
+        return W_T * min(1.0, max(0.02, (self.used[k] / self.P.T) ** 2))
+
     def arc_options(self, node, k, idx):
-        """Các vị trí chèn khả thi của `node` trên cung (k,idx): tối đa 1 'sortie mới' và 1 'ghép tốt nhất'.
-        Placement = (delta, E, k, idx, si (-1 nếu sortie mới), seq, F)."""
+        """Các vị trí chèn khả thi của `node` trên cung (k,idx): 1 'sortie mới' + vị trí ghép tốt nhất cho TỪNG sortie.
+        Placement = (cost, E, k, idx, si (-1 nếu sortie mới), seq, F, Ef, Es, delta, dE)
+        với cost = dE + w_t * delta (đơn vị Wh); delta = thời gian cung tăng thêm; dE = năng lượng tăng thêm."""
         P = self.P
+        ut, ee = P.uav_time, P.uav_energy
         nl = self.nl[k]
         a, b = nl[idx], nl[idx + 1]
-        # cận dưới năng lượng (bất đẳng thức tam giác): mọi đường bay a -> ... node ... -> b
-        lb = P.uav_energy[a][node] + P.uav_energy[node][b] + P.p_srv * P.service[node]
+        sn = P.service[node]
+        pn = P.p_srv * sn
+        # cận dưới năng lượng/thời gian (bất đẳng thức tam giác)
+        lb = ee[a][node] + ee[node][b] + pn
         if lb > P.theta + EPS:
             return ()
-        f_lb = P.uav_time[a][node] + P.uav_time[node][b] + P.service[node]
+        f_lb = ut[a][node] + ut[node][b] + sn
         if self.used[k] + max(0.0, f_lb - self.dur[k][idx]) > P.T + EPS:
             return ()
         tg = self.tG[k][idx]
         dur = self.dur[k][idx]
         lst = self.sorties[k][idx]
+        th, ph = P.theta + EPS, P.p_hover
+        wt = self._wt(k)
         res = []
         if len(lst) < P.R[k]:
-            F, E = self._cost([node], (P.service[node], P.p_srv * P.service[node]), a, b, tg)
-            if E <= P.theta + EPS:
-                res.append((max(0.0, F - dur), E, k, idx, -1, [node], F))
-        best_m = None
+            F, E, Ef, Es = metrics(P, [node], a, b, tg)
+            if E <= th:
+                delta = max(0.0, F - dur)
+                res.append((E + wt * delta, E, k, idx, -1, [node], F, Ef, Es, delta, E))
         for si, so in enumerate(lst):
             other = max([o["F"] for j, o in enumerate(lst) if j != si], default=0.0)
             seq = so["seq"]
-            for pos in range(len(seq) + 1):
-                new = seq[:pos] + [node] + seq[pos:]
-                F, E = self._cost(new, _inner_stats(P, new), a, b, tg)
-                if E > P.theta + EPS:
-                    continue
-                delta = max(tg, F, other) - dur
-                if best_m is None or (delta, E) < best_m[:2]:
-                    best_m = (delta, E, k, idx, si, new, F)
-        if best_m is not None:
-            res.append(best_m)
+            F0, Ef0, Es0, E0 = so["F"], so["Ef"], so["Es"], so["E"]
+            L = len(seq)
+            prev = a
+            best_m = None
+            for pos in range(L + 1):
+                nxt = seq[pos] if pos < L else b
+                nF = F0 + ut[prev][node] + ut[node][nxt] - ut[prev][nxt] + sn
+                nEf = Ef0 + ee[prev][node] + ee[node][nxt] - ee[prev][nxt]
+                nEs = Es0 + pn
+                hov = tg - nF
+                nE = nEf + nEs + (ph * hov if hov > 0 else 0.0)
+                if nE <= th:
+                    delta = max(tg, nF, other) - dur
+                    dE = nE - E0
+                    cost = dE + wt * max(0.0, delta)
+                    if best_m is None or cost < best_m[0]:
+                        best_m = (cost, nE, k, idx, si, seq[:pos] + [node] + seq[pos:], nF, nEf, nEs, delta, dE)
+                if pos < L:
+                    prev = seq[pos]
+            if best_m is not None:
+                res.append(best_m)
         return res
 
     def valid(self, pl):
         k = pl[2]
         if pl[4] == -1 and self.cnt[k] >= self.P.cap[k]:
             return False
-        return self.used[k] + pl[0] <= self.P.T + EPS
+        return self.used[k] + pl[9] <= self.P.T + EPS
 
     def apply_placement(self, pl):
-        delta, E, k, idx, si, seq, F = pl
-        lst = self.sorties[k][idx]
+        cost, E, k, idx, si, seq, F, Ef, Es = pl[:9]
         if si == -1:
-            lst.append({"seq": list(seq), "F": F, "E": E})
-            self.cnt[k] += 1
+            self._attach(k, idx, seq, F, E, Ef, Es, touched=True)
         else:
-            lst[si] = {"seq": list(seq), "F": F, "E": E}
-        self._refresh_arc(k, idx)
+            self.sorties[k][idx][si] = {"seq": list(seq), "F": F, "E": E, "Ef": Ef, "Es": Es, "t": True}
+            self.refresh()
 
 
 class _Cache:
@@ -284,16 +268,8 @@ class _Cache:
 
 
 def state_objective(P: Problem, st: ALNSState):
-    """Cùng công thức với cal_objective của GA."""
-    served = st.served_set()
-    f1 = sum(P.profit[i] for i in served)
-    f2 = sum(s["E"] for _, _, s in st.all_sorties())
-    V = st.viol()
-    if V > EPS:
-        fit = -(P.total_profit + 1.0) * (1.0 + V / P.T)
-    else:
-        fit = f1 - P.eps * f2
-    return fit, f1, f2, V
+    """Cùng công thức với cal_objective của GA (lấy trực tiếp từ State đã được duy trì đồng bộ)."""
+    return st.score, st.profit, st.energy, st.violation
 
 
 def _pkey(pl):
@@ -308,7 +284,7 @@ class ALNSSolver:
     ]
     N_INFO_D = 6  # D1..D6 là toán tử trên nút thông tin
     RR_NAMES = ["R1_greedy", "R2_regret2", "R3_potential"]
-    RI_NAMES = ["I1_profit", "I2_cost", "I3_density", "I4_regret", "I5_noise"]
+    RI_NAMES = ["I1_profit", "I2_cost", "I3_density", "I4_regret", "I5_noise", "I6_build"]
     M_NAMES = ["M1_plain", "M2_noise", "M3_swap"]  # chế độ sửa chữa (chọn thích nghi)
 
     def __init__(
@@ -321,7 +297,7 @@ class ALNSSolver:
         p_worst: float = 3.0,
         noise: float = 0.1,
         omega: float = 1.0,
-        w_start: float = 0.05,
+        w_start: float = 0.005,
         t_end_ratio: float = 0.01,
         sigma=(33.0, 9.0, 3.0),
         rho: float = 0.1,
@@ -363,6 +339,8 @@ class ALNSSolver:
         self.best = None
         self.op_stats = {}
         self.resets = 0
+        self.rng = random.Random(seed)
+        prepare(problem)  # láng giềng gần nhất cho các hàm dựng/chèn của utils
 
         self._max_ud = max(
             (self.P.uav_dist[i][j] for i in self.P.info_ids for j in self.P.info_ids), default=1.0
@@ -419,13 +397,13 @@ class ALNSSolver:
         items = list(items)
         out = []
         while items and len(out) < q:
-            idx = int(len(items) * (random.random() ** self.p_worst))
+            idx = int(len(items) * (self.rng.random() ** self.p_worst))
             out.append(items.pop(min(idx, len(items) - 1)))
         return out
 
     def _d_random(self, st, q, qR):
         served = list(st.served_set())
-        nodes = random.sample(served, min(q, len(served)))
+        nodes = self.rng.sample(served, min(q, len(served)))
         return [], self._remove_nodes(st, nodes)
 
     def _d_worst(self, st, q, qR):
@@ -438,7 +416,7 @@ class ALNSSolver:
     def _d_shaw(self, st, q, qR):
         P = self.P
         served = list(st.served_set())
-        seed_n = random.choice(served)
+        seed_n = self.rng.choice(served)
         loc = {}
         for k, idx, so in st.all_sorties():
             for i in so["seq"]:
@@ -478,10 +456,10 @@ class ALNSSolver:
         ks = [k for k in range(len(st.nl)) if any(st.sorties[k][i] for i in range(len(st.nl[k]) - 1))]
         if not ks:
             return self._d_sortie(st, q, qR)
-        k = random.choice(ks)
+        k = self.rng.choice(ks)
         n_arc = len(st.nl[k]) - 1
-        start = random.randrange(n_arc)
-        w = random.randint(1, 3)
+        start = self.rng.randrange(n_arc)
+        w = self.rng.randint(1, 3)
         items = [
             (k, idx, so)
             for idx in range(start, min(n_arc, start + w))
@@ -509,7 +487,7 @@ class ALNSSolver:
         unserved = [i for i in P.info_ids if P.reachable[i] and i not in served]
         if not unserved or not served:
             return self._d_random(st, q, qR)
-        u = random.choices(unserved, weights=[P.profit[i] for i in unserved])[0]
+        u = self.rng.choices(unserved, weights=[P.profit[i] for i in unserved])[0]
         # cung "rẻ" nhất cho u theo cận dưới thời gian bay
         best_arc, best_lb = None, None
         for k in range(len(st.nl)):
@@ -529,18 +507,18 @@ class ALNSSolver:
         nodes = self._randomized_pick(order, max(1, q))
         # thêm vài nút chưa phục vụ khác quanh u làm mục tiêu phụ
         near = sorted((j for j in unserved if j != u), key=lambda j: P.uav_dist[u][j])
-        self._prio = [u] + [j for j in near[:3] if random.random() < 0.5]
+        self._prio = [u] + [j for j in near[:3] if self.rng.random() < 0.5]
         return [], self._remove_nodes(st, nodes)
 
     def _d_road_random(self, st, q, qR):
         roads = self._all_roads(st)
-        nodes = random.sample(roads, min(qR, len(roads)))
+        nodes = self.rng.sample(roads, min(qR, len(roads)))
         return nodes, st.remove_roads(nodes)
 
     def _d_road_related(self, st, q, qR):
         P = self.P
         roads = self._all_roads(st)
-        seed_n = random.choice(roads)
+        seed_n = self.rng.choice(roads)
         order = sorted(roads, key=lambda x: P.truck_dist[seed_n][x])
         nodes = order[: min(qR, len(order))]
         return nodes, st.remove_roads(nodes)
@@ -566,10 +544,10 @@ class ALNSSolver:
 
     def _d_road_segment(self, st, q, qR):
         ks = [k for k in range(len(st.nl)) if st.road_nodes(k)]
-        k = random.choice(ks)
+        k = self.rng.choice(ks)
         roads = st.road_nodes(k)
         w = min(qR, len(roads))
-        start = random.randint(0, len(roads) - w)
+        start = self.rng.randint(0, len(roads) - w)
         nodes = roads[start: start + w]
         return nodes, st.remove_roads(nodes)
 
@@ -601,12 +579,12 @@ class ALNSSolver:
         groups = []
         pool = list(road_pool)
         if mode == 0:  # tham lam
-            random.shuffle(pool)
+            self.rng.shuffle(pool)
             for x in pool:
                 opt = min(self._road_options(st, x), key=lambda o: (o[0], o[1]))
                 groups.extend(self._insert_road(st, x, opt))
         elif mode == 2:  # theo tiềm năng cung (lợi nhuận UAV phục vụ được), có nhiễu
-            random.shuffle(pool)
+            self.rng.shuffle(pool)
             pot = self._pot
             for x in pool:
                 best_o, best_sc = None, None
@@ -614,7 +592,7 @@ class ALNSSolver:
                     k, idx = o[2], o[3]
                     a, b = st.nl[k][idx], st.nl[k][idx + 1]
                     gain = pot.get((a, x), 0.0) + pot.get((x, b), 0.0) - pot.get((a, b), 0.0)
-                    sc = (o[0], -gain * random.uniform(0.7, 1.3) + 0.01 * o[1])
+                    sc = (o[0], -gain * self.rng.uniform(0.7, 1.3) + 0.01 * o[1])
                     if best_sc is None or sc < best_sc:
                         best_o, best_sc = o, sc
                 groups.extend(self._insert_road(st, x, best_o))
@@ -638,20 +616,18 @@ class ALNSSolver:
     def _reinsert_groups(self, st, groups):
         P = self.P
         for g in sorted(groups, key=lambda g: -sum(P.profit[i] for i in g)):
-            seq = list(g)
-            while seq:
-                plan = st.best_insertion(seq)
-                if plan is not None:
-                    st.apply_new(plan)
-                    break
-                seq.pop()  # nút bị cắt ở lại kho, sẽ được chèn lẻ ở bước sau
+            seq = [x for x in g if x not in st.served and P.reachable[x]]
+            if seq:
+                # đặt cả nhóm vào cung tốt nhất; nếu không được thì bỏ dần nút lợi nhuận thấp nhất
+                # (nút bị bỏ sẽ được chèn lẻ ở bước _repair_info)
+                st.place_best(seq)
 
     def _best_pl(self, opts):
         """Vị trí chèn tốt nhất; ở chế độ nhiễu, chi phí được cộng nhiễu ngẫu nhiên (Ropke & Pisinger)."""
         if not self._noisy:
             return min(opts, key=_pkey)
-        amp = self.noise * 0.1 * self.P.T
-        return min(opts, key=lambda pl: (max(0.0, pl[0] + random.uniform(-amp, amp)), pl[1]))
+        amp = self.noise * 0.1 * self.P.theta
+        return min(opts, key=lambda pl: (max(0.0, pl[0] + self.rng.uniform(-amp, amp)), pl[1]))
 
     def _repair_info(self, st, mode, prio=(), exclude=()):
         """Chèn nút chưa phục vụ. `prio`: chèn trước tiên (mục tiêu của D11);
@@ -662,6 +638,19 @@ class ALNSSolver:
         pool = [i for i in P.info_ids if P.reachable[i] and i not in served and i not in exclude]
         if not pool:
             return
+        if mode == 5:  # I6: dựng sortie mới quanh nút hạt giống (utils.build_sortie) khi còn chỗ trống, rồi lấp tham lam
+            for n in prio:
+                opts = [pl for a_ in [(k_, i_) for k_ in range(len(st.nl)) for i_ in range(len(st.nl[k_]) - 1)]
+                        for pl in st.arc_options(n, *a_) if st.valid(pl)]
+                if opts:
+                    st.apply_placement(min(opts, key=_pkey))
+            guard = 0
+            while st.has_free_slot() and guard < 6 and st.build_sortie(self.rng, 3, 0.2):
+                guard += 1
+            mode, prio = 2, ()
+            pool = [i for i in P.info_ids if P.reachable[i] and i not in st.served and i not in exclude]
+            if not pool:
+                return
         cache = _Cache(st, pool)
         for n in prio:
             if n in cache.opts:
@@ -673,7 +662,7 @@ class ALNSSolver:
                     cache.refresh_arc(pl[2], pl[3])
         if mode == 0:  # I1: theo lợi nhuận giảm dần
             pool = cache.nodes()
-            pool.sort(key=lambda n: (-P.profit[n], random.random()))
+            pool.sort(key=lambda n: (-P.profit[n], self.rng.random()))
             for n in pool:
                 opts = cache.options(n)
                 cache.drop(n)
@@ -683,8 +672,8 @@ class ALNSSolver:
                     cache.refresh_arc(pl[2], pl[3])
             return
 
-        k_reg = random.choice((2, 3))
-        amp = self.noise * 0.1 * P.T
+        k_reg = self.rng.choice((2, 3))
+        amp = self.noise * 0.1 * P.theta
         while True:
             best_n, best_pl, best_sc = None, None, None
             for n in cache.nodes():
@@ -696,19 +685,19 @@ class ALNSSolver:
                 if mode == 1:  # I2: chi phí nhỏ nhất
                     sc = (-pl[0], p, -pl[1])
                 elif mode == 2:  # I3: mật độ lợi nhuận / chi phí
-                    sc = (p / (pl[0] + 0.01), -pl[1])
+                    sc = (p / (max(pl[0], 0.0) + 0.5), -pl[1])
                 elif mode == 3:  # I4: regret-k trên các cung khác nhau
                     per_arc = {}
                     for o in opts:
                         a = (o[2], o[3])
-                        c = o[0] + 0.05 * o[1] / P.theta
+                        c = o[0]
                         if a not in per_arc or c < per_arc[a]:
                             per_arc[a] = c
                     cs = sorted(per_arc.values())
-                    reg = sum((cs[j] if j < len(cs) else P.T) - cs[0] for j in range(1, k_reg))
+                    reg = sum((cs[j] if j < len(cs) else P.theta) - cs[0] for j in range(1, k_reg))
                     sc = ((reg + 0.01) * p, -pl[0])
                 else:  # I5: chi phí có nhiễu
-                    c = pl[0] + 0.05 * pl[1] / P.theta + random.uniform(0.0, amp)
+                    c = pl[0] + self.rng.uniform(0.0, amp)
                     sc = (-c, p)
                 if best_sc is None or sc > best_sc:
                     best_n, best_pl, best_sc = n, pl, sc
@@ -719,6 +708,86 @@ class ALNSSolver:
             cache.refresh_arc(best_pl[2], best_pl[3])
 
     # Cải thiện cục bộ khi tìm được lời giải tốt nhất mới
+    def _tidy(self, st):
+        """Tối ưu thứ tự bay (2-opt + or-opt) cho các sortie vừa bị chạm; nếu giảm được năng lượng thì lấp thêm nút."""
+        P = self.P
+        gain = False
+        for k, idx, so in st.all_sorties():
+            if not so.pop("t", False) or len(so["seq"]) < 2:
+                continue
+            a, b, tg = st.nl[k][idx], st.nl[k][idx + 1], st.tG[k][idx]
+            new = opt_order(P, so["seq"], a, b, tg)
+            F, E, Ef, Es = metrics(P, new, a, b, tg)
+            if E < so["E"] - 1e-7 and E <= P.theta + EPS:
+                so.update(seq=new, F=F, E=E, Ef=Ef, Es=Es)
+                gain = True
+        if gain:
+            st.refresh()
+            self._repair_info(st, 2)
+
+    def _exchange(self, st, max_moves=40):
+        """Cục bộ hoán đổi: thay một nút đang phục vụ u bằng nút chưa phục vụ v (lợi nhuận cao hơn) ở vị trí rẻ nhất
+        trong cùng sortie, rồi lấp thêm nút. Lặp tới khi không cải thiện được."""
+        P = self.P
+        ut, ee = P.uav_time, P.uav_energy
+        th, ph, Tl = P.theta + EPS, P.p_hover, P.T + EPS
+        for _ in range(max_moves):
+            unserved = [n for n in P.info_ids if P.reachable[n] and n not in st.served]
+            if not unserved:
+                return
+            best = None
+            for k in range(len(st.nl)):
+                for idx in range(len(st.nl[k]) - 1):
+                    lst = st.sorties[k][idx]
+                    a, b, tg, dur = st.nl[k][idx], st.nl[k][idx + 1], st.tG[k][idx], st.dur[k][idx]
+                    for si, so in enumerate(lst):
+                        other = max([o["F"] for j, o in enumerate(lst) if j != si], default=0.0)
+                        seq = so["seq"]
+                        for ui, u in enumerate(seq):
+                            base = seq[:ui] + seq[ui + 1:]
+                            pu = P.profit[u]
+                            cands = [v for v in unserved if P.profit[v] >= pu]
+                            if not cands:
+                                continue
+                            if base:
+                                F0, _, Ef0, Es0 = metrics(P, base, a, b, tg)
+                            for v in cands:
+                                gain = P.profit[v] - pu
+                                sv = P.service[v]
+                                if not base:
+                                    F, E, Ef, Es = metrics(P, [v], a, b, tg)
+                                    opts = [(F, E, Ef, Es, [v])] if E <= th else []
+                                else:
+                                    opts = []
+                                    L = len(base)
+                                    prev = a
+                                    for pos in range(L + 1):
+                                        nxt = base[pos] if pos < L else b
+                                        nF = F0 + ut[prev][v] + ut[v][nxt] - ut[prev][nxt] + sv
+                                        nEf = Ef0 + ee[prev][v] + ee[v][nxt] - ee[prev][nxt]
+                                        nEs = Es0 + P.p_srv * sv
+                                        hov = tg - nF
+                                        nE = nEf + nEs + (ph * hov if hov > 0 else 0.0)
+                                        if nE <= th:
+                                            opts.append((nF, nE, nEf, nEs, base[:pos] + [v] + base[pos:]))
+                                        if pos < L:
+                                            prev = base[pos]
+                                for nF, nE, nEf, nEs, nseq in opts:
+                                    delta = max(tg, nF, other) - dur
+                                    if delta > EPS and st.used[k] + delta > Tl:
+                                        continue
+                                    key = (gain, -nE)
+                                    if gain == 0 and nE >= so["E"] - 1e-7:
+                                        continue
+                                    if best is None or key > best[0]:
+                                        best = (key, k, idx, si, nseq, nF, nE, nEf, nEs)
+            if best is None:
+                return
+            _, k, idx, si, nseq, F, E, Ef, Es = best
+            st.sorties[k][idx][si] = {"seq": nseq, "F": F, "E": E, "Ef": Ef, "Es": Es}
+            st.refresh()
+            self._repair_info(st, 2)
+
     def _polish(self, st):
         """Thử mọi hoán vị thứ tự bay của sortie (<= 6 nút) rồi lấp thêm nút còn lại."""
         P = self.P
@@ -727,39 +796,41 @@ class ALNSSolver:
                 a, b = st.nl[k][idx], st.nl[k][idx + 1]
                 tg = st.tG[k][idx]
                 lst = st.sorties[k][idx]
-                changed = False
                 for si, so in enumerate(lst):
                     seq = so["seq"]
-                    if not (2 <= len(seq) <= 6):
+                    if len(seq) < 2:
                         continue
                     cur_key = (max(so["F"], tg), so["E"])
                     best = None
-                    for perm in itertools.permutations(seq):
+                    perms = itertools.permutations(seq) if len(seq) <= 6 else [opt_order(P, seq, a, b, tg)]
+                    for perm in perms:
                         perm = list(perm)
-                        F, E = st._cost(perm, _inner_stats(P, perm), a, b, tg)
+                        F, E, Ef, Es = metrics(P, perm, a, b, tg)
                         if E > P.theta + EPS:
                             continue
                         key = (max(F, tg), E)
                         if key < cur_key and (best is None or key < best[0]):
-                            best = (key, perm, F, E)
+                            best = (key, perm, F, E, Ef, Es)
                     if best is not None:
-                        lst[si] = {"seq": best[1], "F": best[2], "E": best[3]}
-                        changed = True
-                if changed:
-                    st._refresh_arc(k, idx)
+                        lst[si] = {"seq": best[1], "F": best[2], "E": best[3], "Ef": best[4], "Es": best[5]}
+        st.refresh()
         self._repair_info(st, 1)
+        self._exchange(st)
 
     #
     def _init_state(self):
+        """Khởi tạo: dựng nhiều lời giải bằng utils.construct (hành trình heuristic/ngẫu nhiên), lấy bản tốt nhất."""
         P = self.P
-        best_sol, best_fit = None, None
+        best = None
         for t in range(self.init_tries):
-            ind = heuristic_individual(P) if random.random() < 0.7 else random_individual(P)
-            sol = decode(ind, P)
-            fit = cal_objective(P, sol)
-            if best_fit is None or fit[0] > best_fit[0]:
-                best_sol, best_fit = sol, fit
-        return ALNSState.from_solution(P, best_sol)
+            routes = random_routes(P, self.rng, heuristic=(t == 0 or self.rng.random() < 0.7))
+            st = construct(P, routes, self.rng)
+            if best is None or st.score > best.score:
+                best = st
+        st = ALNSState.from_state(best)
+        if self.polish_on:
+            self._polish(st)
+        return st
 
     def _destroy_repair(self, cur, d_fn, q, qR, m, ri, w_rr):
         """Một bước phá hủy + sửa chữa trên bản sao của `cur`.
@@ -783,6 +854,9 @@ class ALNSSolver:
             self._repair_info(new, ri, self._prio, exclude=removed)
             self._repair_info(new, ri)
         self._noisy = False
+        self._tidy(new)
+        for _, _, so in new.all_sorties():
+            so.pop("t", None)
         return new, rr
 
     def _update_elite(self, elite, f, sig, st):
@@ -794,18 +868,17 @@ class ALNSSolver:
             elite.sort(key=lambda t: -t[0])
             del elite[self.elite_size:]
 
-    @staticmethod
-    def _pick_elite(elite):
-        r = random.choices(range(len(elite)), weights=[1.0 / (i + 1) for i in range(len(elite))])[0]
+    def _pick_elite(self, elite):
+        r = self.rng.choices(range(len(elite)), weights=[1.0 / (i + 1) for i in range(len(elite))])[0]
         return elite[r][2]
 
     def _kick(self, st):
         """Phá hủy mạnh (q_kick * số nút đang phục vụ, có thể đảo cả hành trình xe) + sửa chữa có nhiễu."""
         P = self.P
         n_served = len(st.served_set())
-        q = max(1, int(round(random.uniform(0.5, 1.0) * self.q_kick * max(1, n_served))))
-        qR = random.randint(1, max(1, P.num_road // 2)) if P.num_road and random.random() < 0.5 else 0
-        d_fn = random.choice((self._d_random, self._d_shaw, self._d_target))
+        q = max(1, int(round(self.rng.uniform(0.5, 1.0) * self.q_kick * max(1, n_served))))
+        qR = self.rng.randint(1, max(1, P.num_road // 2)) if P.num_road and self.rng.random() < 0.5 else 0
+        d_fn = self.rng.choice((self._d_random, self._d_shaw, self._d_target))
         new = st.copy()
         self._prio, self._noisy = [], True
         if qR:  # nhóm bị giải phóng trở thành nút chưa phục vụ, được chèn lại ở bước sửa chữa
@@ -813,19 +886,18 @@ class ALNSSolver:
             self._repair_road(new, road_pool, 2)
         if new.served_set():
             d_fn(new, q, qR)
-        self._repair_info(new, random.randrange(len(self.RI_NAMES)), self._prio)
+        self._repair_info(new, self.rng.randrange(len(self.RI_NAMES)), self._prio)
         self._noisy = False
         return new
 
-    @staticmethod
-    def _roulette(weights, mask=None):
+    def _roulette(self, weights, mask=None):
         w = [wi if (mask is None or mask[i]) else 0.0 for i, wi in enumerate(weights)]
         if sum(w) <= 0:
             return None
-        return random.choices(range(len(w)), weights=w)[0]
+        return self.rng.choices(range(len(w)), weights=w)[0]
 
     def run(self) -> Dict[str, Dict]:
-        random.seed(self.seed)
+        self.rng = random.Random(self.seed)
         P = self.P
         start = time.time()
         history = {}
@@ -878,8 +950,8 @@ class ALNSSolver:
             nR = P.num_road
             qmax_eff = min(0.8, self.q_max + 0.1 * (stag // self.stag_raise))
             qrmax_eff = min(0.8, self.q_road_max + 0.1 * (stag // self.stag_raise))
-            q = max(1, int(round(random.uniform(self.q_min, qmax_eff) * max(1, n_served))))
-            qR = random.randint(1, max(1, int(round(qrmax_eff * nR)))) if nR else 0
+            q = max(1, int(round(self.rng.uniform(self.q_min, qmax_eff) * max(1, n_served))))
+            qR = self.rng.randint(1, max(1, int(round(qrmax_eff * nR)))) if nR else 0
             mask = [(nR > 0) if i in road_d else (n_served > 0) for i in range(nD)]
             d = self._roulette(w_d, mask)
             if d is None:
@@ -915,7 +987,7 @@ class ALNSSolver:
                 elif fit_n > cur_f + 1e-9:
                     score, accepted = sig1, True
                 else:
-                    if random.random() < math.exp(min(0.0, fit_n - cur_f) / max(temp, 1e-12)):
+                    if self.rng.random() < math.exp(min(0.0, fit_n - cur_f) / max(temp, 1e-12)):
                         score, accepted = sig2, True
             if accepted:
                 cur, cur_f, cur_sig = new, fit_n, sig
@@ -1054,7 +1126,7 @@ def main():
     parser.add_argument("--p-worst", type=float, default=3.0)
     parser.add_argument("--noise", type=float, default=0.1)
     parser.add_argument("--omega", type=float, default=1.0)
-    parser.add_argument("--w-start", type=float, default=0.05)
+    parser.add_argument("--w-start", type=float, default=0.005)
     parser.add_argument("--t-end-ratio", type=float, default=0.01)
     parser.add_argument("--rho", type=float, default=0.1, help="Hệ số phản ứng; 0 = LNS thuần (trọng số cố định)")
     parser.add_argument("--segment", type=int, default=100)
@@ -1106,6 +1178,10 @@ def main():
             end_time = time.time()
 
             scored = [(cal_objective(problem, o[1]), o) for o in outs]
+            for fit_i, o in scored:
+                errs = verify_solution(problem, o[1])
+                if errs:
+                    print(f"  [CẢNH BÁO] seed {o[4]} vi phạm ràng buộc: {errs[:3]}")
             fit, (history, solution, op_stats, resets, seed_used) = max(scored, key=lambda t: t[0][0])
 
             result = {

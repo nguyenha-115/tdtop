@@ -1,0 +1,126 @@
+
+# python -m rl.core.train  (pre-train policy)
+train:
+  # true  = huấn luyện mạng PPO độc lập (rl/ppo, tham số ở mục `ppo.train` cuối file)
+  # false = huấn luyện mạng chính sách đã thiết kế (REINFORCE + baseline POMO, các tham số bên dưới)
+  ppo: false
+
+  # dữ liệu
+  pool: 1000            # số instance train cố định; 0 = dùng curriculum theo `stages`
+  pool_seed: 2024
+  stages: [10, 20, 50, 100]   # chỉ dùng khi pool = 0 (số nút thông tin mỗi giai đoạn)
+
+  # vòng huấn luyện 
+  iters: [200]          # số vòng mỗi giai đoạn (1 giá trị = dùng chung)
+  batch_inst: 4         # số instance mỗi vòng
+  n_lam: 4              # số lambda mỗi instance
+  n_traj: 32            # số quỹ đạo mỗi (instance, lambda)
+  lr: 0.00005
+  wd: 0.000001
+  ent: 0.01             # hệ số entropy ban đầu (giảm tuyến tính về 0)
+  grad_clip: 1.0
+  chunk: 256            # số bước mỗi chunk khi tính loss (giảm nếu thiếu RAM)
+  scalar: tcheby        # tcheby | weighted
+  seed: 0
+
+  # kích thước mạng
+  d: 128
+  layers: 4
+  heads: 8
+  ffn: 512
+
+  # checkpoint
+  init: null            # checkpoint khởi tạo (vd: outputs/checkpoints/last.pt), null = train từ đầu
+  out: outputs/checkpoints   # thư mục lưu checkpoint
+  save_every: 50
+
+
+# python -m rl.core.nsga2_kl_rl  (giải instance bằng NSGA-II + policy)
+solve:
+  # instance
+  subfolder: null       
+  filename: null        
+
+  # policy
+  ckpt: outputs/checkpoints/last.pt   # "none" = mạng ngẫu nhiên (baseline NSGA-II thuần)
+  mode: online          # online (cập nhật mạng khi chạy) | offline
+
+  # NSGA-II
+  pop: 100
+  gen: 100
+  M: 100                # Das-Dennis: |Lambda| = M + 1
+  ops: [O1, O2, O3, O4] # toán tử được dùng
+  rho: [0.2, 0.4]       # tỉ lệ cung bị phá ở O2
+  ls_steps: 20          # số bước tìm kiếm cục bộ ở O4
+  seed: 42
+  time_limit: null      # giây; null = không giới hạn
+  log_every: 5
+
+  # cập nhật online
+  U: 10                 # cập nhật mạng mỗi U thế hệ
+  online_lr: 0.00003
+  n_lam: 4
+  n_traj: 16
+  max_elite: 64
+  alpha: 0.5            # trọng số mất mát bắt chước elite
+  scalar: tcheby
+
+  out: outputs/result        # thư mục lưu kết quả
+
+
+# ====================================================================
+# PPO độc lập (rl/ppo) - không dùng gì trong rl/core
+#   huấn luyện: python ppo/train.py            (hoặc train.ppo: true rồi python core/train.py)
+#   giải      : python ppo/solve.py --subfolder S/N10
+# Đường dẫn tương đối tính từ thư mục rl/.
+# ====================================================================
+ppo:
+  train:
+    # dữ liệu: sinh bằng data/data.py, seed >= data_seed (không trùng bộ test seed 42-46)
+    data_dir: ppo/data          # train/ (count instance / cỡ / phân bố) + val/ (1 instance / cỡ / phân bố)
+    sizes: [S10, S20, S30, L100]
+    count: 10
+    data_seed: 1000
+
+    # thu thập
+    iters: 300
+    batch_inst: 4               # số instance mỗi vòng
+    n_traj: 32                  # số quỹ đạo mỗi instance (mỗi quỹ đạo một lambda ~ U, phép D4 ngẫu nhiên)
+
+    # PPO
+    lr: 0.0001
+    epochs: 4                   # số lượt tối ưu trên mỗi batch
+    mb: 512                     # số bước mỗi minibatch
+    clip: 0.2                   # epsilon cắt tỉ lệ pi/pi_old
+    vclip: 0.0                  # cắt V quanh V_old (0 = tắt)
+    vf_coef: 0.5
+    ent: 0.01                   # hệ số entropy ban đầu (giảm tuyến tính về 0)
+    gamma: 1.0
+    gae_lambda: 0.95
+    target_kl: 0.03             # dừng sớm các epoch khi KL vượt ngưỡng; null = tắt
+    grad_clip: 1.0
+
+    # mạng
+    d: 128
+    layers: 3
+    heads: 8
+    ffn: 512
+
+    # checkpoint / log
+    init: null
+    out: outputs/ppo/checkpoints   # last.pt, best.pt (theo HV validation), train_log.csv
+    save_every: 25
+    eval_every: 25              # đánh giá HV tham lam trên tập val mỗi N vòng
+    log_every: 1
+    seed: 0
+
+  solve:
+    ckpt: outputs/ppo/checkpoints/best.pt
+    M: 100                      # |Lambda| = M + 1
+    rounds: 10                  # số vòng lấy mẫu sau vòng greedy (= "thế hệ" trong history)
+    n_samples: 8                # số mẫu mỗi lambda mỗi vòng
+    time_limit: null
+    chunk: 1024                 # số env mỗi lần gọi mạng
+    seed: 42
+    log_every: 5
+    out: ../moo/result/ppo      # định dạng moo -> dùng thẳng moo/compare.py

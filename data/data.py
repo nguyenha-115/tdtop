@@ -4,8 +4,6 @@ Sinh dữ liệu TD-TOP đa xe tải (MILP đa mục tiêu + thuật toán base)
 Ví dụ:
     python data.py --suite S                      # 15 instance nhỏ (n=10,20,30 x 5)
     python data.py --suite L                      # 90 instance lớn (n=100..1000 x R,C,RC x 3 seed)
-    python data.py --suite SA-R                   # 9 instance x R = 2..6
-    python data.py --suite SA-B                   # 9 instance x 4 mức pin
     python data.py --suite L --n 200 --dist RC --seed 42 --count 5
     python data.py --write_config                 # ghi config.json mặc định rồi thoát
 """
@@ -68,11 +66,6 @@ DEFAULT_CONFIG = {
         },
     },
 }
-DEFAULT_CONFIG["PROFILES"]["SA-R"] = copy.deepcopy(DEFAULT_CONFIG["PROFILES"]["L"])
-DEFAULT_CONFIG["PROFILES"]["SA-B"] = copy.deepcopy(DEFAULT_CONFIG["PROFILES"]["L"])
-
-SUITE_BATTERIES = {"SA-B": [1900, 2850, 4276, 5100]}
-SUITE_RS = {"SA-R": [2, 3, 4, 5, 6]}
 
 
 def deep_merge(base, over):
@@ -377,28 +370,13 @@ def make_plan(args):
             for d in dists:
                 for k in range(count):
                     plan.append((n, d, base + k))
-    elif suite == "SA-R":
-        ns = args.n or list(range(200, 1001, 100))
-        dists = args.dist or ["R", "C", "RC"]  # xen kẽ theo thứ tự instance
-        count = args.count if args.count is not None else 1
-        for j, n in enumerate(ns):
-            for k in range(count):
-                plan.append((n, dists[j % len(dists)], base + j * count + k))
-    elif suite == "SA-B":
-        ns = args.n or [300]
-        dists = args.dist or ["R", "C", "RC"]
-        count = args.count if args.count is not None else 3
-        for n in ns:
-            for d in dists:
-                for k in range(count):
-                    plan.append((n, d, base + k))
     return plan
 
 
 def file_name(suite, seed_i, n, dist, R, mah, default_mah):
     prefix = suite.replace("-", "")  
     name = f"{prefix}{seed_i:03d}_N{n}_{dist}_R{R}"
-    if mah != default_mah:  # tránh trùng tên giữa các mức pin của bộ SA-B
+    if mah != default_mah:  # tránh trùng tên giữa các mức pin
         name += f"_B{mah}"
     return name + ".json"
 
@@ -426,12 +404,12 @@ def update_manifest(out_root, rows):
 
 def main():
     ap = argparse.ArgumentParser(description="Sinh dữ liệu TD-TOP đa xe tải")
-    ap.add_argument("--suite", choices=["S", "L", "SA-R", "SA-B"], default="L")
+    ap.add_argument("--suite", choices=["S", "L"], default="L")
     ap.add_argument("--n", type=int, nargs="+", default=None, help="số nút thông tin (theo bộ)")
     ap.add_argument("--dist", nargs="+", choices=["R", "C", "RC"], default=None)
     ap.add_argument("--seed", type=int, default=42, help="seed gốc; instance i dùng seed+i")
     ap.add_argument("--count", type=int, default=None,
-                    help="số instance mỗi cấu hình (mặc định theo bảng Mục 1: S=5, L=5, SA-R=1, SA-B=3)")
+                    help="số instance mỗi cấu hình (mặc định theo bảng Mục 1: S=5, L=5)")
     ap.add_argument("--R", type=int, nargs="+", default=None, help="UAV mỗi xe")
     ap.add_argument("--battery_mah", type=int, nargs="+", default=None)
     ap.add_argument("--C", type=int, default=None, help="năng lực C (ghi đè config); K = ceil(n/C)")
@@ -457,8 +435,8 @@ def main():
     energy = derived_energy(cfg)
     default_mah = cfg["BATTERY_MAH_DEFAULT"]
 
-    Rs = args.R or SUITE_RS.get(args.suite, [cfg["DEFAULT_R"]])
-    batteries = args.battery_mah or SUITE_BATTERIES.get(args.suite, [default_mah])
+    Rs = args.R or [cfg["DEFAULT_R"]]
+    batteries = args.battery_mah or [default_mah]
     s_max = args.sorties_per_uav or cfg["PROFILES"][args.suite].get("SORTIES_PER_UAV")
     print(f"P_fly={energy['P_FLY_W']:.2f} W, P_hover={energy['P_HOVER_W']:.2f} W, "
           f"P_srv={energy['P_SRV_W']:.2f} W, e_fly={energy['E_FLY_WH_PER_KM']:.4f} Wh/km")

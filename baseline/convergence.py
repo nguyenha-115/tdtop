@@ -39,7 +39,7 @@ def find_folder_files(root, algo, subfolder):
 def out_path(out_dir, algo, json_path):
     stem = os.path.splitext(os.path.basename(json_path))[0]
     parts = stem.split("_")
-    s = re.sub(r"\d+$", "", parts[0]) or parts[0]  # S042 -> S, L015 -> L, SA-R012 -> SA-R
+    s = re.sub(r"\d+$", "", parts[0]) or parts[0]  # S042 -> S, L015 -> L
     n = parts[1] if len(parts) > 1 else "N_unknown"  # vd N10
     d = os.path.join(out_dir, algo, s, n)
     os.makedirs(d, exist_ok=True)

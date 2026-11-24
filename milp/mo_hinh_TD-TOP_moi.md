@@ -87,10 +87,10 @@ $$
 \tag{39}
 $$
 
-Mỗi nút đường bộ trung gian được tối đa một xe ghé thăm:
+Mỗi nút đường bộ trung gian được đúng một xe ghé thăm (bắt buộc thăm mọi nút đường bộ):
 
 $$
-\sum_{k \in K} w_i^k \le 1, \quad \forall i \in N_1
+\sum_{k \in K} w_i^k = 1, \quad \forall i \in N_1
 \tag{40}
 $$
 
