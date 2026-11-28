@@ -49,9 +49,11 @@ solve:
   pop: 100
   gen: 100
   M: 100                # Das-Dennis: |Lambda| = M + 1
-  ops: [O1, O2, O3, O4] # toán tử được dùng
+  ops: [O1, O2, O3, O4, O5] # toán tử được dùng (O5 = thang Pareto: đánh bóng + chuỗi chèn/xóa tham lam)
   rho: [0.2, 0.4]       # tỉ lệ cung bị phá ở O2
   ls_steps: 20          # số bước tìm kiếm cục bộ ở O4
+  o5_steps: 3           # số bước chèn / xóa mỗi phía của O5
+  polish: 0.5           # xác suất đánh bóng (thứ tự bay + đổi cung) mỗi con do mạng sinh ra (O1-O3); 0 = tắt
   seed: 42
   time_limit: null      # giây; null = không giới hạn
   log_every: 5
@@ -64,6 +66,12 @@ solve:
   max_elite: 64
   alpha: 0.5            # trọng số mất mát bắt chước elite
   scalar: tcheby
+  # PPO online (thích nghi theo instance kiểu EAS): chỉ tinh chỉnh adapter có điều kiện lambda của PPONet
+  # bằng PPO-clip (baseline chung theo lambda) + alpha * NLL bắt chước elite; dùng U, n_lam, n_traj, max_elite ở trên
+  adapt_lr: 0.001
+  adapt_epochs: 4
+  adapt_mb: 512
+  adapt_clip: 0.2
 
   out: outputs/result        # thư mục lưu kết quả
 
@@ -115,6 +123,12 @@ ppo:
     seed: 0
 
   solve:
+    # false = PPO độc lập (greedy + lấy mẫu theo lambda, không NSGA-II) -> ghi vào `out`
+    # true  = PPO + NSGA-II (mạng PPO làm toán tử O1-O4 của core/nsga2_kl_rl, offline; tham số NSGA-II
+    #         pop/gen/ops/... lấy ở mục `solve` phía trên) -> ghi vào `nsga2_out`
+    nsga2: false
+    nsga2_out: outputs/ppo_nsga2
+    nsga2_mode: online          # online = tinh chỉnh adapter theo instance khi chạy NSGA-II; offline = mạng cố định
     ckpt: outputs/ppo/checkpoints/best.pt
     M: 100                      # |Lambda| = M + 1
     rounds: 10                  # số vòng lấy mẫu sau vòng greedy (= "thế hệ" trong history)

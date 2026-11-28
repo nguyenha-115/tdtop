@@ -194,7 +194,28 @@ def make_children(ctx, pop, archive, counts, args, Lam):
         s = ops.o4_local_search(ctx, p, lam, args.ls_steps)
         s.op = "O4"
         kids.append(s)
+    if args.polish > 0:   # đánh bóng con do mạng sinh ra (O1-O3)
+        idx = [i for i, k in enumerate(kids) if k.op in ("O1", "O2", "O3") and rng.random() < args.polish]
+        for i, s in zip(idx, ops.polish_sols(ctx, [kids[i] for i in idx])):
+            kids[i] = s
+    if counts.get("O5", 0):
+        n_par = max(1, int(np.ceil(counts["O5"] / (1 + 2 * args.o5_steps))))
+        for s in ops.o5_pareto_ladder(ctx, sparse_parents(ctx, archive, pop, n_par), args.o5_steps):
+            s.op = "O5"
+            kids.append(s)
     return kids
+
+
+def sparse_parents(ctx, archive, pop, n):
+    """Cha cho O5: nửa từ archive theo crowding (vùng thưa của mặt Pareto), nửa theo giải đấu trên quần thể."""
+    rng = ctx.rng
+    out = [tournament(pop, rng) for _ in range(n - n // 2)]
+    if len(archive.sols) >= 3:
+        cd = np.minimum(crowding(archive.objs()), 10.0) + 1e-6
+        out += [archive.sols[i] for i in rng.choice(len(archive.sols), size=n // 2, p=cd / cd.sum())]
+    else:
+        out += [tournament(pop, rng) for _ in range(n // 2)]
+    return out
 
 
 # ====================================================================
@@ -241,7 +262,7 @@ def run(P, policy, args, cfg, log=print):
         enc = policy.encode(inst, cfg.n_aug, grad=False)
         ctx = ops.Ctx(inst, policy, enc, rng, Lam, cfg.n_aug, cfg.scalar)
     online = args.mode == "online"
-    opt = torch.optim.Adam(policy.decoder_params(), lr=args.online_lr) if online else None
+    opt = torch.optim.Adam(policy.decoder_params(), lr=args.online_lr) if online and not is_ppo(policy) else None
 
     pop = init_population(ctx, args.pop, Lam)
     if not pop:
@@ -266,7 +287,15 @@ def run(P, policy, args, cfg, log=print):
         for s, l in zip(archive.sols, assign_lambda(P, Fa, Fa, Lam, cfg.scalar)):
             s.lam = l
         counts = dict(zip(args.ops, rng.multinomial(args.pop, selector.probs())))
-        kids = [k for k in make_children(ctx, pop, archive, counts, args, Lam) if k.feasible]
+        kids = make_children(ctx, pop, archive, counts, args, Lam)
+        msg = ""
+        if online and is_ppo(policy) and g % args.U == 0:   # thích nghi adapter PPO (mẫu mới cũng là con)
+            with torch.enable_grad():
+                st, extra = ctx.online_update(archive, cfg)
+            kids += extra
+            if st:
+                msg = f" | adapt: pg={st['pg']:.3f} nll={st['nll']:.3f} elite={st['elite']}/{st['elite_total']}"
+        kids = [k for k in kids if k.feasible]
         uniq = []
         for k in kids:
             if k.sig not in sigs:
@@ -276,6 +305,8 @@ def run(P, policy, args, cfg, log=print):
         sel_n = {o: 0 for o in args.ops}
         sel_ok = {o: 0 for o in args.ops}
         for k in uniq:
+            if k.op not in sel_n:
+                continue
             sel_n[k.op] += 1
             sel_ok[k.op] += int(archive.would_enter(k))
         for o in args.ops:
@@ -285,8 +316,7 @@ def run(P, policy, args, cfg, log=print):
         pop = nsga2_select(pop + uniq, args.pop)
         rank_crowd(pop)
         hist.append((g, archive.hv(), len(archive.sols), time.time() - t0))
-        msg = ""
-        if online and g % args.U == 0:
+        if online and not is_ppo(policy) and g % args.U == 0:
             st = online_update(ctx, policy, opt, archive, cfg, Lam, rng)
             if st:
                 msg = (f" | update: gnorm={st['grad_norm']:.2f} elite={st['elite_kept']}/{st['elite_total']} "
@@ -324,10 +354,17 @@ def build_parser():
     p.add_argument("--n-traj", type=int)
     p.add_argument("--scalar", choices=["tcheby", "weighted"])
     p.add_argument("--no-aug", action="store_true")
+    p.add_argument("--polish", type=float, help="xác suất đánh bóng mỗi con của O1-O3 (0 = tắt)")
+    p.add_argument("--o5-steps", type=int, help="số bước chèn / xóa của thang Pareto O5")
+    p.add_argument("--adapt-lr", type=float, help="PPO online: lr của adapter")
+    p.add_argument("--adapt-epochs", type=int)
+    p.add_argument("--adapt-mb", type=int)
+    p.add_argument("--adapt-clip", type=float)
     p.add_argument("--seed", type=int)
     p.add_argument("--time-limit", type=float)
     p.add_argument("--log-every", type=int)
     p.add_argument("--out", type=str)
+    p.set_defaults(polish=0.0, o5_steps=3, adapt_lr=1e-3, adapt_epochs=4, adapt_mb=512, adapt_clip=0.2)
     p.set_defaults(**load_config("solve"))
     return p
 
@@ -338,15 +375,14 @@ def is_ppo(policy):
 
 def load_policy(args, cfg):
     """Nạp policy theo checkpoint: mạng POMO (rl/core) hoặc mạng PPO (rl/ppo, nhận ra qua khóa algo='ppo').
-    Với PPO: chỉ hỗ trợ offline, và cfg.scalar = "weighted" (PPO học với phần thưởng tổng có trọng số)."""
+    Với PPO: cfg.scalar = "weighted" (PPO học với phần thưởng tổng có trọng số); online = tinh chỉnh adapter
+    theo instance (rl/ppo/nsga_ctx.PPOCtx.online_update)."""
     if args.ckpt.lower() == "none":
         return Policy(d=64, layers=2, heads=4, ffn=128)
     ck = torch.load(args.ckpt, map_location="cpu", weights_only=False)
     if ck.get("algo") != "ppo":
         return Policy.load(args.ckpt)
     from rl.ppo.model import PPONet
-    if args.mode == "online":
-        raise SystemExit("policy PPO chỉ hỗ trợ --mode offline (cập nhật online là REINFORCE của mạng POMO)")
     net, _ = PPONet.load(args.ckpt)
     if cfg.scalar != "weighted":
         print(f"[PPO] dùng scalar=weighted cho gán lambda / O4 (thay cho {cfg.scalar})", flush=True)
@@ -356,7 +392,8 @@ def load_policy(args, cfg):
 
 def make_cfg(args):
     cfg = train_parser().parse_args([])
-    for k in ("alpha", "max_elite", "n_lam", "n_traj", "scalar", "no_aug"):
+    for k in ("alpha", "max_elite", "n_lam", "n_traj", "scalar", "no_aug",
+              "adapt_lr", "adapt_epochs", "adapt_mb", "adapt_clip"):
         setattr(cfg, k, getattr(args, k))
     cfg.max_elite = args.max_elite
     return finalize_args(cfg)

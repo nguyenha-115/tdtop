@@ -5,6 +5,9 @@
     Khóa    : H[aug] + W_dyn * dyn (đặc trưng động theo từng nút) ; 2 khóa đặc biệt học được (+ emb giai đoạn)
     Actor   : glimpse MHA(c; khóa) -> con trỏ C*tanh(q.k/sqrt(d)) -> log-softmax có mask
     Critic  : MLP([c, glimpse]) -> V(s)   (dùng chung thân mạng với actor)
+    Adapter : g <- g + W2 relu(W1 [g, phi(lambda)])   (lớp thích nghi theo instance kiểu EAS-Lay, có điều kiện
+              theo lambda; W2 khởi tạo 0 -> mạng nạp từ checkpoint cũ cho đầu ra y hệt. Khi giải bằng NSGA-II,
+              chỉ adapter được tinh chỉnh online - xem rl/ppo/nsga_ctx.py)
 """
 
 import math
@@ -37,6 +40,13 @@ class PPONet(nn.Module):
         self.wq = nn.Linear(d, d, bias=False)
         self.wk = nn.Linear(d, d, bias=False)
         self.value = nn.Sequential(nn.Linear(2 * d, d), nn.ReLU(), nn.Linear(d, 1))
+        self.adapter = Adapter(d)
+
+    def adapter_params(self):
+        return list(self.adapter.parameters())
+
+    def reset_adapter(self):
+        self.adapter.reset()
 
     def encode(self, static):
         """static: tensor [A, n, STATIC_DIM] -> H [A, n, d]."""
@@ -52,9 +62,10 @@ class PPONet(nn.Module):
                                 self.glob(bt["glob"]) + se], -1))
         g, _ = self.glimpse(c[:, None, :], keys, keys, key_padding_mask=~bt["mask"], need_weights=False)
         g = g.squeeze(1)
+        v = self.value(torch.cat([c, g], -1)).squeeze(-1)                  # critic không qua adapter
+        g = self.adapter(g, bt["glob"][:, 10:12])
         u = self.C * torch.tanh((self.wq(g)[:, None, :] * self.wk(keys)).sum(-1) / math.sqrt(self.d))
         logp = torch.log_softmax(u.masked_fill(~bt["mask"], NEG), -1)
-        v = self.value(torch.cat([c, g], -1)).squeeze(-1)
         return logp, v
 
     def save(self, path, extra=None):
@@ -64,8 +75,38 @@ class PPONet(nn.Module):
     def load(path):
         ck = torch.load(path, map_location="cpu", weights_only=False)
         net = PPONet(**ck["cfg"])
-        net.load_state_dict(ck["state"])
+        missing, unexpected = net.load_state_dict(ck["state"], strict=False)
+        bad = [k for k in missing if not k.startswith("adapter.")] + list(unexpected)
+        if bad:
+            raise RuntimeError(f"checkpoint không khớp mạng PPO: {bad}")
         return net, ck
+
+
+class Adapter(nn.Module):
+    """Lớp thích nghi residual có điều kiện lambda (FiLM + MLP), đầu ra = 0 lúc khởi tạo."""
+
+    def __init__(self, d, hidden=None):
+        super().__init__()
+        h = hidden or d
+        self.lam = nn.Sequential(nn.Linear(2, h), nn.ReLU())
+        self.fc1 = nn.Linear(d, h)
+        self.film = nn.Linear(h, 2 * h)
+        self.fc2 = nn.Linear(h, d)
+        self.reset()
+
+    def reset(self):
+        with torch.random.fork_rng(devices=[]):   # không làm lệch chuỗi ngẫu nhiên của lần lấy mẫu sau
+            torch.manual_seed(12345)
+            for m in (self.lam[0], self.fc1, self.film):
+                m.reset_parameters()
+        nn.init.zeros_(self.fc2.weight)
+        nn.init.zeros_(self.fc2.bias)
+
+    def forward(self, g, lam):
+        z = self.lam(lam)
+        gamma, beta = self.film(z).chunk(2, -1)
+        h = torch.relu(self.fc1(g) * (1.0 + gamma) + beta)
+        return g + self.fc2(h)
 
 
 # ====================================================================

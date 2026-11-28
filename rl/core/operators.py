@@ -6,16 +6,26 @@
     O3  lai ghép lộ trình: OX trên giant tour -> tách theo xe (sửa nếu vi phạm T) -> Pha B bằng pi_theta,
         giữ sortie của các cung còn tồn tại                              - kết hợp cấu trúc xe
     O4  tìm kiếm cục bộ trên sortie (chèn / xóa / chuyển / hoán đổi / 2-opt) kiểm khả thi bằng simulator
+    O5  thang Pareto (Pareto ladder): đánh bóng cha rồi đi dọc mặt Pareto bằng chuỗi chèn tham lam
+        (tăng f1 với chi phí năng lượng biên nhỏ nhất) và chuỗi xóa tham lam (giảm f2 với tổn thất f1 nhỏ nhất);
+        mọi bước trung gian đều là con -> lấp các khoảng trống của mặt Pareto chỉ trong một lần gọi
+
+polish(st): cải thiện tất định một lời giải mà không đổi tập nút phục vụ - tối ưu thứ tự bay từng sortie
+    (2-opt / or-opt) và chuyển sortie sang cung rẻ hơn, rồi chèn lại nút nếu còn chỗ miễn phí năng lượng.
+    Áp cho con của O1-O3 (tham số polish) -> mạng chỉ cần chọn đúng tập nút / cấu trúc, phần tinh chỉnh
+    năng lượng do đánh bóng đảm nhận (và con đã đánh bóng được đưa lại cho mạng học bắt chước).
 
 Mọi hàm nhận `ctx` (Ctx) và trả về danh sách Sol.
 """
 
 import numpy as np
 
-from .environment import Env, run_batch
-from .utils import Sol, build_state, route_time, scalarize
+import local_move as lm  # moo/local_move.py (moo/ đã nằm trong sys.path qua .utils)
 
-OPS = ("O1", "O2", "O3", "O4")
+from .environment import Env, run_batch
+from .utils import Sol, build_state, route_time, scalarize, sortie_metrics
+
+OPS = ("O1", "O2", "O3", "O4", "O5")
 
 
 class Ctx:
@@ -248,3 +258,137 @@ def o4_local_search(ctx, sol, lam, steps=20):
 
 def inst_P(ctx):
     return ctx.inst.P
+
+
+# --------------------------------------------------------------------- đánh bóng + O5
+def state_to_sol(P, st):
+    arcs = {(k, idx): [list(s["seq"]) for s in lst] for k in range(P.num_trucks)
+            for idx, lst in enumerate(st.sorties[k]) if lst}
+    return Sol(P, st.routes, arcs, st)
+
+
+def polish(st):
+    """Giảm năng lượng giữ nguyên tập nút phục vụ (thứ tự bay + đổi cung). Sửa st tại chỗ."""
+    lm.improve_orders(st)
+    lm.reposition(st)
+    st.refresh()
+    return st
+
+
+def polish_sols(ctx, sols):
+    P = ctx.inst.P
+    out = []
+    for s in sols:
+        if not s.feasible:
+            out.append(s)
+            continue
+        st = build_state(P, s.routes, s.arcs)
+        if st is None:
+            out.append(s)
+            continue
+        e0 = st.energy
+        polish(st)
+        if st.feasible and st.energy < e0 - 1e-9:
+            n = state_to_sol(P, st)
+            n.lam, n.op = s.lam, s.op
+            out.append(n)
+        else:
+            out.append(s)
+    return out
+
+
+def _unserved_st(P, st, reach):
+    return [n for n in reach if n not in st.served]
+
+
+def _best_add(st, cands):
+    """Nút chưa phục vụ có tỉ lệ profit / (chi phí năng lượng biên) lớn nhất. Trả (n, ins_opt, new_opt) | None."""
+    P = st.P
+    best, best_r = None, -1.0
+    for n in cands:
+        ins = lm.best_insert(st, n)
+        new = lm.best_new_sortie(st, n)
+        opts = [o for o in (ins, new) if o is not None]
+        if not opts:
+            continue
+        o = min(opts, key=lambda x: x[0])
+        r = P.profit[n] / max(o[0], 1e-6)
+        if r > best_r:
+            best_r, best = r, (n, o is ins and ins is not None, o)
+    return best
+
+
+def _apply_add(st, choice):
+    n, is_ins, o = choice
+    if is_ins:
+        lm.apply_insert(st, n, o)
+    else:
+        _, k, idx, s, F, E, Ef, Es = o
+        st.attach(k, idx, s, F, E, Ef, Es)
+
+
+def _best_drop(st):
+    """Nút đang phục vụ mà xóa đi tốn ít profit nhất trên mỗi đơn vị năng lượng tiết kiệm."""
+    P = st.P
+    best, best_r = None, np.inf
+    for k, idx, s in st.all_sorties():
+        a, b, tg = st.nl[k][idx], st.nl[k][idx + 1], st.tG[k][idx]
+        seq = s["seq"]
+        for j, n in enumerate(seq):
+            rest = seq[:j] + seq[j + 1:]
+            if rest:
+                _, E, _, _ = sortie_metrics(P, rest, a, b, tg)
+                if E > P.theta + 1e-9:                     # lơ lửng lâu hơn -> mất cả sortie
+                    lost, save = sum(P.profit[x] for x in seq), s["E"]
+                else:
+                    lost, save = P.profit[n], s["E"] - E
+            else:
+                lost, save = P.profit[n], s["E"]
+            if save <= 1e-9:
+                continue
+            r = lost / save
+            if r < best_r:
+                best_r, best = r, n
+    return best
+
+
+def o5_pareto_ladder(ctx, parents, steps=3, n_cand=12):
+    """Mỗi cha -> [cha đã đánh bóng] + tối đa `steps` con chèn dần + tối đa `steps` con xóa dần."""
+    P, inst, rng = ctx.inst.P, ctx.inst, ctx.rng
+    reach = [int(v) for v, ok in zip(inst.info, inst.reach_info) if ok]
+    out = []
+    for par in parents:
+        st = build_state(P, par.routes, par.arcs)
+        if st is None or not st.feasible:
+            continue
+        polish(st)
+        base = state_to_sol(P, st)
+        out.append(base)
+        up = st.copy()
+        for _ in range(steps):
+            uns = _unserved_st(P, up, reach)
+            if not uns:
+                break
+            if len(uns) > n_cand:
+                w = np.array([P.profit[n] for n in uns], dtype=float) + 1e-6
+                uns = [int(x) for x in rng.choice(uns, n_cand, replace=False, p=w / w.sum())]
+            ch = _best_add(up, uns)
+            if ch is None:
+                break
+            _apply_add(up, ch)
+            up.refresh()
+            lm.improve_orders(up)
+            up.refresh()
+            if not up.feasible:
+                break
+            out.append(state_to_sol(P, up))
+        dn = st.copy()
+        for _ in range(steps):
+            n = _best_drop(dn)
+            if n is None:
+                break
+            lm.remove_nodes(dn, [n])
+            if not dn.served:
+                break
+            out.append(state_to_sol(P, dn))
+    return out

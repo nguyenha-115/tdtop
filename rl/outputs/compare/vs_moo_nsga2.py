@@ -14,8 +14,8 @@ from problem import Problem  # noqa: E402
 
 D = Path(__file__).resolve().parent
 MOO = ROOT / "moo" / "result" / "nsga2"
-CFG = [("moo_nsga2", "moo NSGA-II"), ("pure", "NSGA-II thuần (rl)"), ("pomo_samedata", "POMO train lại"),
-       ("ppo_weighted", "PPO weighted")]
+CFG = [("moo_nsga2", "moo NSGA-II"), ("moo_pfgmoea", "moo PFG-MOEA"),("pure", "NSGA-II thuần (rl)"), ("pomo_samedata", "POMO train lại"),
+       ("ppo_weighted", "PPO weighted"), ("ppo_o5_offline", "PPO offline O1-O5")]
 SUBS = ["S/N10", "S/N20", "S/N30", "L/N100"]
 
 
@@ -30,8 +30,8 @@ def hv(pts, ref=(1.0, 1.0)):
 
 
 def front(cfg, sub, name):
-    if cfg == "moo_nsga2":
-        d = json.load(open(MOO / sub / name, encoding="utf-8"))
+    if cfg.startswith("moo_"):
+        d = json.load(open(MOO.parent / cfg[4:] / sub / name, encoding="utf-8"))
         return [(p["f1_total_value"], p["f2_total_energy_wh"]) for p in d["pareto_front"]], d["time"], d["hypervolume"]
     d = json.load(open(D / cfg / sub / name, encoding="utf-8"))
     return [(p["f1"], p["f2"]) for p in d["front"]], d["time"], None
@@ -43,7 +43,8 @@ for sub in SUBS:
         P = Problem(str(ROOT / "data" / "data" / sub / f.name))
         r = {"sub": sub, "file": f.name}
         for c, _ in CFG:
-            if c != "moo_nsga2" and not (D / c / sub / f.name).exists():
+            src = MOO.parent / c[4:] if c.startswith("moo_") else D / c
+            if not (src / sub / f.name).exists():
                 continue
             F, t, hv_file = front(c, sub, f.name)
             r[c] = hv([P.normalize(a, b) for a, b in F])

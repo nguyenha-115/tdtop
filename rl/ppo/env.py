@@ -34,9 +34,15 @@ class Env:
         route_guide: [[nút đường của xe k], ...] - đi theo nếu mask cho phép, ngược lại để mạng chọn
         arc_guide  : {(k, idx): [seq, ...]} - sortie giữ lại trên cung idx của xe k
         guide_free : cung không có trong arc_guide: True = mạng chọn tự do, False = bỏ trống
-        blocked    : nút thông tin giữ chỗ cho sortie được giữ (mạng không được chọn)"""
+        blocked    : nút thông tin giữ chỗ cho sortie được giữ (mạng không được chọn)
+    imitate=True: bước được hướng dẫn mà có >= 2 hành động hợp lệ KHÔNG áp dụng thẳng, mà dừng lại với self.obs
+        và self.forced = hành động hướng dẫn -> người gọi step(self.forced) để ghi quỹ đạo của một lời giải cho
+        trước (học bắt chước elite, xem nsga_ctx.replay)."""
 
-    def __init__(self, inst, lam, aug=0, route_guide=None, arc_guide=None, guide_free=True, blocked=None):
+    def __init__(self, inst, lam, aug=0, route_guide=None, arc_guide=None, guide_free=True, blocked=None,
+                 imitate=False):
+        self.imitate = imitate
+        self.forced = None
         self.I, self.P = inst, inst.P
         P = self.P
         self.n = inst.n
@@ -76,11 +82,14 @@ class Env:
 
     def _advance(self):
         """Áp dụng các bước bắt buộc cho tới khi cần một quyết định thật (self.obs) hoặc kết thúc."""
-        self.obs = None
+        self.obs, self.forced = None, None
         while not self.done:
             mask = self._mask()
             g = self._guide(mask)
             if g is not None:                      # teacher forcing
+                if self.imitate and int(mask.sum()) > 1:
+                    self.obs, self.forced = self._observe(mask), g
+                    return
                 self._apply(g)
                 continue
             if self.stage == 2 and self.blocked.any():
